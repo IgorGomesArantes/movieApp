@@ -8,20 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		7802DB922264178E00F6682F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802DB912264178E00F6682F /* AppDelegate.swift */; };
-		7802DB942264178E00F6682F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802DB932264178E00F6682F /* ViewController.swift */; };
-		7802DB972264178E00F6682F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7802DB952264178E00F6682F /* Main.storyboard */; };
 		7802DB992264179100F6682F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7802DB982264179100F6682F /* Assets.xcassets */; };
 		7802DB9C2264179100F6682F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7802DB9A2264179100F6682F /* LaunchScreen.storyboard */; };
+		7802DBA62266680F00F6682F /* SDWebImageMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7802DBA42266680F00F6682F /* SDWebImageMapKit.framework */; };
+		7802DBA72266680F00F6682F /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7802DBA52266680F00F6682F /* SDWebImage.framework */; };
+		7802DBB82266A66E00F6682F /* Portuguese.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7802DBBA2266A66E00F6682F /* Portuguese.strings */; };
+		7802DBBD2266A68F00F6682F /* English.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7802DBBF2266A68F00F6682F /* English.strings */; };
+		7802DBC82266AC7B00F6682F /* Production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7802DBC72266AC7B00F6682F /* Production.plist */; };
+		7802DBCA2266B05900F6682F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802DBC92266B05900F6682F /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7802DB8E2264178E00F6682F /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7802DB912264178E00F6682F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7802DB932264178E00F6682F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7802DB962264178E00F6682F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7802DB982264179100F6682F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7802DB9B2264179100F6682F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7802DB9D2264179100F6682F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7802DB9D2264179100F6682F /* Development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Development.plist; sourceTree = "<group>"; };
+		7802DBA42266680F00F6682F /* SDWebImageMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImageMapKit.framework; path = Carthage/Build/iOS/SDWebImageMapKit.framework; sourceTree = "<group>"; };
+		7802DBA52266680F00F6682F /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
+		7802DBB72266A64900F6682F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		7802DBB92266A66E00F6682F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Portuguese.strings"; sourceTree = "<group>"; };
+		7802DBBE2266A68F00F6682F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/English.strings; sourceTree = "<group>"; };
+		7802DBC52266A9C400F6682F /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		7802DBC62266A9DC00F6682F /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		7802DBC72266AC7B00F6682F /* Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
+		7802DBC92266B05900F6682F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +40,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7802DBA62266680F00F6682F /* SDWebImageMapKit.framework in Frameworks */,
+				7802DBA72266680F00F6682F /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +53,7 @@
 			children = (
 				7802DB902264178E00F6682F /* MovieApp */,
 				7802DB8F2264178E00F6682F /* Products */,
+				7802DBA32266680F00F6682F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +68,123 @@
 		7802DB902264178E00F6682F /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
-				7802DB912264178E00F6682F /* AppDelegate.swift */,
-				7802DB932264178E00F6682F /* ViewController.swift */,
-				7802DB952264178E00F6682F /* Main.storyboard */,
-				7802DB982264179100F6682F /* Assets.xcassets */,
-				7802DB9A2264179100F6682F /* LaunchScreen.storyboard */,
-				7802DB9D2264179100F6682F /* Info.plist */,
+				7802DBAA22668DC900F6682F /* Application */,
+				7802DBAC2266A15500F6682F /* Global */,
+				7802DBAB22668DD200F6682F /* Scenes */,
 			);
 			path = MovieApp;
+			sourceTree = "<group>";
+		};
+		7802DBA32266680F00F6682F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7802DBA52266680F00F6682F /* SDWebImage.framework */,
+				7802DBA42266680F00F6682F /* SDWebImageMapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7802DBA922668DC000F6682F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		7802DBAA22668DC900F6682F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7802DBC42266A99000F6682F /* Configuration */,
+				7802DB9A2264179100F6682F /* LaunchScreen.storyboard */,
+				7802DB912264178E00F6682F /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		7802DBAB22668DD200F6682F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				7802DBB12266A26C00F6682F /* Details */,
+				7802DBB02266A26400F6682F /* Search */,
+				7802DBAF2266A25C00F6682F /* Home */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		7802DBAC2266A15500F6682F /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				7802DBB22266A54700F6682F /* Resources */,
+				7802DBAE2266A1A700F6682F /* Components */,
+				7802DBA922668DC000F6682F /* Networking */,
+				7802DBAD2266A18A00F6682F /* Coordinator */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		7802DBAD2266A18A00F6682F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7802DBAE2266A1A700F6682F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7802DBAF2266A25C00F6682F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7802DBB02266A26400F6682F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		7802DBB12266A26C00F6682F /* Details */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		7802DBB22266A54700F6682F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7802DBB62266A62800F6682F /* Languages */,
+				7802DB982264179100F6682F /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7802DBB62266A62800F6682F /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				7802DBBA2266A66E00F6682F /* Portuguese.strings */,
+				7802DBBF2266A68F00F6682F /* English.strings */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
+		7802DBC42266A99000F6682F /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				7802DBC62266A9DC00F6682F /* Development.xcconfig */,
+				7802DBC52266A9C400F6682F /* Production.xcconfig */,
+				7802DB9D2264179100F6682F /* Development.plist */,
+				7802DBC72266AC7B00F6682F /* Production.plist */,
+				7802DBC92266B05900F6682F /* Environment.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +197,7 @@
 				7802DB8A2264178E00F6682F /* Sources */,
 				7802DB8B2264178E00F6682F /* Frameworks */,
 				7802DB8C2264178E00F6682F /* Resources */,
+				7802DBA82266687800F6682F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -106,6 +230,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 7802DB852264178E00F6682F;
 			productRefGroup = 7802DB8F2264178E00F6682F /* Products */;
@@ -123,49 +248,84 @@
 			buildActionMask = 2147483647;
 			files = (
 				7802DB9C2264179100F6682F /* LaunchScreen.storyboard in Resources */,
+				7802DBC82266AC7B00F6682F /* Production.plist in Resources */,
+				7802DBBD2266A68F00F6682F /* English.strings in Resources */,
+				7802DBB82266A66E00F6682F /* Portuguese.strings in Resources */,
 				7802DB992264179100F6682F /* Assets.xcassets in Resources */,
-				7802DB972264178E00F6682F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7802DBA82266687800F6682F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SDWebImageMapKit.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7802DB8A2264178E00F6682F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7802DB942264178E00F6682F /* ViewController.swift in Sources */,
 				7802DB922264178E00F6682F /* AppDelegate.swift in Sources */,
+				7802DBCA2266B05900F6682F /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7802DB952264178E00F6682F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7802DB962264178E00F6682F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7802DB9A2264179100F6682F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7802DB9B2264179100F6682F /* Base */,
+				7802DBB72266A64900F6682F /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7802DBBA2266A66E00F6682F /* Portuguese.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7802DBB92266A66E00F6682F /* pt-BR */,
+			);
+			name = Portuguese.strings;
+			sourceTree = "<group>";
+		};
+		7802DBBF2266A68F00F6682F /* English.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7802DBBE2266A68F00F6682F /* en */,
+			);
+			name = English.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7802DB9E2264179100F6682F /* Debug */ = {
+		7802DB9E2264179100F6682F /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7802DBC62266A9DC00F6682F /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -221,12 +381,36 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = Development;
 		};
-		7802DB9F2264179100F6682F /* Release */ = {
+		7802DBA12264179100F6682F /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PNTT39UXP5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/MovieApp/Application/Configuration/Development.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = igor.MovieApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		7802DBC22266A79600F6682F /* Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7802DBC52266A9C400F6682F /* Production.xcconfig */;
+			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -276,15 +460,19 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Production;
 		};
-		7802DBA12264179100F6682F /* Debug */ = {
+		7802DBC32266A79600F6682F /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PNTT39UXP5;
-				INFOPLIST_FILE = MovieApp/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/MovieApp/Application/Configuration/Production.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -294,25 +482,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
-		};
-		7802DBA22264179100F6682F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PNTT39UXP5;
-				INFOPLIST_FILE = MovieApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = igor.MovieApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
+			name = Production;
 		};
 /* End XCBuildConfiguration section */
 
@@ -320,20 +490,20 @@
 		7802DB892264178E00F6682F /* Build configuration list for PBXProject "MovieApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7802DB9E2264179100F6682F /* Debug */,
-				7802DB9F2264179100F6682F /* Release */,
+				7802DB9E2264179100F6682F /* Development */,
+				7802DBC22266A79600F6682F /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Development;
 		};
 		7802DBA02264179100F6682F /* Build configuration list for PBXNativeTarget "MovieApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7802DBA12264179100F6682F /* Debug */,
-				7802DBA22264179100F6682F /* Release */,
+				7802DBA12264179100F6682F /* Development */,
+				7802DBC32266A79600F6682F /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};
