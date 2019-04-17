@@ -13,16 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let viewController = UIViewController()
         viewController.view.backgroundColor = .yellow
         
-        let environment = Environment()
-        let teste = environment.configuration(.environment)
+        let teste = Configuration.shared.environment
         debugPrint(teste)
-        
+ 
         window = UIWindow()
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
