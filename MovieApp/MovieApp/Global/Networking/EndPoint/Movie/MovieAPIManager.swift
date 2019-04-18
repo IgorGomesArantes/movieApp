@@ -9,11 +9,15 @@
 import Foundation
 
 class MovieAPIManager {
-    let router = NetworkRouter<MovieAPIEndPoint>()
+    private let router: NetworkRouter<MovieAPIEndPoint>
     
-    func getMovie(code: Int) {
+    init(_ requestProtocol: RequestProtocol) {
+        router = NetworkRouter<MovieAPIEndPoint>(requestProtocol)
+    }
+    
+    func getMovie(code: Int, completion: @escaping (ServiceResponse<Movie>) -> ()) {
         router.request(.movie(code: code)) { (result:ServiceResponse<Movie>) in
-            
+            completion(result)
         }
     }
 }

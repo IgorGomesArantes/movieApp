@@ -25,7 +25,7 @@ extension MovieAPIEndPoint: EndPointProtocol {
         case .development:
             return ""
         case .staging:
-            return ""
+            return "movieAPI"
         }
     }
     
@@ -49,7 +49,7 @@ extension MovieAPIEndPoint: EndPointProtocol {
     var path: String {
         switch self {
         case .movie(let code):
-            return "\(code)"
+            return "movie/\(code)"
         default:
             return ""
         }

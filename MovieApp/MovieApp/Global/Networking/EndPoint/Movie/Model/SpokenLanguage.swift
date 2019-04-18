@@ -9,6 +9,6 @@
 import Foundation
 
 struct SpokenLanguage: Codable {
-    var iso_639_1: String?
     var name: String?
+    var iso_639_1: String?
 }

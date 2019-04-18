@@ -18,9 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewController = UIViewController()
         viewController.view.backgroundColor = .yellow
         
-        let teste = Configuration.shared.environment
-        debugPrint(teste)
- 
+//        var movie: Movie?
+//        let manager = MovieAPIManager(MockedRequest.success)
+//        manager.getMovie(code: 1) { response in
+//            switch(response) {
+//            case .success(let result):
+//                    movie = result
+//            case .error:
+//                    break
+//            }
+//        }
+        
         window = UIWindow()
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()

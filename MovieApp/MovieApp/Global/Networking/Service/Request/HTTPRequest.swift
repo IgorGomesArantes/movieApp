@@ -1,5 +1,5 @@
 //
-//  NetworkRouter.swift
+//  HTTPRequest.swift
 //  MovieApp
 //
 //  Created by Igor Gomes Arantes on 17/04/19.
@@ -8,44 +8,32 @@
 
 import Foundation
 
-class NetworkRouter<EndPoint: EndPointProtocol> {//: NetworkRouterProtocol {
+class HTTPRequest: RequestProtocol {
     
     // MARK: - Properties
-    private var task: URLSessionTask?
+    var task: URLSessionTask?
     
-    // MARK: - NetworkRouterProtocol methods
-    func request<Response:Decodable>(_ route: EndPoint, completion: @escaping (ServiceResponse<Response>) -> ()) {
-        
+    // MARK: - Public methods
+    func requestData(_ route: EndPointProtocol, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        let session = URLSession.shared
         do {
             let request = try buildRequest(from: route)
-            NetworkLogger.log(request: request)
-            getDataFromUrl(request: request){ (data, response, error) in
-                if let data = data {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decodedData = try decoder.decode(Response.self, from: data)
-                        
-                        completion(.success(decodedData))
-                    } catch {
-                        completion(.error(""))
-                    }
-                } else {
-                    completion(.error(""))
-                }
-            }
+            
+            task = session.dataTask(with: request, completionHandler: { data, response, error in
+                completion(data, response, error)
+            })
+            task?.resume()
         } catch {
-            completion(.error(""))
+            completion(nil, nil, error)
         }
-        
-        self.task?.resume()
     }
     
     func cancel() {
-        self.task?.cancel()
+        task?.cancel()
     }
     
     // MARK: - Private methods
-    private func buildRequest(from route: EndPoint) throws -> URLRequest {
+    private func buildRequest(from route: EndPointProtocol) throws -> URLRequest {
         
         var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
         
@@ -102,30 +90,4 @@ class NetworkRouter<EndPoint: EndPointProtocol> {//: NetworkRouterProtocol {
             request.setValue(value, forHTTPHeaderField: key)
         }
     }
-    
-    private func getDataFromUrl(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?)->()) {
-        let session = URLSession.shared
-        task = session.dataTask(with: request, completionHandler: { data, response, error in
-            completion(data, response, error)
-        })
-        task?.resume()
-    }
-    
-    private func getData<T:Decodable>(request: URLRequest, completion: @escaping(ServiceResponse<T>) -> ()) {
-        getDataFromUrl(request: request){ (data, response, error) in
-            if let data = data {
-                do {
-                    let decoder = JSONDecoder()
-                    let decodedData = try decoder.decode(T.self, from: data)
-                    
-                    completion(.success(decodedData))
-                } catch {
-                    completion(.error(""))
-                }
-            } else {
-                completion(.error(""))
-            }
-        }
-    }
 }
-

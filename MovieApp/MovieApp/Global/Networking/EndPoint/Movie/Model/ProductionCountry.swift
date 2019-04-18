@@ -9,6 +9,6 @@
 import Foundation
 
 struct ProducionCountry: Codable {
-    var iso_3166_1: String?
     var name: String?
+    var iso_3166_1: String?
 }
