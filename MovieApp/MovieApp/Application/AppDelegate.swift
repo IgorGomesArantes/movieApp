@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .yellow
-        
 //        var movie: Movie?
 //        let manager = MovieAPIManager(MockedRequest.success)
 //        manager.getMovie(code: 1) { response in
@@ -29,9 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-        window = UIWindow()
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let appCoordinator = ApplicationCoordinator(window: window!)
+        appCoordinator.start()
         
         return true
     }

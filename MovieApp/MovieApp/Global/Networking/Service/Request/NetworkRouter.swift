@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NetworkRouter<EndPoint: EndPointProtocol> {//: NetworkRouterProtocol {
+class NetworkRouter<EndPoint: EndPointProtocol> {
     
     // MARK: - Properties
     private let requestProtocol: RequestProtocol
@@ -18,7 +18,7 @@ class NetworkRouter<EndPoint: EndPointProtocol> {//: NetworkRouterProtocol {
         self.requestProtocol = requestProtocol
     }
     
-    // MARK: - NetworkRouterProtocol methods
+    // MARK: - Public methods
     func request<T:Decodable>(_ route: EndPoint, completion: @escaping (ServiceResponse<T>) -> ()) {
         requestProtocol.requestData(route) { (data, response, error) in
             if let data = data {
