@@ -19,8 +19,8 @@ class NetworkRouter<EndPoint: EndPointProtocol> {
     }
     
     // MARK: - Public methods
-    func request<T:Decodable>(_ route: EndPoint, completion: @escaping (ServiceResponse<T>) -> ()) {
-        requestProtocol.requestData(route) { (data, response, error) in
+    func request<T:Decodable>(_ endPoint: EndPoint, completion: @escaping (ServiceResponse<T>) -> ()) {
+        requestProtocol.requestData(endPoint) { (data, response, error) in
             if let data = data {
                 do {
                     let decoder = JSONDecoder()

@@ -173,16 +173,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7802DBA922668DC000F6682F /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				7802DBCD226771A400F6682F /* EndPoint */,
-				7802DBCE226771DD00F6682F /* Service */,
-				7802DBCF226771EF00F6682F /* Encoding */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
 		7802DBAA22668DC900F6682F /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +198,7 @@
 			children = (
 				7802DBB22266A54700F6682F /* Resources */,
 				7802DBAE2266A1A700F6682F /* Components */,
-				7802DBA922668DC000F6682F /* Networking */,
+				7802DBCE226771DD00F6682F /* Network */,
 				7802DBAD2266A18A00F6682F /* Coordinator */,
 			);
 			path = Global;
@@ -292,14 +282,16 @@
 			path = EndPoint;
 			sourceTree = "<group>";
 		};
-		7802DBCE226771DD00F6682F /* Service */ = {
+		7802DBCE226771DD00F6682F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				7802DBCD226771A400F6682F /* EndPoint */,
+				7802DBCF226771EF00F6682F /* Encoding */,
 				7802DC2622681B0A00F6682F /* Helper */,
 				7802DC202268141500F6682F /* Request */,
 				7802DC1F226813E200F6682F /* Model */,
 			);
-			path = Service;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		7802DBCF226771EF00F6682F /* Encoding */ = {
@@ -307,7 +299,6 @@
 			children = (
 				7802DBE522678AEE00F6682F /* Parameters.swift */,
 				7802DBEB22678D1B00F6682F /* ParameterEncoderProtocol.swift */,
-				7802DBED22678DB500F6682F /* NetworkError.swift */,
 				7802DBE722678BAA00F6682F /* ParameterEncoding.swift */,
 				7802DBE922678C0400F6682F /* URLParameterEncoder.swift */,
 				7802DBEF22678E5F00F6682F /* JSONParameterEncoder.swift */,
@@ -377,6 +368,7 @@
 		7802DC1F226813E200F6682F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7802DBED22678DB500F6682F /* NetworkError.swift */,
 				7802DBDD226789B100F6682F /* EndPointProtocol.swift */,
 				7802DBE322678A8700F6682F /* HTTPTask.swift */,
 				7802DBE122678A2500F6682F /* HTTPMethod.swift */,

@@ -48,8 +48,8 @@ extension MovieAPIEndPoint: EndPointProtocol {
     
     var path: String {
         switch self {
-        case .movie(let code):
-            return "movie/\(code)"
+        case .movie:
+            return "movie"
         default:
             return ""
         }
@@ -60,9 +60,13 @@ extension MovieAPIEndPoint: EndPointProtocol {
     }
     
     var task: HTTPTask {
-        let task = HTTPTask.request
-        
-        return task
+        switch self {
+        case .movie(let code):
+            let parameters = ["id":code]
+            return HTTPTask.requestParameters(bodyParameters: nil, bodyEncoding: .urlEncoding, urlParameters: parameters)
+        default:
+            return HTTPTask.request
+        }
     }
     
     var headers: HTTPHeaders? {
