@@ -10,9 +10,7 @@ import UIKit
 
 class HomeView: UIView {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    func setup() {
         backgroundColor = .orange
     }
 }

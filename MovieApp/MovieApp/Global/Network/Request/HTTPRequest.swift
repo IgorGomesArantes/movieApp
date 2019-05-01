@@ -14,10 +14,10 @@ class HTTPRequest: RequestProtocol {
     var task: URLSessionTask?
     
     // MARK: - Public methods
-    func requestData(_ route: EndPointProtocol, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+    func requestData(_ endPoint: EndPointProtocol, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         let session = URLSession.shared
         do {
-            let request = try buildRequest(from: route)
+            let request = try buildRequest(from: endPoint)
             
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 completion(data, response, error)
@@ -33,55 +33,24 @@ class HTTPRequest: RequestProtocol {
     }
     
     // MARK: - Private methods
-    private func buildRequest(from route: EndPointProtocol) throws -> URLRequest {
+    private func buildRequest(from endPoint: EndPointProtocol) throws -> URLRequest {
         
-        var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
+        var request = URLRequest(url: endPoint.baseURL.appendingPathComponent(endPoint.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
         
-        request.httpMethod = route.httpMethod.rawValue
+        request.httpMethod = endPoint.httpMethod.rawValue
         
         do {
-            switch route.task {
-            case .request:
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                
-            case .requestParameters(
-                let bodyParameters,
-                let bodyEncoding,
-                let urlParameters):
-                
-                try self.configureParameters(bodyParameters: bodyParameters,
-                                             bodyEncoding: bodyEncoding,
-                                             urlParameters: urlParameters,
-                                             request: &request)
-                
-            case .requestParametersAndHeaders(
-                let bodyParameters,
-                let bodyEncoding,
-                let urlParameters,
-                let additionalHeaders):
-                
-                self.addAdditionalHeaders(additionalHeaders, request: &request)
-                try self.configureParameters(bodyParameters: bodyParameters,
-                                             bodyEncoding: bodyEncoding,
-                                             urlParameters: urlParameters,
-                                             request: &request)
-            }
+            try configureParametersAndHeaders(headers: endPoint.headers, parameters: endPoint.httpParameters, request: &request)
+            
             return request
         } catch {
             throw error
         }
     }
     
-    private func configureParameters(   bodyParameters: Parameters?,
-                                        bodyEncoding: ParameterEncoding,
-                                        urlParameters: Parameters?,
-                                        request: inout URLRequest) throws {
-        do {
-            try bodyEncoding.encode(urlRequest: &request,
-                                    bodyParameters: bodyParameters, urlParameters: urlParameters)
-        } catch {
-            throw error
-        }
+    private func configureParametersAndHeaders(headers: HTTPHeaders?, parameters: HTTPParameters, request: inout URLRequest) throws {
+        try ParameterEncoding.encode(parameters, request: &request)
+        addAdditionalHeaders(headers, request: &request)
     }
     
     private func addAdditionalHeaders(_ additionalHeaders: HTTPHeaders?, request: inout URLRequest) {

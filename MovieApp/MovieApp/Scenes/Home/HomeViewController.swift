@@ -23,6 +23,8 @@ class HomeViewController: UIViewController {
         homeView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         homeView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         homeView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        homeView.setup()
     }
     
 }

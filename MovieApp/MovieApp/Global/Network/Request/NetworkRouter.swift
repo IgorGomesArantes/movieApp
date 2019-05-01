@@ -28,10 +28,13 @@ class NetworkRouter<EndPoint: EndPointProtocol> {
                     
                     completion(.success(decodedData))
                 } catch {
-                    completion(.error(""))
+                    completion(.error("Network router decode error."))
                 }
+            } else if let error = error {
+                completion(.error(error.localizedDescription))
+                
             } else {
-                completion(.error(""))
+                completion(.error("Network router unexpected error."))
             }
         }
     }

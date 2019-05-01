@@ -10,6 +10,7 @@ import UIKit
 
 class ApplicationCoordinator: Coordinator {
 
+    // MARK: - Properties
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
         return navigationController
@@ -21,6 +22,7 @@ class ApplicationCoordinator: Coordinator {
     }
     let window: UIWindow
     
+    // MARK: - Initialization methods
     init(window: UIWindow) {
         self.window = window
         
@@ -28,8 +30,9 @@ class ApplicationCoordinator: Coordinator {
         window.makeKeyAndVisible()
     }
     
+    // MARK: - Public methods
     func start() {
-        let homeCoordinator = HomeCoordinator()
+        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
         navigationController.viewControllers = [homeCoordinator.rootViewController]
         
         addChildCoordinator(homeCoordinator)

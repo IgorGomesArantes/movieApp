@@ -14,6 +14,22 @@ enum MovieAPIEndPoint {
     case list(page:Int, pageSize:Int)
     case popular(page:Int, pageSize:Int)
     case recommended(page:Int, pageSize:Int, movieCodeList:[Int])
+    case image(_ path: String, quality: Quality)
+}
+
+// MARK: - Constants
+extension MovieAPIEndPoint {
+    private var apiKey: String {
+        return "423a7efcc5851107f96bc25a3b0c3f28"
+    }
+    
+    private var language: String {
+        return "pt-BR"
+    }
+    
+    private var imageBaseURL: String {
+        return "https://image.tmdb.org/t/p"
+    }
 }
 
 extension MovieAPIEndPoint: EndPointProtocol {
@@ -21,11 +37,11 @@ extension MovieAPIEndPoint: EndPointProtocol {
     private var environmentBaseURL: String {
         switch Configuration.shared.environment {
         case .production:
-            return ""
+            return "https://api.themoviedb.org/3"
         case .development:
-            return ""
+            return "https://api.themoviedb.org/3"
         case .staging:
-            return "movieAPI"
+            return "Movie API"
         }
     }
     
@@ -41,15 +57,27 @@ extension MovieAPIEndPoint: EndPointProtocol {
     }
     
     var baseURL: URL {
-        guard let baseURL = URL(string: environmentBaseURL) else { fatalError("BaseURL could not be configured.") }
-        
-        return baseURL
+        switch self {
+        case .image:
+            guard let baseURL = URL(string: imageBaseURL) else { fatalError("BaseURL could not be configured.") }
+            
+            return baseURL
+            
+        default:
+            guard let baseURL = URL(string: environmentBaseURL) else { fatalError("BaseURL could not be configured.") }
+            
+            return baseURL
+        }
     }
     
     var path: String {
         switch self {
-        case .movie:
-            return "movie"
+        case .movie(let code):
+            return "movie\(code)"
+        
+        case .image(let path, let quality):
+            return "\(quality)/\(path)"
+            
         default:
             return ""
         }
@@ -59,19 +87,19 @@ extension MovieAPIEndPoint: EndPointProtocol {
         return .get
     }
     
-    var task: HTTPTask {
+    // TODO: - Adicionar parametros de chave e linguagem
+    var httpParameters: HTTPParameters {
         switch self {
         case .movie(let code):
             let parameters = ["id":code]
-            return HTTPTask.requestParameters(bodyParameters: nil, bodyEncoding: .urlEncoding, urlParameters: parameters)
+            return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
+            
         default:
-            return HTTPTask.request
+            return HTTPParameters(bodyParameters: nil, urlParameters: nil)
         }
     }
     
     var headers: HTTPHeaders? {
-        let headers = HTTPHeaders()
-        
-        return headers
+        return nil
     }
 }

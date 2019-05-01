@@ -11,7 +11,8 @@ import Foundation
 protocol EndPointProtocol {
     var baseURL: URL { get }
     var path: String { get }
-    var httpMethod: HTTPMethod { get }
-    var task: HTTPTask { get }
     var headers: HTTPHeaders? { get }
+    var httpMethod: HTTPMethod { get }
+    var httpParameters: HTTPParameters { get }
 }
+
