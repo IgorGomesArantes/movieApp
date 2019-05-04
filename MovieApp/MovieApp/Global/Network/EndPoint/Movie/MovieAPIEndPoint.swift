@@ -41,7 +41,7 @@ extension MovieAPIEndPoint: EndPointProtocol {
         case .development:
             return "https://api.themoviedb.org/3"
         case .staging:
-            return "Movie API"
+            return "MovieAPI"
         }
     }
     
@@ -78,6 +78,9 @@ extension MovieAPIEndPoint: EndPointProtocol {
         case .image(let path, let quality):
             return "\(quality)/\(path)"
             
+        case .popular:
+            return "movie/popular"
+            
         default:
             return ""
         }
@@ -92,6 +95,10 @@ extension MovieAPIEndPoint: EndPointProtocol {
         switch self {
         case .movie(let code):
             let parameters = ["id":code]
+            return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
+        
+        case .popular:
+            let parameters = ["api_key":apiKey, "language":language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
             
         default:

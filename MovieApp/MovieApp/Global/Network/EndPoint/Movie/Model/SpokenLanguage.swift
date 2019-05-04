@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SpokenLanguage: Codable {
+struct SpokenLanguage: Decodable {
     var name: String?
     var iso_639_1: String?
 }

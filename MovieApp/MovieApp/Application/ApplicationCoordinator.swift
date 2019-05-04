@@ -11,9 +11,18 @@ import UIKit
 class ApplicationCoordinator: Coordinator {
 
     // MARK: - Properties
-    private lazy var navigationController: UINavigationController = {
+    private var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
         return navigationController
+    } ()
+    
+    private var requestProtocol: RequestProtocol = {
+        switch Configuration.shared.environment {
+        case .staging:
+            return MockedRequest.success
+        default:
+            return HTTPRequest()
+        }
     } ()
     
     var childCoordinators: [Coordinator] = []
@@ -32,7 +41,8 @@ class ApplicationCoordinator: Coordinator {
     
     // MARK: - Public methods
     func start() {
-        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
+        let initializationData = HomeCoordinator.InitializationData(navigationController: navigationController, requestProtocol: requestProtocol)
+        let homeCoordinator = HomeCoordinator(initializationData: initializationData)
         navigationController.viewControllers = [homeCoordinator.rootViewController]
         
         addChildCoordinator(homeCoordinator)

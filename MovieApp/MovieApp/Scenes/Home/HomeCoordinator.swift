@@ -11,6 +11,11 @@ import UIKit
 class HomeCoordinator: Coordinator {
     
     // MARK: - Abstract data
+    struct InitializationData {
+        let navigationController: UINavigationController
+        let requestProtocol: RequestProtocol
+    }
+    
     struct HomeModule {
         let model: HomeViewModel
         let controller: HomeViewController
@@ -26,10 +31,12 @@ class HomeCoordinator: Coordinator {
     } ()
     
     let navigationController: UINavigationController
+    let requestProtocol: RequestProtocol
     
     // MARK: Initialization methods
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(initializationData: InitializationData) {
+        self.navigationController = initializationData.navigationController
+        self.requestProtocol = initializationData.requestProtocol
     }
     
     // MARK: - Public methods
@@ -39,8 +46,9 @@ class HomeCoordinator: Coordinator {
     
     // MARK: - Build module methods
     private func buildHomeModule() -> HomeModule {
-        let viewModel = HomeViewModel(movieService: MovieAPIManager(MockedRequest.success))
+        let viewModel = HomeViewModel(movieService: MovieAPIManager(requestProtocol))
         let viewController = HomeViewController()
+        viewController.viewModel = viewModel
         
         return HomeModule(model: viewModel, controller: viewController)
     }

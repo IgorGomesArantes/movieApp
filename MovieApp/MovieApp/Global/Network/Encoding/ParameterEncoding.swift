@@ -11,10 +11,14 @@ import Foundation
 class ParameterEncoding {
     static func encode(_ parameters: HTTPParameters, request: inout URLRequest) throws {
         do {
-            guard let bodyParameters = parameters.bodyParameters, let urlParameters = parameters.urlParameters else { return }
+            if let bodyParameters = parameters.bodyParameters {
+                try JSONParameterEncoder().encode(urlRequest: &request, with: bodyParameters)
+            }
             
-            try URLParameterEncoder().encode(urlRequest: &request, with: urlParameters)
-            try JSONParameterEncoder().encode(urlRequest: &request, with: bodyParameters)
+            if let urlParameters = parameters.urlParameters {
+                try URLParameterEncoder().encode(urlRequest: &request, with: urlParameters)
+            }
+            
         } catch {
             throw error
         }

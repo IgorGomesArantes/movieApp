@@ -7,24 +7,56 @@
 //
 
 import UIKit
+import SnapKit
 
 class HomeViewController: UIViewController {
     
-    private let homeView = HomeView()
+    // MARK: - View properties
+    private let tableView = UITableView()
     
+    // MARK: - Properties
+    var viewModel: HomeViewModel?
+    
+    // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .brown
-        
-        view.addSubview(homeView)
-        homeView.translatesAutoresizingMaskIntoConstraints = false
-        homeView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        homeView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        homeView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        homeView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        
-        homeView.setup()
+        initialConfiguration()
+        start()
     }
     
+    // MARK: - Initialization methods
+    private func initialConfiguration() {
+        viewModel?.onResponse = onResponse
+        tableViewHierarchyConfiguration()
+    }
+    
+    private func start() {
+        viewModel?.reload()
+    }
+    
+    // MARK: - Private methods
+    private func onResponse(result: HomeViewModel.options) {
+        switch result {
+        case .popular(let result):
+            popularHandle(result: result)
+        default:
+            break
+        }
+    }
+    
+    private func popularHandle(result: ServiceStatus<MoviePage>) {
+        switch result {
+        case .success(let result):
+            break
+        default:
+            break
+        }
+    }
+    
+    private func tableViewHierarchyConfiguration() {
+        view.addSubview(tableView)
+        tableView.frame = view.bounds
+        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
 }

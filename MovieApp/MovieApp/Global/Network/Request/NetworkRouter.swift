@@ -21,6 +21,14 @@ class NetworkRouter<EndPoint: EndPointProtocol> {
     // MARK: - Public methods
     func request<T:Decodable>(_ endPoint: EndPoint, completion: @escaping (ServiceResponse<T>) -> ()) {
         requestProtocol.requestData(endPoint) { (data, response, error) in
+            
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode >= 300 {
+                    completion(.error("Erro: \(response.statusCode)"))
+                    return
+                }
+            }
+            
             if let data = data {
                 do {
                     let decoder = JSONDecoder()

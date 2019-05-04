@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ProductionCompany: Codable {
+struct ProductionCompany: Decodable {
     var id: Int?
     var name: String?
     var logo_path: String?

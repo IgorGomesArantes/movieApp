@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ProducionCountry: Codable {
+struct ProducionCountry: Decodable {
     var name: String?
     var iso_3166_1: String?
 }

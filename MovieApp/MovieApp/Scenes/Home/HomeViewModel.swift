@@ -14,14 +14,18 @@ class HomeViewModel {
     enum options {
         case myList(_ response: (ServiceStatus<[Movie]>))
         case recomendations(_ response: (ServiceStatus<[Movie]>))
-        case popular(_ response: (ServiceStatus<[Movie]>))
+        case popular(_ response: (ServiceStatus<MoviePage>))
     }
+    
+    // MARK: - Constants
+    private let pageSize = 10
+    private let currentPopularPage = 1
     
     // MARK: - Properties
     private let movieService: MovieAPIManager
     private var myList: [Movie]?
     private var recomendations: [Movie]?
-    private var popular: [Movie]?
+    private var popular: MoviePage = MoviePage()
     
     var onResponse: ((options) -> Void)?
     
@@ -42,10 +46,10 @@ class HomeViewModel {
     private func reloadPopular() {
         onResponse?(.popular(.loading))
         
-        movieService.getPopularMovies(page: 1, pageSize: 10) {
+        movieService.getPopularMovies(page: currentPopularPage, pageSize: pageSize) {
             switch $0 {
             case .success(let result):
-                if result.isEmpty {
+                if result.results.isEmpty {
                     self.onResponse?(.popular(.empty))
                 } else {
                     self.onResponse?(.popular(.success(result)))
