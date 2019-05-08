@@ -11,10 +11,7 @@ import Foundation
 
 enum MovieAPIEndPoint {
     case movie(code:Int)
-    case list(page:Int, pageSize:Int)
     case popular(page:Int, pageSize:Int)
-    case recommended(page:Int, pageSize:Int, movieCodeList:[Int])
-    case image(_ path: String, quality: Quality)
 }
 
 // MARK: - Constants
@@ -27,62 +24,45 @@ extension MovieAPIEndPoint {
         return "pt-BR"
     }
     
-    private var imageBaseURL: String {
+    var imageBaseURL: String {
         return "https://image.tmdb.org/t/p"
     }
 }
 
 extension MovieAPIEndPoint: EndPointProtocol {
-    
+
     private var environmentBaseURL: String {
         switch Configuration.shared.environment {
         case .production:
             return "https://api.themoviedb.org/3"
-        case .development:
-            return "https://api.themoviedb.org/3"
         case .staging:
-            return "MovieAPI"
-        }
-    }
-    
-    private var environmentAPIKey: String {
-        switch Configuration.shared.environment {
-        case .production:
-            return ""
-        case .development:
-            return ""
-        case .staging:
-            return ""
+            return "MockedMovieAPI"
         }
     }
     
     var baseURL: URL {
-        switch self {
-        case .image:
-            guard let baseURL = URL(string: imageBaseURL) else { fatalError("BaseURL could not be configured.") }
-            
-            return baseURL
-            
-        default:
-            guard let baseURL = URL(string: environmentBaseURL) else { fatalError("BaseURL could not be configured.") }
-            
-            return baseURL
-        }
+        guard let baseURL = URL(string: environmentBaseURL) else { fatalError("BaseURL could not be configured.") }
+        
+        return baseURL
     }
     
     var path: String {
         switch self {
         case .movie(let code):
             return "movie\(code)"
-        
-        case .image(let path, let quality):
-            return "\(quality)/\(path)"
             
         case .popular:
             return "movie/popular"
+        }
+    }
+    
+    var mockLocalPath: String {
+        switch self {
+        case .movie:
+            return "movie"
             
-        default:
-            return ""
+        case .popular:
+            return "popular"
         }
     }
     
@@ -94,15 +74,12 @@ extension MovieAPIEndPoint: EndPointProtocol {
     var httpParameters: HTTPParameters {
         switch self {
         case .movie(let code):
-            let parameters = ["id":code]
+            let parameters = ["id": String(code), "api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
         
         case .popular:
-            let parameters = ["api_key":apiKey, "language":language]
+            let parameters = ["api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
-            
-        default:
-            return HTTPParameters(bodyParameters: nil, urlParameters: nil)
         }
     }
     

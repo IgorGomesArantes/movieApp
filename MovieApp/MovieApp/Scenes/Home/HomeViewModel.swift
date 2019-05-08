@@ -30,8 +30,8 @@ class HomeViewModel {
     var onResponse: ((options) -> Void)?
     
     // MARK - Initialization methods
-    init(movieService: MovieAPIManager) {
-        self.movieService = movieService
+    init() {
+        self.movieService = MovieAPIManager()
     }
     
     // MARK: - Public methods

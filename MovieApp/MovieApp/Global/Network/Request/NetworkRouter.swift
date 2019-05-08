@@ -14,7 +14,7 @@ class NetworkRouter<EndPoint: EndPointProtocol> {
     private let requestProtocol: RequestProtocol
     
     // MARK: - Initialization methods
-    init(_ requestProtocol: RequestProtocol) {
+    init(requestProtocol: RequestProtocol) {
         self.requestProtocol = requestProtocol
     }
     

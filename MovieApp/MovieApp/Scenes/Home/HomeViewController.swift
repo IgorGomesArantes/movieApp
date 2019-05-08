@@ -48,7 +48,7 @@ class HomeViewController: UIViewController {
     private func popularHandle(result: ServiceStatus<MoviePage>) {
         switch result {
         case .success(let result):
-            break
+            debugPrint(result)
         default:
             break
         }

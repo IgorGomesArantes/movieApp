@@ -14,8 +14,13 @@ class MovieAPIManager {
     private let router: NetworkRouter<MovieAPIEndPoint>
     
     // MARK: - Initialization methods
-    init(_ requestProtocol: RequestProtocol) {
-        router = NetworkRouter<MovieAPIEndPoint>(requestProtocol)
+    init() {
+        switch Configuration.shared.environment {
+        case .production:
+            router = NetworkRouter<MovieAPIEndPoint>(requestProtocol: HTTPRequest())
+        case .staging:
+            router = NetworkRouter<MovieAPIEndPoint>(requestProtocol: MockedRequest.success)
+        }
     }
     
     // MARK: - Public methods

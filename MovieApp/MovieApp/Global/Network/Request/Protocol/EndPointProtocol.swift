@@ -11,8 +11,8 @@ import Foundation
 protocol EndPointProtocol {
     var baseURL: URL { get }
     var path: String { get }
+    var mockLocalPath: String { get }
     var headers: HTTPHeaders? { get }
     var httpMethod: HTTPMethod { get }
     var httpParameters: HTTPParameters { get }
 }
-

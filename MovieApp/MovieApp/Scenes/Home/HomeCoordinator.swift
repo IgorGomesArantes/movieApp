@@ -13,7 +13,6 @@ class HomeCoordinator: Coordinator {
     // MARK: - Abstract data
     struct InitializationData {
         let navigationController: UINavigationController
-        let requestProtocol: RequestProtocol
     }
     
     struct HomeModule {
@@ -31,12 +30,10 @@ class HomeCoordinator: Coordinator {
     } ()
     
     let navigationController: UINavigationController
-    let requestProtocol: RequestProtocol
     
     // MARK: Initialization methods
     init(initializationData: InitializationData) {
         self.navigationController = initializationData.navigationController
-        self.requestProtocol = initializationData.requestProtocol
     }
     
     // MARK: - Public methods
@@ -46,7 +43,7 @@ class HomeCoordinator: Coordinator {
     
     // MARK: - Build module methods
     private func buildHomeModule() -> HomeModule {
-        let viewModel = HomeViewModel(movieService: MovieAPIManager(requestProtocol))
+        let viewModel = HomeViewModel()
         let viewController = HomeViewController()
         viewController.viewModel = viewModel
         

@@ -16,24 +16,22 @@ enum MockedRequest {
 
 extension MockedRequest: RequestProtocol {
     func requestData(_ route: EndPointProtocol, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        
+
         switch self {
         case .success:
-            let baseURL = route.baseURL.absoluteString
-            let path = route.path.replacingOccurrences(of: "/", with: "-")
-            let data = MockDataHelper.getData(forResource: "\(baseURL)-\(path)")
-            
+            let data = MockedDataHelper.getData(forResource: route.mockLocalPath)
+
             completion(data, URLResponse(), nil)
-            
+
         case .none:
             completion(Data(), URLResponse(), nil)
-            
+
         case .error:
             completion(nil, nil, NetworkError.mockedError)
         }
     }
-    
+
     func cancel() {
-        
+
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockDataHelper {
+class MockedDataHelper {
     static func getData(forResource resource: String) -> Data {
         let bundle = Bundle(for: self)
         guard let path = bundle.path(forResource: resource, ofType: "json"),

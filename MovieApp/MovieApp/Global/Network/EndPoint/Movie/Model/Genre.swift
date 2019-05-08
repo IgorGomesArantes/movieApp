@@ -8,7 +8,19 @@
 
 import Foundation
 
-struct Genre: Decodable {
-    var id: Int?
-    var name: String?
+class Genre: Decodable {
+    let code: Int?
+    let name: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case code = "id"
+        case name = "name"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        code = try container.decodeIfPresent(Int.self, forKey: .code)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+    }
 }

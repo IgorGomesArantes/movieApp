@@ -16,14 +16,14 @@ class ApplicationCoordinator: Coordinator {
         return navigationController
     } ()
     
-    private var requestProtocol: RequestProtocol = {
-        switch Configuration.shared.environment {
-        case .staging:
-            return MockedRequest.success
-        default:
-            return HTTPRequest()
-        }
-    } ()
+//    private var requestProtocol: RequestProtocol = {
+//        switch Configuration.shared.environment {
+//        case .staging:
+//            return MockedRequest.success
+//        default:
+//            return HTTPRequest()
+//        }
+//    } ()
     
     var childCoordinators: [Coordinator] = []
     var rootViewController: UIViewController {
@@ -41,7 +41,7 @@ class ApplicationCoordinator: Coordinator {
     
     // MARK: - Public methods
     func start() {
-        let initializationData = HomeCoordinator.InitializationData(navigationController: navigationController, requestProtocol: requestProtocol)
+        let initializationData = HomeCoordinator.InitializationData(navigationController: navigationController)
         let homeCoordinator = HomeCoordinator(initializationData: initializationData)
         navigationController.viewControllers = [homeCoordinator.rootViewController]
         
