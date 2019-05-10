@@ -26,6 +26,7 @@ class HomeViewModel {
     private var myList: [Movie]?
     private var recomendations: [Movie]?
     private var popular: MoviePage = MoviePage()
+    weak var delegate: HomeViewControllerDelegate?
     
     var onResponse: ((options) -> Void)?
     

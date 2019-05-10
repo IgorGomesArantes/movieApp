@@ -44,8 +44,7 @@ class HomeCoordinator: Coordinator {
     // MARK: - Build module methods
     private func buildHomeModule() -> HomeModule {
         let viewModel = HomeViewModel()
-        let viewController = HomeViewController()
-        viewController.viewModel = viewModel
+        let viewController = HomeViewController.instantiate(viewModel: viewModel)
         
         return HomeModule(model: viewModel, controller: viewController)
     }

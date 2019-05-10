@@ -9,13 +9,20 @@
 import UIKit
 import SnapKit
 
+protocol HomeViewControllerDelegate: class {
+    func configureMyList()
+    func configureRecomendations()
+    func configurePopular()
+}
+
 class HomeViewController: UIViewController {
     
     // MARK: - View properties
-    private let tableView = UITableView()
+    private let homeView = HomeView()
+    //private let homeView = PopularView()
     
     // MARK: - Properties
-    var viewModel: HomeViewModel?
+    private var viewModel: HomeViewModel!
     
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
@@ -24,15 +31,24 @@ class HomeViewController: UIViewController {
         initialConfiguration()
         start()
     }
-    
+
     // MARK: - Initialization methods
+    static func instantiate(viewModel: HomeViewModel) -> HomeViewController {
+        let homeViewController = HomeViewController()
+        
+        homeViewController.viewModel = viewModel
+        
+        return homeViewController
+    }
+    
+    // MARK: - Configuration methods
     private func initialConfiguration() {
-        viewModel?.onResponse = onResponse
+        viewModel.onResponse = onResponse
         tableViewHierarchyConfiguration()
     }
     
     private func start() {
-        viewModel?.reload()
+        viewModel.reload()
     }
     
     // MARK: - Private methods
@@ -55,8 +71,8 @@ class HomeViewController: UIViewController {
     }
     
     private func tableViewHierarchyConfiguration() {
-        view.addSubview(tableView)
-        tableView.frame = view.bounds
-        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        view.addSubview(homeView)
+        homeView.frame = view.bounds
+        homeView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }

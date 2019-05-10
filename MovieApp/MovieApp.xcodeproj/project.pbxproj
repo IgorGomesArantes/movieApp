@@ -45,10 +45,11 @@
 		781BB2D3226DFB760031ADA6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781BB2D2226DFB760031ADA6 /* HomeCoordinator.swift */; };
 		781BB2D5226DFB850031ADA6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781BB2D4226DFB850031ADA6 /* HomeViewModel.swift */; };
 		781BB2D8226DFC180031ADA6 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781BB2D7226DFC180031ADA6 /* ApplicationCoordinator.swift */; };
+		787F0F012286068A00EFB108 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F0F002286068A00EFB108 /* HomeView.swift */; };
+		787F0F0322860A0100EFB108 /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F0F0222860A0100EFB108 /* PopularViewModel.swift */; };
 		78F1839722792E1A001FAFF5 /* Quality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F1839622792E1A001FAFF5 /* Quality.swift */; };
 		78F1839B227B4EC8001FAFF5 /* popular.json in Resources */ = {isa = PBXBuildFile; fileRef = 78F1839A227B4EC8001FAFF5 /* popular.json */; };
 		78F1839D227B4F2D001FAFF5 /* MoviePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F1839C227B4F2D001FAFF5 /* MoviePage.swift */; };
-		78F183A1227B6779001FAFF5 /* PopularView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F183A0227B6779001FAFF5 /* PopularView.xib */; };
 		78F183A3227B6A1C001FAFF5 /* PopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F183A2227B6A1C001FAFF5 /* PopularView.swift */; };
 		78F183A5227B93EB001FAFF5 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F183A4227B93EB001FAFF5 /* SnapKit.framework */; };
 /* End PBXBuildFile section */
@@ -111,10 +112,11 @@
 		781BB2D2226DFB760031ADA6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		781BB2D4226DFB850031ADA6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		781BB2D7226DFC180031ADA6 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		787F0F002286068A00EFB108 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		787F0F0222860A0100EFB108 /* PopularViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
 		78F1839622792E1A001FAFF5 /* Quality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quality.swift; sourceTree = "<group>"; };
 		78F1839A227B4EC8001FAFF5 /* popular.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = popular.json; sourceTree = "<group>"; };
 		78F1839C227B4F2D001FAFF5 /* MoviePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePage.swift; sourceTree = "<group>"; };
-		78F183A0227B6779001FAFF5 /* PopularView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularView.xib; sourceTree = "<group>"; };
 		78F183A2227B6A1C001FAFF5 /* PopularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularView.swift; sourceTree = "<group>"; };
 		78F183A4227B93EB001FAFF5 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,8 @@
 		7802DB902264178E00F6682F /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				7802DBB22266A54700F6682F /* Resources */,
+				7802DBCE226771DD00F6682F /* Network */,
 				7802DBAA22668DC900F6682F /* Application */,
 				7802DBAC2266A15500F6682F /* Global */,
 				7802DBAB22668DD200F6682F /* Scenes */,
@@ -203,9 +207,7 @@
 		7802DBAC2266A15500F6682F /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				7802DBB22266A54700F6682F /* Resources */,
 				7802DBAE2266A1A700F6682F /* Components */,
-				7802DBCE226771DD00F6682F /* Network */,
 				7802DBAD2266A18A00F6682F /* Coordinator */,
 			);
 			path = Global;
@@ -229,10 +231,11 @@
 		7802DBAF2266A25C00F6682F /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				781BB2D6226DFBA10031ADA6 /* View */,
+				787F0F052286216700EFB108 /* Components */,
+				781BB2D2226DFB760031ADA6 /* HomeCoordinator.swift */,
 				781BB2D4226DFB850031ADA6 /* HomeViewModel.swift */,
 				781BB2D0226DFB6A0031ADA6 /* HomeViewController.swift */,
-				781BB2D2226DFB760031ADA6 /* HomeCoordinator.swift */,
+				787F0F002286068A00EFB108 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -421,13 +424,21 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		781BB2D6226DFBA10031ADA6 /* View */ = {
+		781BB2D6226DFBA10031ADA6 /* Popular */ = {
 			isa = PBXGroup;
 			children = (
-				78F183A0227B6779001FAFF5 /* PopularView.xib */,
 				78F183A2227B6A1C001FAFF5 /* PopularView.swift */,
+				787F0F0222860A0100EFB108 /* PopularViewModel.swift */,
 			);
-			path = View;
+			path = Popular;
+			sourceTree = "<group>";
+		};
+		787F0F052286216700EFB108 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				781BB2D6226DFBA10031ADA6 /* Popular */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		78F1839522792E0F001FAFF5 /* Enum */ = {
@@ -527,7 +538,6 @@
 				7802DBBD2266A68F00F6682F /* English.strings in Resources */,
 				7802DC2A2268217900F6682F /* movie.json in Resources */,
 				7802DBB82266A66E00F6682F /* Portuguese.strings in Resources */,
-				78F183A1227B6779001FAFF5 /* PopularView.xib in Resources */,
 				7802DB992264179100F6682F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,11 +601,13 @@
 				781BB2D3226DFB760031ADA6 /* HomeCoordinator.swift in Sources */,
 				7802DC2822681B1900F6682F /* MockedDataHelper.swift in Sources */,
 				781BB2D1226DFB6A0031ADA6 /* HomeViewController.swift in Sources */,
+				787F0F0322860A0100EFB108 /* PopularViewModel.swift in Sources */,
 				7802DBCA2266B05900F6682F /* Configuration.swift in Sources */,
 				7802DBCC22676F6100F6682F /* Coordinator.swift in Sources */,
 				78F183A3227B6A1C001FAFF5 /* PopularView.swift in Sources */,
 				7802DC052267BEE400F6682F /* Movie.swift in Sources */,
 				7802DBEE22678DB500F6682F /* NetworkError.swift in Sources */,
+				787F0F012286068A00EFB108 /* HomeView.swift in Sources */,
 				7802DBE822678BAA00F6682F /* ParameterEncoding.swift in Sources */,
 				7802DBE622678AEE00F6682F /* Parameters.swift in Sources */,
 				7802DBF2226794B300F6682F /* NetworkRouter.swift in Sources */,

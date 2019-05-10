@@ -13,8 +13,15 @@ class ApplicationCoordinator: Coordinator {
     // MARK: - Properties
     private var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.tintColor = UIColor(named: "yellow")
+        navigationController.navigationBar.barTintColor = UIColor(named: "yellow")
+        
+        navigationController.view.backgroundColor = UIColor(named: "yellow")
+    
         return navigationController
     } ()
+
     
 //    private var requestProtocol: RequestProtocol = {
 //        switch Configuration.shared.environment {
