@@ -13,7 +13,7 @@ class HomeView: UIView {
     
     // MARK: - View properties
     let contentView = UIView()
-    //let popularCollectionView = UICollectionView()
+    var popularCollectionView: UICollectionView!
     
     // MARK: - Initialization methods
     override init(frame: CGRect) {
@@ -37,17 +37,32 @@ class HomeView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
-        contentView.backgroundColor = UIColor(named: "lightGrey")
+        contentView.backgroundColor = UIColor(named: "lightYellow")
     }
     
     private func popularCollectionConfiguration() {
-//        contentView.addSubview(popularCollectionView)
-//        popularCollectionView.snp.makeConstraints { make in
-//            make.top.left.right.equalToSuperview()
-//            make.height.equalTo(contentView.snp.height).dividedBy(2)
-//        }
-//
-//        popularCollectionView.showsVerticalScrollIndicator = false
-//        popularCollectionView.showsHorizontalScrollIndicator = true
+        let cellHeight = 400
+        let cellWidth = (cellHeight / 3) * 2
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        layout.minimumInteritemSpacing = 40
+        layout.minimumLineSpacing = 40
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        
+        
+        popularCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        
+        popularCollectionView.register(PopularCollectionViewCell.self, forCellWithReuseIdentifier: PopularCollectionViewCell.reuseIdentifier)
+        
+        contentView.addSubview(popularCollectionView)
+        popularCollectionView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(contentView.snp.height).dividedBy(1.5)
+        }
+
+        popularCollectionView.backgroundColor = .clear
+        popularCollectionView.showsHorizontalScrollIndicator = false
     }
 }

@@ -52,7 +52,7 @@ class PopularView: UIView {
     private func contentVoteConfiguration() {
         imageView.addSubview(contentVoteView)
         contentVoteView.snp.makeConstraints { make in
-            make.bottom.right.equalToSuperview().inset(24)
+            make.bottom.right.equalToSuperview().inset(16)
             make.width.equalTo(60)
             make.height.equalTo(25)
         }
@@ -80,7 +80,6 @@ class PopularView: UIView {
             make.left.equalTo(starVoteImageView.snp.right).offset(3)
         }
         
-        voteAverageLabel.text = "10,5"
         voteAverageLabel.font = UIFont.boldSystemFont(ofSize: 14)
         voteAverageLabel.textColor = .white
     }
@@ -88,7 +87,7 @@ class PopularView: UIView {
     private func contentPlusConfiguration() {
         imageView.addSubview(contentPlusView)
         contentPlusView.snp.makeConstraints { make in
-            make.top.right.equalToSuperview().inset(24)
+            make.top.right.equalToSuperview().inset(16)
             make.height.width.equalTo(60)
         }
         

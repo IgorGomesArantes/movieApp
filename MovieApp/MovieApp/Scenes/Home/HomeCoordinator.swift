@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HomeCoordinatorDelegate: class {
+    func detail(_ movieCode: Int)
+}
+
 class HomeCoordinator: Coordinator {
     
     // MARK: - Abstract data
@@ -46,6 +50,15 @@ class HomeCoordinator: Coordinator {
         let viewModel = HomeViewModel()
         let viewController = HomeViewController.instantiate(viewModel: viewModel)
         
+        viewModel.coordinatorDelegate = self
+        viewModel.controllerDelegate = viewController
+        
         return HomeModule(model: viewModel, controller: viewController)
+    }
+}
+
+extension HomeCoordinator: HomeCoordinatorDelegate {
+    func detail(_ movieCode: Int) {
+        
     }
 }

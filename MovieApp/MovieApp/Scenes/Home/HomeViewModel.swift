@@ -6,17 +6,10 @@
 //  Copyright © 2019 Igor Gomes Arantes. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class HomeViewModel {
-    
-    // MARK: - Abstract data
-    enum options {
-        case myList(_ response: (ServiceStatus<[Movie]>))
-        case recomendations(_ response: (ServiceStatus<[Movie]>))
-        case popular(_ response: (ServiceStatus<MoviePage>))
-    }
-    
+
     // MARK: - Constants
     private let pageSize = 10
     private let currentPopularPage = 1
@@ -26,9 +19,8 @@ class HomeViewModel {
     private var myList: [Movie]?
     private var recomendations: [Movie]?
     private var popular: MoviePage = MoviePage()
-    weak var delegate: HomeViewControllerDelegate?
-    
-    var onResponse: ((options) -> Void)?
+    weak var controllerDelegate: HomeViewControllerDelegate?
+    weak var coordinatorDelegate: HomeCoordinatorDelegate?
     
     // MARK - Initialization methods
     init() {
@@ -45,19 +37,20 @@ class HomeViewModel {
     
     // MARK: - Reload auxiliar methods
     private func reloadPopular() {
-        onResponse?(.popular(.loading))
+        controllerDelegate?.popular(.loading)
         
         movieService.getPopularMovies(page: currentPopularPage, pageSize: pageSize) {
             switch $0 {
             case .success(let result):
                 if result.results.isEmpty {
-                    self.onResponse?(.popular(.empty))
+                    self.controllerDelegate?.popular(.empty)
                 } else {
-                    self.onResponse?(.popular(.success(result)))
+                    self.popular = result
+                    self.controllerDelegate?.popular(.success(result))
                 }
                 
             case .error(let string):
-                self.onResponse?(.popular(.error(string)))
+                self.controllerDelegate?.popular(.error(string))
             }
         }
     }
@@ -67,6 +60,30 @@ class HomeViewModel {
     }
     
     private func reloadRecomendations() {
+        
+    }
+    
+    // MARK: - Public methods
+    func configure(_ view: HomeView) {
+        
+    }
+    
+    // MARK: - Popular methods and properties
+    var popularCount: Int {
+        return popular.results.count
+    }
+    
+    func popularViewModel(index: Int) -> PopularViewModel {
+        let movieCode = popular.results[index].id ?? 0
+        let imagePath = movieService.getImagePath(popular.results[index].posterPath ?? "")
+        let voteAverage = popular.results[index].voteAverage ?? 0.0
+        
+        let viewModel = PopularViewModel(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverage)
+        
+        return viewModel
+    }
+    
+    func popularDetail(_ index: Int) {
         
     }
 }

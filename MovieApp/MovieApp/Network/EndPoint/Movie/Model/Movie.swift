@@ -40,7 +40,7 @@ class Movie: Decodable {
         case genres = "genres"
         case overview = "overview"
         case popularity = "popularity"
-        case posterPath = "postar_path"
+        case posterPath = "poster_path"
         case voteAverage = "vote_average"
         case releaseDate = "release_date"
         case originalTitle = "original_title"

@@ -12,6 +12,7 @@ class MovieAPIManager {
     
     // MARK: - Properties
     private let router: NetworkRouter<MovieAPIEndPoint>
+    private let imageBaseURL = "https://image.tmdb.org/t/p"
     
     // MARK: - Initialization methods
     init() {
@@ -34,5 +35,9 @@ class MovieAPIManager {
         router.request(.popular(page: page, pageSize: pageSize)) {
             completion($0)
         }
+    }
+    
+    func getImagePath(_ imagePath: String, quality: Quality = Quality.high) -> String {
+        return "\(imageBaseURL)/\(quality.rawValue)/\(imagePath)"
     }
 }

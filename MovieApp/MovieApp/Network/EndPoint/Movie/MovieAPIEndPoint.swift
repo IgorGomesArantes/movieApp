@@ -23,10 +23,6 @@ extension MovieAPIEndPoint {
     private var language: String {
         return "pt-BR"
     }
-    
-    var imageBaseURL: String {
-        return "https://image.tmdb.org/t/p"
-    }
 }
 
 extension MovieAPIEndPoint: EndPointProtocol {
