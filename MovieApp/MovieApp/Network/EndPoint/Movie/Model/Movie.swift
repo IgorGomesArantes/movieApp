@@ -68,4 +68,24 @@ class Movie: Decodable {
         originalTitle = try container.decodeIfPresent(String.self, forKey: .originalTitle)
         originalLanguage = try container.decodeIfPresent(String.self, forKey: .posterPath)
     }
+    
+    init() {
+        id = nil
+        adult = nil
+        budget = nil
+        revenue = nil
+        runtime = nil
+        title = nil
+        status = nil
+        vote_count = nil
+        tagline = nil
+        genres = nil
+        overview = nil
+        popularity = nil
+        posterPath = nil
+        voteAverage = nil
+        releaseDate = nil
+        originalTitle = nil
+        originalLanguage = nil
+    }
 }

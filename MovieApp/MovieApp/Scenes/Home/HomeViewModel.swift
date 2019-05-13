@@ -16,11 +16,10 @@ class HomeViewModel {
     
     // MARK: - Properties
     private let movieService: MovieAPIManager
-    private var myList: [Movie]?
-    private var recomendations: [Movie]?
     private var popular: MoviePage = MoviePage()
+    // TODO: - estudar weak
+    var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
-    weak var coordinatorDelegate: HomeCoordinatorDelegate?
     
     // MARK - Initialization methods
     init() {
@@ -30,9 +29,18 @@ class HomeViewModel {
     // MARK: - Public methods
     func reload() {
         reloadPopular()
-
-        reloadMyList()
-        reloadRecomendations()
+    }
+    
+    func popularDetail(_ index: Int) {
+        coordinatorDelegate?.detail(index)
+    }
+    
+    func search() {
+        coordinatorDelegate?.search()
+    }
+    
+    func configure(_ view: HomeView) {
+        
     }
     
     // MARK: - Reload auxiliar methods
@@ -55,19 +63,6 @@ class HomeViewModel {
         }
     }
     
-    private func reloadMyList() {
-        
-    }
-    
-    private func reloadRecomendations() {
-        
-    }
-    
-    // MARK: - Public methods
-    func configure(_ view: HomeView) {
-        
-    }
-    
     // MARK: - Popular methods and properties
     var popularCount: Int {
         return popular.results.count
@@ -81,9 +76,5 @@ class HomeViewModel {
         let viewModel = PopularViewModel(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverage)
         
         return viewModel
-    }
-    
-    func popularDetail(_ index: Int) {
-        
     }
 }

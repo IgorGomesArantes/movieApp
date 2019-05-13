@@ -10,9 +10,7 @@ import UIKit
 import SnapKit
 
 protocol HomeViewControllerDelegate: class {
-    func myList()
     func popular(_ result: ServiceStatus<MoviePage>)
-    func recomendations()
 }
 
 class HomeViewController: UIViewController {
@@ -30,7 +28,7 @@ class HomeViewController: UIViewController {
         initialConfiguration()
         start()
     }
-
+    
     // MARK: - Initialization methods
     static func instantiate(viewModel: HomeViewModel) -> HomeViewController {
         let homeViewController = HomeViewController()
@@ -40,32 +38,40 @@ class HomeViewController: UIViewController {
         return homeViewController
     }
     
-    // MARK: - Configuration methods
-    private func initialConfiguration() {
-        viewModel.controllerDelegate = self
-        homeView.popularCollectionView.delegate = self
-        homeView.popularCollectionView.dataSource = self
-        
-        homeViewConfiguration()
-    }
-    
     private func start() {
         viewModel.reload()
     }
     
     // MARK: - Configuration methods
+    private func initialConfiguration() {
+        homeView.popularCollectionView.delegate = self
+        homeView.popularCollectionView.dataSource = self
+        
+        homeViewConfiguration()
+        navigationItemConfiguration()
+    }
+
     private func homeViewConfiguration() {
         view.addSubview(homeView)
         homeView.frame = view.bounds
         homeView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-}
-
-extension HomeViewController: HomeViewControllerDelegate {
-    func myList() {
+    
+    private func navigationItemConfiguration() {
+        navigationItem.title = "Home"
         
+        let button = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonAction))
+        navigationItem.rightBarButtonItem = button
     }
     
+    // MARK: - Action methods
+    @objc private func searchButtonAction() {
+        viewModel.search()
+    }
+}
+
+// MARK: - Home view controller delegate methods
+extension HomeViewController: HomeViewControllerDelegate {
     func popular(_ result: ServiceStatus<MoviePage>) {
         switch result {
         case .success(let result):
@@ -75,12 +81,9 @@ extension HomeViewController: HomeViewControllerDelegate {
             break
         }
     }
-    
-    func recomendations() {
-        
-    }
 }
 
+// MARK: - Collection view delegate and data source methods
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.popularCount

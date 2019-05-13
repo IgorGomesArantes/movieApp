@@ -47,13 +47,15 @@ class PopularView: UIView {
         
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: "avatar")
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
     }
     
     private func contentVoteConfiguration() {
         imageView.addSubview(contentVoteView)
         contentVoteView.snp.makeConstraints { make in
-            make.bottom.right.equalToSuperview().inset(16)
-            make.width.equalTo(60)
+            make.bottom.right.equalToSuperview().inset(8)
+            make.width.equalTo(50)
             make.height.equalTo(25)
         }
         
@@ -87,8 +89,8 @@ class PopularView: UIView {
     private func contentPlusConfiguration() {
         imageView.addSubview(contentPlusView)
         contentPlusView.snp.makeConstraints { make in
-            make.top.right.equalToSuperview().inset(16)
-            make.height.width.equalTo(60)
+            make.top.right.equalToSuperview().inset(8)
+            make.height.width.equalTo(50)
         }
         
         contentPlusView.backgroundColor = UIColor(named: "transparentGrey")

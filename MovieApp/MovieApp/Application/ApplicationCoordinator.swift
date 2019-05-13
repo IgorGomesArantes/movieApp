@@ -14,23 +14,13 @@ class ApplicationCoordinator: Coordinator {
     private var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
         navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.tintColor = UIColor(named: "yellow")
+        navigationController.navigationBar.tintColor = .black
         navigationController.navigationBar.barTintColor = UIColor(named: "yellow")
         
         navigationController.view.backgroundColor = UIColor(named: "yellow")
     
         return navigationController
     } ()
-
-    
-//    private var requestProtocol: RequestProtocol = {
-//        switch Configuration.shared.environment {
-//        case .staging:
-//            return MockedRequest.success
-//        default:
-//            return HTTPRequest()
-//        }
-//    } ()
     
     var childCoordinators: [Coordinator] = []
     var rootViewController: UIViewController {
