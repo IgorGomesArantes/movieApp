@@ -22,7 +22,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        start()
+        initialConfiguration()
     }
     
     // MARK: - Initialization methods
@@ -34,16 +34,19 @@ class DetailViewController: UIViewController {
         return viewController
     }
     
-    func start() {
-        initialConfiguration()
-    }
-    
     // MARK - Configuration methods
-    func initialConfiguration() {
+    private func initialConfiguration() {
         configureNavigationItem()
+        detailViewConfiguration()
     }
     
-    func configureNavigationItem() {
+    private func detailViewConfiguration() {
+        view.addSubview(detailView)
+        detailView.frame = view.bounds
+        detailView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+    
+    private func configureNavigationItem() {
         navigationItem.title = "Detalhes"
     }
 }
