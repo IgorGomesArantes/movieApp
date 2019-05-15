@@ -104,6 +104,6 @@ class PopularView: UIView {
             make.edges.equalToSuperview().inset(10)
         }
         
-        plusImageView.image = UIImage(named: "plus")
+        plusImageView.image = UIImage(named: "whitePlus")
     }
 }
