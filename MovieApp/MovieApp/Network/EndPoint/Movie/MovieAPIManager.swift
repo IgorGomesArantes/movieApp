@@ -25,7 +25,7 @@ class MovieAPIManager {
     }
     
     // MARK: - Public methods
-    func getMovie(code: Int, completion: @escaping (ServiceResponse<Movie>) -> ()) { 
+    func getMovie(by code: Int, completion: @escaping (ServiceResponse<Movie>) -> ()) { 
         router.request(.movie(code: code)) {
             completion($0)
         }

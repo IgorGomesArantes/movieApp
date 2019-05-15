@@ -9,23 +9,23 @@
 import Foundation
 
 class Movie: Decodable {
-    let id: Int?
-    let adult: Bool?
-    let budget: Int?
-    let revenue: Int?
-    let runtime: Int?
-    let title: String?
-    let status: String?
-    let vote_count: Int?
-    let tagline: String?
-    let genres: [Genre]?
-    let overview: String?
-    let popularity: Float?
-    let posterPath: String?
-    let voteAverage: Float?
-    let releaseDate: String?
-    let originalTitle: String?
-    let originalLanguage: String?
+    var id: Int?
+    var adult: Bool?
+    var budget: Int?
+    var revenue: Int?
+    var runtime: Int?
+    var title: String?
+    var status: String?
+    var voteCount: Int?
+    var tagline: String?
+    var genres: [Genre]?
+    var overview: String?
+    var popularity: Float?
+    var posterPath: String?
+    var voteAverage: Float?
+    var releaseDate: String?
+    var originalTitle: String?
+    var originalLanguage: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -57,9 +57,9 @@ class Movie: Decodable {
         runtime = try container.decodeIfPresent(Int.self, forKey: .runtime)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         status = try container.decodeIfPresent(String.self, forKey: .status)
-        vote_count = try container.decodeIfPresent(Int.self, forKey: .voteCount)
+        voteCount = try container.decodeIfPresent(Int.self, forKey: .voteCount)
         tagline = try container.decodeIfPresent(String.self, forKey: .tagline)
-        genres = try container.decodeIfPresent([Genre].self, forKey: .tagline)
+        genres = try container.decodeIfPresent([Genre].self, forKey: .genres)
         overview = try container.decodeIfPresent(String.self, forKey: .overview)
         popularity = try container.decodeIfPresent(Float.self, forKey: .popularity)
         posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
@@ -69,23 +69,5 @@ class Movie: Decodable {
         originalLanguage = try container.decodeIfPresent(String.self, forKey: .posterPath)
     }
     
-    init() {
-        id = nil
-        adult = nil
-        budget = nil
-        revenue = nil
-        runtime = nil
-        title = nil
-        status = nil
-        vote_count = nil
-        tagline = nil
-        genres = nil
-        overview = nil
-        popularity = nil
-        posterPath = nil
-        voteAverage = nil
-        releaseDate = nil
-        originalTitle = nil
-        originalLanguage = nil
-    }
+    init() {}
 }

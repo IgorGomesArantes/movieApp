@@ -41,9 +41,10 @@ class DetailCoordinator: Coordinator {
     
     // MARK: - Build module methods
     private func buildDetailModule() -> DetailModule {
-        let viewModel = DetailViewModel()
-        
+        let viewModel = DetailViewModel(movieCode)
         let viewController = DetailViewController.instanciate(viewModel: viewModel)
+        
+        viewModel.controllerDelegate = viewController
         
         return DetailModule(viewModel: viewModel, controller: viewController)
     }

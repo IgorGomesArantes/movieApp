@@ -65,6 +65,7 @@ class DetailView: UIView {
         averageVoteBarConfiguration()
         overviewConfiguration()
         //myListButtonConfiguration()
+        mockConfiguration()
     }
     
     private func contentConfiguration() {
@@ -83,8 +84,6 @@ class DetailView: UIView {
             make.width.equalTo(UIScreen.main.bounds.width)
             make.height.equalTo(imageView.snp.width).multipliedBy(constants.imageAspectRatio)
         }
-        
-        imageView.image = UIImage(named: "avengers")
     }
     
     private func titleConfiguration() {
@@ -95,9 +94,6 @@ class DetailView: UIView {
         }
         
         titleLabel.font = UIFont.systemFont(ofSize: constants.bigFontSize)
-        
-        // TODO: - Criar metodo
-        titleLabel.text = "Avengers: EndGame"
     }
     
     private func dateDurationStackConfiguration() {
@@ -118,10 +114,6 @@ class DetailView: UIView {
         
         releaseDateLabel.font = UIFont.systemFont(ofSize: constants.smallFontSize)
         durationLabel.font = UIFont.systemFont(ofSize: constants.smallFontSize)
-        
-        // TODO: - Retirar
-        releaseDateLabel.text = "11 de Março de 2019"
-        durationLabel.text = "128 min"
     }
     
     private func averageVoteConfiguration() {
@@ -142,10 +134,6 @@ class DetailView: UIView {
         
         averageVoteLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
         averageVoteNumberLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
-
-        // TODO: - Retirar
-        averageVoteLabel.text = "Nota geral:"
-        averageVoteNumberLabel.text = "7.4"
     }
     
     private func averageVoteBarConfiguration() {
@@ -158,9 +146,6 @@ class DetailView: UIView {
         
         averageVoteProgressView.progressTintColor = UIColor(named: "yellow")
         averageVoteProgressView.trackTintColor = UIColor(named: "lightGrey")
-        
-        // TODO: - Retirar
-        averageVoteProgressView.setProgress(0.74, animated: false)
     }
     
     private func overviewConfiguration() {
@@ -172,9 +157,6 @@ class DetailView: UIView {
         
         overviewLabel.numberOfLines = 0
         overviewLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
-        
-        // TODO: - Retirar
-        overviewLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae neque gravida, sagittis leo quis, fringilla ipsum. Proin commodo, augue eu egestas pulvinar, elit elit ullamcorper eros, vel mollis ligula elit sed augue. Aliquam pharetra ligula a sem rhoncus faucibus. Donec ut nisi id risus dignissim viverra a ac ex. Fusce sem turpis, facilisis at fringilla ut, molestie ac dolor. Sed efficitur, velit consectetur pharetra lacinia, nibh quam egestas lorem, vitae auctor leo arcu dignissim felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi pharetra, lectus a cursus fermentum, tortor neque lacinia orci, non blandit ex neque id justo. Proin sit amet venenatis dui, quis suscipit dolor. Donec pharetra lorem sit amet auctor vulputate. Proin nec placerat dolor. Nullam hendrerit vel tortor quis pharetra. Suspendisse blandit hendrerit auctor. Suspendisse potenti. Mauris ac dictum tortor."
     }
     
     // TODO: - Corrigir
@@ -195,5 +177,17 @@ class DetailView: UIView {
         myListButton.setTitleColor(.black, for: .normal)
         myListButton.titleLabel?.font = UIFont.systemFont(ofSize: 8)
         myListButton.titleEdgeInsets = UIEdgeInsets(top: constants.buttonWidthSize, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+    
+    // MARK: - Mock methods
+    private func mockConfiguration() {
+        imageView.image = UIImage(named: "avengers")
+        titleLabel.text = "Avengers: EndGame"
+        releaseDateLabel.text = "11 de Março de 2019"
+        durationLabel.text = "128 min"
+        averageVoteLabel.text = "Nota geral:"
+        averageVoteNumberLabel.text = "7.4"
+        averageVoteProgressView.setProgress(0.74, animated: false)
+        overviewLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae neque gravida, sagittis leo quis, fringilla ipsum. Proin commodo, augue eu egestas pulvinar, elit elit ullamcorper eros, vel mollis ligula elit sed augue. Aliquam pharetra ligula a sem rhoncus faucibus. Donec ut nisi id risus dignissim viverra a ac ex. Fusce sem turpis, facilisis at fringilla ut, molestie ac dolor. Sed efficitur, velit consectetur pharetra lacinia, nibh quam egestas lorem, vitae auctor leo arcu dignissim felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi pharetra, lectus a cursus fermentum, tortor neque lacinia orci, non blandit ex neque id justo. Proin sit amet venenatis dui, quis suscipit dolor. Donec pharetra lorem sit amet auctor vulputate. Proin nec placerat dolor. Nullam hendrerit vel tortor quis pharetra. Suspendisse blandit hendrerit auctor. Suspendisse potenti. Mauris ac dictum tortor."
     }
 }

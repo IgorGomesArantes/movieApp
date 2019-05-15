@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DetailViewControllerDelegate {
+protocol DetailViewControllerDelegate: class {
     func reload(_ result: ServiceStatus<Movie>)
 }
 
@@ -23,6 +23,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         initialConfiguration()
+        viewModel.reload()
     }
     
     // MARK: - Initialization methods
@@ -48,6 +49,21 @@ class DetailViewController: UIViewController {
     
     private func configureNavigationItem() {
         navigationItem.title = "Detalhes"
+    }
+}
+
+extension DetailViewController: DetailViewControllerDelegate {
+    func reload(_ result: ServiceStatus<Movie>) {
+        switch result {
+        case .success:
+            viewModel.configure(detailView)
+        case .error:
+            break
+        case .loading:
+            break
+        case .empty:
+            break
+        }
     }
 }
 

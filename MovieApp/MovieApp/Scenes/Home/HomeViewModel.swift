@@ -43,7 +43,7 @@ class HomeViewModel {
         
     }
     
-    // MARK: - Reload auxiliar methods
+    // MARK: - Reload methods
     private func reloadPopular() {
         controllerDelegate?.popular(.loading)
         

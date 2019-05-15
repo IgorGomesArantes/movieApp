@@ -35,7 +35,8 @@ class NetworkRouter<EndPoint: EndPointProtocol> {
                     let decodedData = try decoder.decode(T.self, from: data)
                     
                     completion(.success(decodedData))
-                } catch {
+                } catch(let error) {
+                    debugPrint(error.localizedDescription)
                     completion(.error("Network router decode error."))
                 }
             } else if let error = error {
