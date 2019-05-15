@@ -18,19 +18,11 @@ class MoviePage: Decodable {
         case numberOfResults = "total_results"
     }
     
-    let page: Int?
-    let label: String?
-    let results: [Movie]
-    let total_pages: Int?
-    let total_results: Int?
-    
-    init() {
-        self.page = 1
-        self.label = nil
-        self.results = []
-        self.total_pages = 1
-        self.total_results = 0
-    }
+    var page: Int?
+    var label: String?
+    var results: [Movie]
+    var total_pages: Int?
+    var total_results: Int?
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -40,5 +32,9 @@ class MoviePage: Decodable {
         results = try container.decodeIfPresent([Movie].self, forKey: .results) ?? []
         total_pages = try container.decodeIfPresent(Int.self, forKey: .numberOfPages)
         total_results = try container.decodeIfPresent(Int.self, forKey: .numberOfResults)
+    }
+    
+    init() {
+        self.results = []
     }
 }

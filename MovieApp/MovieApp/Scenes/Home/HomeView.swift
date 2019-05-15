@@ -40,6 +40,7 @@ class HomeView: UIView {
         contentView.backgroundColor = UIColor(named: "lightYellow")
     }
     
+    // TODO: - Corrigir tamanho dinamico
     private func popularCollectionConfiguration() {
         let cellHeight = 400
         let cellWidth = (cellHeight / 3) * 2

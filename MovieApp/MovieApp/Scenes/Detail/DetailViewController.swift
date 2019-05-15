@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - Properties
     private let detailView = DetailView()
-    var viewModel: DetailViewModel!
+    private var viewModel: DetailViewModel!
     
     // MARK: - View lifecycle methods
     override func viewDidLoad() {

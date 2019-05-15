@@ -15,16 +15,11 @@ class HomeViewModel {
     private let currentPopularPage = 1
     
     // MARK: - Properties
-    private let movieService: MovieAPIManager
+    private let movieService = MovieAPIManager()
     private var popular: MoviePage = MoviePage()
     // TODO: - estudar weak
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
-    
-    // MARK - Initialization methods
-    init() {
-        self.movieService = MovieAPIManager()
-    }
     
     // MARK: - Public methods
     func reload() {

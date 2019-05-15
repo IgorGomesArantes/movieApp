@@ -30,7 +30,7 @@ class DetailView: UIView {
     
     let constants = Constants()
     
-    // MARK: - Properties
+    // MARK: - View properties
     let contentScrollView = UIScrollView()
     let imageView = UIImageView()
     let titleLabel = UILabel()

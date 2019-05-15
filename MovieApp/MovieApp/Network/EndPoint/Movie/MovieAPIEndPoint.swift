@@ -11,6 +11,7 @@ import Foundation
 
 enum MovieAPIEndPoint {
     case movie(code:Int)
+    case search(query: String)
     case popular(page:Int, pageSize:Int)
 }
 
@@ -45,7 +46,10 @@ extension MovieAPIEndPoint: EndPointProtocol {
     var path: String {
         switch self {
         case .movie(let code):
-            return "movie\(code)"
+            return "movie/\(code)"
+            
+        case .search:
+            return "search/movie"
             
         case .popular:
             return "movie/popular"
@@ -56,6 +60,9 @@ extension MovieAPIEndPoint: EndPointProtocol {
         switch self {
         case .movie:
             return "movie"
+            
+        case .search:
+            return "search"
             
         case .popular:
             return "popular"
@@ -72,7 +79,11 @@ extension MovieAPIEndPoint: EndPointProtocol {
         case .movie(let code):
             let parameters = ["id": String(code), "api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
-        
+            
+        case .search(let query):
+            let parameters = ["query": query, "sort_by": "popularity", "api_key": apiKey, "language": language]
+            return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
+            
         case .popular:
             let parameters = ["api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
