@@ -54,4 +54,10 @@ class SearchViewModel {
     func cancel() {
         coordinatorDelegate?.cancel()
     }
+    
+    func selectItem(at index: Int) {
+        let movieCode = movies[index].id ?? 0
+        
+        coordinatorDelegate?.detail(movieCode: movieCode)
+    }
 }

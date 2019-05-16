@@ -61,6 +61,8 @@ extension HomeCoordinator: HomeCoordinatorDelegate {
         let detailCoordinator = DetailCoordinator(initializationData)
         
         addChildCoordinator(detailCoordinator)
+        
+        detailCoordinator.delegate = self
     }
     
     func search() {
@@ -68,5 +70,14 @@ extension HomeCoordinator: HomeCoordinatorDelegate {
         let searchCoordinator = SearchCoordinator(initializationData)
         
         addChildCoordinator(searchCoordinator)
+        
+        searchCoordinator.delegate = self
+    }
+}
+
+// MARK: - Coordinator delegate methdos
+extension HomeCoordinator: CoordinatorDelegate {
+    func childDidFinish(_ coordinator: Coordinator) {
+        removeChildCoordinator(coordinator)
     }
 }

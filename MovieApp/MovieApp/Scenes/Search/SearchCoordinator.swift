@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchCoordinatorDelegate: class {
     func cancel()
+    func detail(movieCode: Int)
 }
 
 class SearchCoordinator: Coordinator {
@@ -25,18 +26,22 @@ class SearchCoordinator: Coordinator {
     }
     
     // MARK: - Properties
+    weak var delegate: CoordinatorDelegate?
     var childCoordinators: [Coordinator] = []
-    var rootViewController: UIViewController { return searchModule.viewController }
+    var rootViewController: UIViewController { return navigationController }
+    let superNavigationController: UINavigationController
     let navigationController: UINavigationController
     var searchModule: SearchModule { return buildSearchModule() }
     
     // MARK: - Initialization methods
     init(_ initializationData: InitializationData) {
-        self.navigationController = initializationData.navigationController
+        self.superNavigationController = initializationData.navigationController
+        self.navigationController = UINavigationController()
+        self.navigationConfiguration()
     }
     
     func start() {
-        navigationController.present(rootViewController, animated: true, completion: nil)
+        superNavigationController.present(rootViewController, animated: true)
     }
     
     // MARK: - Build module methods
@@ -49,12 +54,41 @@ class SearchCoordinator: Coordinator {
         
         return SearchModule(viewModel: viewModel, viewController: viewController)
     }
+    
+    // MARK: - Configuration methods
+    private func navigationConfiguration() {
+        navigationController.viewControllers = [searchModule.viewController]
+        navigationController.isNavigationBarHidden = true
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.tintColor = .black
+        navigationController.navigationBar.barTintColor = UIColor(named: "yellow")
+        navigationController.view.backgroundColor = UIColor(named: "yellow")
+    }
 }
 
-// TODO: - Corrigir com navigation manager
 // MARK: - Search coordinator delegate methods
 extension SearchCoordinator: SearchCoordinatorDelegate {
     func cancel() {
-        navigationController.dismiss(animated: false, completion: nil)
+        superNavigationController.dismiss(animated: true) {
+            self.delegate?.childDidFinish(self)
+        }
+    }
+    
+    func detail(movieCode: Int) {
+        let initializationData = DetailCoordinator.InitializationData(navigationController: navigationController, movieCode: movieCode)
+        let detailCoordinator = DetailCoordinator(initializationData)
+        
+        addChildCoordinator(detailCoordinator)
+        
+        detailCoordinator.delegate = self
+        navigationController.isNavigationBarHidden = false
+    }
+}
+
+// MARK: - Search coordinator delegate methods
+extension SearchCoordinator: CoordinatorDelegate {
+    func childDidFinish(_ coordinator: Coordinator) {
+        navigationController.isNavigationBarHidden = true
+        removeChildCoordinator(coordinator)
     }
 }

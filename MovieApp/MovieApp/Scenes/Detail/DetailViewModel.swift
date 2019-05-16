@@ -14,6 +14,7 @@ class DetailViewModel {
     var movie: Movie = Movie()
     let movieCode: Int
     let movieService = MovieAPIManager()
+    var coordinatorDelegate: DetailCoordinatorDelegate?
     weak var controllerDelegate: DetailViewControllerDelegate?
     
     // MARK: - Initialization methods
@@ -46,5 +47,9 @@ class DetailViewModel {
         view.averageVoteNumberLabel.text = String(movie.voteAverage ?? 0.0)
         view.averageVoteProgressView.setProgress((movie.voteAverage ?? 0.0) / 10, animated: false)
         view.overviewLabel.text = movie.overview ?? ""
+    }
+    
+    func back() {
+        coordinatorDelegate?.back()
     }
 }

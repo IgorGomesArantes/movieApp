@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DetailCoordinatorDelegate {
+    func back()
+}
+
 class DetailCoordinator: Coordinator {
     
     // MARK: - Metadata
@@ -22,6 +26,7 @@ class DetailCoordinator: Coordinator {
     }
     
     // MARK: - Properties
+    weak var delegate: CoordinatorDelegate?
     var childCoordinators: [Coordinator] = []
     var rootViewController: UIViewController { return detailModule.controller }
     
@@ -45,7 +50,14 @@ class DetailCoordinator: Coordinator {
         let viewController = DetailViewController.instanciate(viewModel: viewModel)
         
         viewModel.controllerDelegate = viewController
+        viewModel.coordinatorDelegate = self
         
         return DetailModule(viewModel: viewModel, controller: viewController)
+    }
+}
+
+extension DetailCoordinator: DetailCoordinatorDelegate {
+    func back() {
+        delegate?.childDidFinish(self)
     }
 }

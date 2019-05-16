@@ -26,6 +26,14 @@ class DetailViewController: UIViewController {
         viewModel.reload()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParent || isBeingDismissed {
+            viewModel.back()
+        }
+    }
+    
     // MARK: - Initialization methods
     static func instanciate(viewModel: DetailViewModel) -> DetailViewController {
         let viewController = DetailViewController()
