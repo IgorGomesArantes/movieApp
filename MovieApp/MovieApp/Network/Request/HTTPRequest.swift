@@ -20,11 +20,15 @@ class HTTPRequest: RequestProtocol {
             let request = try buildRequest(from: endPoint)
             
             task = session.dataTask(with: request, completionHandler: { data, response, error in
-                completion(data, response, error)
+                DispatchQueue.main.async() {
+                    completion(data, response, error)
+                }
             })
             task?.resume()
         } catch {
-            completion(nil, nil, error)
+            DispatchQueue.main.async() {
+                completion(nil, nil, error)
+            }
         }
     }
     

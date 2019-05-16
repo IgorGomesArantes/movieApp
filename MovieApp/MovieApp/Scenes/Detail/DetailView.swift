@@ -65,7 +65,7 @@ class DetailView: UIView {
         averageVoteBarConfiguration()
         overviewConfiguration()
         //myListButtonConfiguration()
-        mockConfiguration()
+        //mockConfiguration()
     }
     
     private func contentConfiguration() {

@@ -27,7 +27,9 @@ class HomeViewModel {
     }
     
     func popularDetail(_ index: Int) {
-        coordinatorDelegate?.detail(index)
+        let movieCode = popular.results[index].id ?? 0
+        
+        coordinatorDelegate?.detail(movieCode)
     }
     
     func search() {

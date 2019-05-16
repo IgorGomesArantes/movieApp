@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         initialConfiguration()
-        viewModel.reload(query: "")
+        viewModel.reload()
     }
     
     // MARK: - Initialization methods
@@ -78,6 +78,12 @@ extension SearchViewController: SearchViewControllerDelegate {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModel.cancel()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let query = searchBar.text ?? ""
+        
+        viewModel.reload(query: query)
     }
 }
 

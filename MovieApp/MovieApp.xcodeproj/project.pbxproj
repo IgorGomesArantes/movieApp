@@ -14,7 +14,6 @@
 		7802DBA72266680F00F6682F /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7802DBA52266680F00F6682F /* SDWebImage.framework */; };
 		7802DBB82266A66E00F6682F /* Portuguese.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7802DBBA2266A66E00F6682F /* Portuguese.strings */; };
 		7802DBBD2266A68F00F6682F /* English.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7802DBBF2266A68F00F6682F /* English.strings */; };
-		7802DBC82266AC7B00F6682F /* Production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7802DBC72266AC7B00F6682F /* Production.plist */; };
 		7802DBCA2266B05900F6682F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802DBC92266B05900F6682F /* Configuration.swift */; };
 		7802DBCC22676F6100F6682F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802DBCB22676F6100F6682F /* Coordinator.swift */; };
 		7802DBDE226789B100F6682F /* EndPointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802DBDD226789B100F6682F /* EndPointProtocol.swift */; };
@@ -581,7 +580,6 @@
 			files = (
 				7802DB9C2264179100F6682F /* LaunchScreen.storyboard in Resources */,
 				788CC020228C64B500A35A12 /* search.json in Resources */,
-				7802DBC82266AC7B00F6682F /* Production.plist in Resources */,
 				78F1839B227B4EC8001FAFF5 /* popular.json in Resources */,
 				7802DBBD2266A68F00F6682F /* English.strings in Resources */,
 				7802DC2A2268217900F6682F /* movie.json in Resources */,

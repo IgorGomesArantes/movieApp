@@ -13,7 +13,6 @@ class SearchViewModel {
     // MARK: - Properties
     private let movieService = MovieAPIManager()
     private var movies = [Movie]()
-    private var query = ""
     var coordinatorDelegate: SearchCoordinatorDelegate?
     weak var controllerDelegate: SearchViewControllerDelegate?
     
@@ -22,10 +21,12 @@ class SearchViewModel {
     }
     
     // MARK: - Public methods
-    func reload(query: String) {
+    func reload(query: String = "") {
+        let formattedQuery = query.replacingOccurrences(of: " ", with: "+")
+        
         controllerDelegate?.reload(.loading)
         
-        movieService.getMovies(by: query) {
+        movieService.getMovies(by: formattedQuery) {
             switch($0) {
             case .success(let result):
                 self.movies = result.results
