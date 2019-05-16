@@ -41,8 +41,8 @@ class DetailViewModel {
         let imagePath = movieService.getImagePath(movie.posterPath ?? "")
         view.imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
         view.titleLabel.text = movie.title ?? ""
-        view.releaseDateLabel.text = "11 de Março de 2019"
-        view.durationLabel.text = "128 min"
+        view.releaseDateLabel.text = getFormmatedDate()
+        view.durationLabel.text = "\(movie.runtime ?? 0) min"
         view.averageVoteLabel.text = "Nota geral:"
         view.averageVoteNumberLabel.text = String(movie.voteAverage ?? 0.0)
         view.averageVoteProgressView.setProgress((movie.voteAverage ?? 0.0) / 10, animated: false)
@@ -51,5 +51,17 @@ class DetailViewModel {
     
     func back() {
         coordinatorDelegate?.back()
+    }
+    
+    // MARK: - Private methods
+    // TODO: - Melhorar soluçãos
+    private func getFormmatedDate() -> String {
+        let months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+        
+        let year = movie.releaseDate?.split(separator: "-")[0] ?? "0000"
+        let month = Int(movie.releaseDate?.split(separator: "-")[1] ?? "0") ?? 1
+        let day = movie.releaseDate?.split(separator: "-")[2] ?? "1"
+        
+        return "\(day) de \(months[month - 1]) de \(year)"
     }
 }

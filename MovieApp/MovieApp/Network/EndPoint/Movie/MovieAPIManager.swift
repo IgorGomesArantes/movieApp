@@ -37,8 +37,8 @@ class MovieAPIManager {
         }
     }
     
-    func getPopularMovies(page:Int, pageSize:Int, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
-        router.request(.popular(page: page, pageSize: pageSize)) {
+    func getPopularMovies(page:Int, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
+        router.request(.popular(page: page)) {
             completion($0)
         }
     }

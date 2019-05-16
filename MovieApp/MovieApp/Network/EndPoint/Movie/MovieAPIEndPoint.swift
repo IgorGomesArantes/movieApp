@@ -12,7 +12,7 @@ import Foundation
 enum MovieAPIEndPoint {
     case movie(code:Int)
     case search(query: String)
-    case popular(page:Int, pageSize:Int)
+    case popular(page:Int)
 }
 
 // MARK: - Constants
@@ -84,8 +84,8 @@ extension MovieAPIEndPoint: EndPointProtocol {
             let parameters = ["query": query, "sort_by": "popularity", "api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
             
-        case .popular:
-            let parameters = ["api_key": apiKey, "language": language]
+        case .popular(let page):
+            let parameters = ["api_key": apiKey, "language": language, "page": String(page)]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
         }
     }

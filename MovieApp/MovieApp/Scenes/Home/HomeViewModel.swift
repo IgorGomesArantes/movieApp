@@ -11,13 +11,11 @@ import UIKit
 class HomeViewModel {
 
     // MARK: - Constants
-    private let pageSize = 10
     private let currentPopularPage = 1
     
     // MARK: - Properties
     private let movieService = MovieAPIManager()
     private var popular: MoviePage = MoviePage()
-    // TODO: - estudar weak
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
     
@@ -44,7 +42,7 @@ class HomeViewModel {
     private func reloadPopular() {
         controllerDelegate?.popular(.loading)
         
-        movieService.getPopularMovies(page: currentPopularPage, pageSize: pageSize) {
+        movieService.getPopularMovies(page: currentPopularPage) {
             switch $0 {
             case .success(let result):
                 if result.results.isEmpty {
