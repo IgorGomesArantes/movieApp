@@ -10,6 +10,13 @@ import UIKit
 
 class PopularView: UIView {
     
+    // MARK: - Constants
+    struct Constants {
+        
+    }
+    
+    private let constants = Constants()
+    
     // MARK: - View properties
     let imageView = UIImageView()
     let voteAverageLabel = UILabel()

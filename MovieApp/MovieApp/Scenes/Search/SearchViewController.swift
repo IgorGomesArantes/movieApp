@@ -51,7 +51,6 @@ class SearchViewController: UIViewController {
         searchView.searchBar.delegate = self
         searchView.resultCollectionView.delegate = self
         searchView.resultCollectionView.dataSource = self
-        searchView.resultCollectionView.reloadData()
     }
     
     private func configureNavigationItem() {
