@@ -8,20 +8,27 @@
 
 import UIKit
 
-class PopularCollectionViewCell: UICollectionViewCell {
+class PopularCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let reuseIdentifier = "popularCell"
-    var viewModel: PopularViewModel!
-    var view = PopularView()
+    private var view = PopularView()
+    
+    // MARK: - Initialization methods
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        hierarchyConfiguration()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Public methods
     func setup(movieCode: Int, imagePath: String, voteAverage: Float) {
-        hierarchyConfiguration()
-        
-        viewModel = PopularViewModel(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverage)
-        
-        viewModel.configure(view)
+        view.voteAverageLabel.text = String(voteAverage)
+        view.imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
     }
     
     // MARK: - Configuration methods

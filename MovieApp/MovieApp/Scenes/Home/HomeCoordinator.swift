@@ -46,7 +46,6 @@ class HomeCoordinator: Coordinator {
         
         let viewController = HomeViewController.instantiate(viewModel: viewModel)
         
-//        viewModel.controllerDelegate = viewController
         viewModel.coordinatorDelegate = self
         
         return HomeModule(model: viewModel, controller: viewController)

@@ -1,32 +1,37 @@
 //
-//  PopularViewModel.swift
+//  PopularCollectionViewModel.swift
 //  MovieApp
 //
-//  Created by Igor Gomes Arantes on 10/05/19.
+//  Created by Igor Gomes Arantes on 16/05/19.
 //  Copyright © 2019 Igor Gomes Arantes. All rights reserved.
 //
 
 import UIKit
-import SDWebImage
 
 class PopularViewModel {
     
     // MARK: - Properties
-    let movieCode: Int
-    let imagePath: String
-    let voteAverage: Float
+    private let movieService = MovieAPIManager()
+    private var movies = [Movie]()
     
-    // MARK: - Initialization methods
-    init(movieCode: Int, imagePath: String, voteAverage: Float) {
-        self.movieCode = movieCode
-        self.imagePath = imagePath
-        self.voteAverage = voteAverage
+    // MARK: Public methods and properties
+    var count: Int {
+        return movies.count
     }
     
-    // MARK: - Public methods
-    func configure(_ view: PopularView) {
-        view.voteAverageLabel.text = String(voteAverage)
-        view.imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
+    func getMovieCode(by index: Int) -> Int {
+        return movies[index].id ?? 0
+    }
+    
+    func setup(movies: [Movie]) {
+        self.movies = movies
+    }
+    
+    func configureCell(_ cell: PopularCell, index: Int) {
+        let movieCode = movies[index].id ?? 0
+        let imagePath = movieService.getImagePath(movies[index].posterPath ?? "")
+        let voteAverage = movies[index].voteAverage ?? 0.0
+        
+        cell.setup(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverage)
     }
 }
-

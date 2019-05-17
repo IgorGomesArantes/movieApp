@@ -37,6 +37,5 @@ class HomeView: UIView {
 
         tableView.backgroundColor = UIColor(named: "lightYellow")
         tableView.separatorStyle = .none
-        tableView.register(PopularTableViewCell.self, forCellReuseIdentifier: PopularTableViewCell.reuseIdentifier)
     }
 }

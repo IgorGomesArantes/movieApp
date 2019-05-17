@@ -9,26 +9,32 @@
 import UIKit
 
 protocol HomeViewModelDelegate: class {
-    func didSelectAt(index: Int)
+    func didSelectMovie(code: Int)
 }
 
 class HomeViewModel {
 
-    // MARK: - Constants
-    private let currentPopularPage = 1
-    
     // MARK: - Properties
+    private var popular = [Movie]()
     private let movieService = MovieAPIManager()
-    var popular: MoviePage = MoviePage()
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
+    
+    // MARK: - Configuration properties
+    var numberOfSections: Int {
+        return 3
+    }
+    
+    var numberOfRowsBySection: Int {
+        return 1
+    }
     
     // MARK: - Public methods
     func reload() {
         reloadPopular()
     }
     
-    func popularDetail(_ movieCode: Int) {
+    func detail(_ movieCode: Int) {
         coordinatorDelegate?.detail(movieCode)
     }
     
@@ -36,22 +42,23 @@ class HomeViewModel {
         coordinatorDelegate?.search()
     }
     
+    // MARK: - Configure cell methods
     func configurePopularCell(_ cell: PopularTableViewCell) {
         cell.delegate = self
-        cell.setup(movies: popular.results)
+        cell.setup(movies: popular)
     }
     
     // MARK: - Reload methods
     private func reloadPopular() {
         controllerDelegate?.popular(.loading)
         
-        movieService.getPopularMovies(page: currentPopularPage) {
+        movieService.getPopularMovies() {
             switch $0 {
             case .success(let result):
                 if result.results.isEmpty {
                     self.controllerDelegate?.popular(.empty)
                 } else {
-                    self.popular = result
+                    self.popular = result.results
                     self.controllerDelegate?.popular(.success(result))
                 }
                 
@@ -63,9 +70,7 @@ class HomeViewModel {
 }
 
 extension HomeViewModel: HomeViewModelDelegate {
-    func didSelectAt(index: Int) {
-        let movieCode = popular.results[index].id ?? 0
-        
-        popularDetail(movieCode)
+    func didSelectMovie(code: Int) {
+        detail(code)
     }
 }

@@ -25,7 +25,7 @@ class MovieAPIManager {
     }
     
     // MARK: - Public methods
-    func getMovie(by code: Int, completion: @escaping (ServiceResponse<Movie>) -> ()) { 
+    func getMovie(by code: Int, completion: @escaping (ServiceResponse<Movie>) -> ()) {
         router.request(.movie(code: code)) {
             completion($0)
         }
@@ -37,7 +37,7 @@ class MovieAPIManager {
         }
     }
     
-    func getPopularMovies(page:Int, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
+    func getPopularMovies(page: Int = 1, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
         router.request(.popular(page: page)) {
             completion($0)
         }

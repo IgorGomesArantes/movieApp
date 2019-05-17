@@ -10,22 +10,37 @@ import UIKit
 
 class PopularTableViewCell: UITableViewCell {
     
-    // MARK: - Properties
+    // MARK: - Static constants
     static let reuseIdentifier = "popularTableViewCell"
-    var collectionView: UICollectionView!
-    var viewModel: PopularCollectionViewModel!
+    
+    // MARK: - Properties
     weak var delegate: HomeViewModelDelegate?
+    private var collectionView: UICollectionView!
+    private var viewModel = PopularViewModel()
+    
+    // MARK: - Initialization methods
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        initialConfiguration()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Public methods
     func setup(movies: [Movie]) {
-        viewModel = PopularCollectionViewModel(movies: movies)
-        collectionConfiguration()
-        hierarchyConfiguration()
-        
+        viewModel.setup(movies: movies)
         collectionView.reloadData()
     }
     
     // MARK: - Configuration methods
+    private func initialConfiguration() {
+        collectionConfiguration()
+        hierarchyConfiguration()
+    }
+    
     private func hierarchyConfiguration() {
         addSubview(collectionView)
         collectionView.snp.makeConstraints {
@@ -43,9 +58,10 @@ class PopularTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.register(PopularCollectionViewCell.self, forCellWithReuseIdentifier: PopularCollectionViewCell.reuseIdentifier)
+        collectionView.register(PopularCell.self, forCellWithReuseIdentifier: PopularCell.reuseIdentifier)
     }
     
+    // MARK: - Build methods
     private func buildFlowLayout() -> UICollectionViewFlowLayout {
         let cellWidth = UIScreen.main.bounds.width / 2.0
         let cellHeight = cellWidth * 1.5
@@ -69,15 +85,16 @@ extension PopularTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.reuseIdentifier, for: indexPath) as! PopularCell
         
-        viewModel.popularViewModel(cell: cell, index: indexPath.row)
+        viewModel.configureCell(cell, index: indexPath.row)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectAt(index: indexPath.row)
+        let movieCode = viewModel.getMovieCode(by: indexPath.row)
+        delegate?.didSelectMovie(code: movieCode)
     }
 }
 

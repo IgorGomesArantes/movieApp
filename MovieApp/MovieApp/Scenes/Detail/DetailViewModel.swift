@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DetailViewModel {
     
@@ -62,7 +63,7 @@ class DetailViewModel {
         
         let releaseSplittedDate = releaseDate.split(separator: "-")
         
-        if releaseDate.count != 3 { return "1 de \(months[0]) de 1900" }
+        if releaseSplittedDate.count != 3 { return "1 de \(months[0]) de 1900" }
         
         let year = releaseSplittedDate[0]
         let month = Int(releaseSplittedDate[1]) ?? 1
