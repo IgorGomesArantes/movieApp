@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HomeViewModelDelegate: class {
+    func didSelectAt(index: Int)
+}
+
 class HomeViewModel {
 
     // MARK: - Constants
@@ -15,7 +19,7 @@ class HomeViewModel {
     
     // MARK: - Properties
     private let movieService = MovieAPIManager()
-    private var popular: MoviePage = MoviePage()
+    var popular: MoviePage = MoviePage()
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
     
@@ -24,9 +28,7 @@ class HomeViewModel {
         reloadPopular()
     }
     
-    func popularDetail(_ index: Int) {
-        let movieCode = popular.results[index].id ?? 0
-        
+    func popularDetail(_ movieCode: Int) {
         coordinatorDelegate?.detail(movieCode)
     }
     
@@ -34,8 +36,9 @@ class HomeViewModel {
         coordinatorDelegate?.search()
     }
     
-    func configure(_ view: HomeView) {
-        
+    func configurePopularCell(_ cell: PopularTableViewCell) {
+        cell.delegate = self
+        cell.setup(movies: popular.results)
     }
     
     // MARK: - Reload methods
@@ -57,19 +60,12 @@ class HomeViewModel {
             }
         }
     }
-    
-    // MARK: - Popular methods and properties
-    var popularCount: Int {
-        return popular.results.count
-    }
-    
-    func popularViewModel(index: Int) -> PopularViewModel {
+}
+
+extension HomeViewModel: HomeViewModelDelegate {
+    func didSelectAt(index: Int) {
         let movieCode = popular.results[index].id ?? 0
-        let imagePath = movieService.getImagePath(popular.results[index].posterPath ?? "")
-        let voteAverage = popular.results[index].voteAverage ?? 0.0
         
-        let viewModel = PopularViewModel(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverage)
-        
-        return viewModel
+        popularDetail(movieCode)
     }
 }

@@ -58,9 +58,15 @@ class DetailViewModel {
     private func getFormmatedDate() -> String {
         let months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
         
-        let year = movie.releaseDate?.split(separator: "-")[0] ?? "0000"
-        let month = Int(movie.releaseDate?.split(separator: "-")[1] ?? "0") ?? 1
-        let day = movie.releaseDate?.split(separator: "-")[2] ?? "1"
+        guard let releaseDate = movie.releaseDate else { return "1 de \(months[0]) de 1900" }
+        
+        let releaseSplittedDate = releaseDate.split(separator: "-")
+        
+        if releaseDate.count != 3 { return "1 de \(months[0]) de 1900" }
+        
+        let year = releaseSplittedDate[0]
+        let month = Int(releaseSplittedDate[1]) ?? 1
+        let day = releaseSplittedDate[2]
         
         return "\(day) de \(months[month - 1]) de \(year)"
     }

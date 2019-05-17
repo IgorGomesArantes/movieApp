@@ -15,42 +15,36 @@ protocol HomeViewControllerDelegate: class {
 
 class HomeViewController: UIViewController {
     
-    // MARK: - View properties
-    private let homeView = HomeView()
-    
     // MARK: - Properties
     private var viewModel: HomeViewModel!
+    private var homeView = HomeView()
     
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initialConfiguration()
-        start()
+        viewModel.reload()
     }
     
     // MARK: - Initialization methods
     static func instantiate(viewModel: HomeViewModel) -> HomeViewController {
         let homeViewController = HomeViewController()
-        
+
         homeViewController.viewModel = viewModel
-        
+
         return homeViewController
-    }
-    
-    private func start() {
-        viewModel.reload()
     }
     
     // MARK: - Configuration methods
     private func initialConfiguration() {
-        homeView.popularCollectionView.delegate = self
-        homeView.popularCollectionView.dataSource = self
+        homeView.tableView.delegate = self
+        homeView.tableView.dataSource = self
         
         homeViewConfiguration()
         navigationItemConfiguration()
     }
-
+    
     private func homeViewConfiguration() {
         view.addSubview(homeView)
         homeView.frame = view.bounds
@@ -70,37 +64,47 @@ class HomeViewController: UIViewController {
     }
 }
 
-// MARK: - Home view controller delegate methods
-extension HomeViewController: HomeViewControllerDelegate {
-    func popular(_ result: ServiceStatus<MoviePage>) {
-        switch result {
-        case .success(let result):
-            homeView.popularCollectionView.reloadData()
-            debugPrint(result)
-        default:
-            break
-        }
-    }
-}
 
 // MARK: - Collection view delegate and data source methods
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.popularCount
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = homeView.tableView.dequeueReusableCell(withIdentifier: PopularTableViewCell.reuseIdentifier, for: indexPath) as! PopularTableViewCell
         
-        let cell = homeView.popularCollectionView.dequeueReusableCell(withReuseIdentifier: PopularCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularCollectionViewCell
-        
-        let cellViewModel = viewModel.popularViewModel(index: indexPath.row)
-        
-        cell.setup(cellViewModel)
+        viewModel.configurePopularCell(cell)
         
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.popularDetail(indexPath.row)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let width = UIScreen.main.bounds.width
+        
+        return (width / 2.0) * 1.5 + 16
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let width = UIScreen.main.bounds.width
+
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 200))
+
+        headerView.backgroundColor = UIColor(named: "lightYellow")
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Melhores da semana"
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        
+        headerView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(16)
+        }
+
+        return headerView
     }
 }

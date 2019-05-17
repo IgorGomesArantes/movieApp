@@ -63,7 +63,7 @@ class PopularView: UIView {
         contentVoteView.snp.makeConstraints { make in
             make.bottom.right.equalToSuperview().inset(8)
             make.width.equalTo(50)
-            make.height.equalTo(25)
+            make.height.equalTo(20)
         }
         
         contentVoteView.backgroundColor = UIColor(named: "transparentGrey")
@@ -108,7 +108,7 @@ class PopularView: UIView {
     private func plusIconConfiguration() {
         contentPlusView.addSubview(plusImageView)
         plusImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
+            make.edges.equalToSuperview().inset(7)
         }
         
         plusImageView.image = UIImage(named: "whitePlus")

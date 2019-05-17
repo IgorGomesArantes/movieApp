@@ -9,15 +9,23 @@
 import UIKit
 
 class PopularCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let reuseIdentifier = "popularCell"
+    var viewModel: PopularViewModel!
     var view = PopularView()
     
-    func setup(_ viewModel: PopularViewModel) {
-        setupHierarchy()
+    // MARK: - Public methods
+    func setup(movieCode: Int, imagePath: String, voteAverage: Float) {
+        hierarchyConfiguration()
+        
+        viewModel = PopularViewModel(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverage)
+        
         viewModel.configure(view)
     }
     
-    private func setupHierarchy() {
+    // MARK: - Configuration methods
+    private func hierarchyConfiguration() {
         addSubview(view)
         view.snp.makeConstraints {
             $0.edges.equalToSuperview()
