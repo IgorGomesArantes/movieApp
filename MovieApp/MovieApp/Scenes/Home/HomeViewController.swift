@@ -159,7 +159,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case .myList:
             return (width / 5.0) * 1.5 + 10
         case .recomendation:
-            return (((width / 2.0) - 30) * 0.6 + 20) * 10
+            return ((((width / 2.0) - 30) * 0.5 + 15) * 10) + 10
         }
     }
     

@@ -58,19 +58,19 @@ class RecomendationTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.reuseIdentifier)
+        collectionView.register(RecomendationCell.self, forCellWithReuseIdentifier: RecomendationCell.reuseIdentifier)
     }
     
     // MARK: - Build methods
     private func buildFlowLayout() -> UICollectionViewFlowLayout {
         let cellWidth = (UIScreen.main.bounds.width / 2.0) - 30
-        let cellHeight = cellWidth * 0.6
+        let cellHeight = cellWidth * 0.5
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 20
+        layout.minimumLineSpacing = 15
         layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         
         return layout
@@ -85,11 +85,11 @@ extension RecomendationTableViewCell: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.reuseIdentifier, for: indexPath) as! MyListCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecomendationCell.reuseIdentifier, for: indexPath) as! RecomendationCell
         
         viewModel.configureCell(cell, index: indexPath.row)
         
-        cell.backgroundColor = UIColor.red
+        cell.backgroundColor = UIColor.white
         
         return cell
     }

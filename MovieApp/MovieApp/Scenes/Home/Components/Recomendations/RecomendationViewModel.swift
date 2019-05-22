@@ -27,9 +27,12 @@ class RecomendationViewModel {
         self.movies = movies
     }
     
-    func configureCell(_ cell: MyListCell, index: Int) {
+    func configureCell(_ cell: RecomendationCell, index: Int) {
         let imagePath = movieService.getImagePath(movies[index].posterPath ?? "")
+        let movieCode = movies[index].id ?? 0
+        let voteAverare = movies[index].voteAverage ?? 0
+        let title = movies[index].title ?? ""
         
-        cell.setup(imagePath)
+        cell.setup(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverare, title: title)
     }
 }

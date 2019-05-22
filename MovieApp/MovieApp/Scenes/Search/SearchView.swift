@@ -12,7 +12,7 @@ class SearchView: UIView {
     
     // MARK: - Constants
     struct Constants {
-        let backGroundColor = UIColor(named: "lightYellow")
+        let backGroundColor = UIColor.white//UIColor(named: "lightYellow")
         let mainColor = UIColor(named: "yellow")
         
         let smallSpace = CGFloat(8)
@@ -70,7 +70,7 @@ class SearchView: UIView {
         searchBar.searchBarStyle = .minimal
         
         searchBar.placeholder = constants.searchBarPlaceholder
-        searchBar.scopeButtonTitles = constants.searchBarScopeTitles
+        //searchBar.scopeButtonTitles = constants.searchBarScopeTitles
         
         searchBar.barTintColor = constants.backGroundColor
         searchBar.tintColor = constants.mainColor

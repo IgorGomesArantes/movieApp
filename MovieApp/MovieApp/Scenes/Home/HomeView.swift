@@ -35,7 +35,7 @@ class HomeView: UIView {
         tableView.frame = self.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
-        tableView.backgroundColor = UIColor(named: "lightYellow")
+        tableView.backgroundColor = .white//UIColor(named: "lightYellow")
         tableView.separatorStyle = .none
     }
 }

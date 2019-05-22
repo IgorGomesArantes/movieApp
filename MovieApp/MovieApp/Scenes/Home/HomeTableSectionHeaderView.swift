@@ -37,13 +37,13 @@ class HomeTableSectionHeaderView: UIView {
     }
     
     private func viewConfiguration() {
-        backgroundColor = UIColor(named: "lightYellow")
+        backgroundColor = .white//UIColor(named: "lightYellow")
     }
     
     private func titleConfiguration() {
         let inset = (width / 100) * 3
         
-        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in

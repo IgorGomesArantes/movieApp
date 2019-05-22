@@ -43,8 +43,8 @@ class PopularView: UIView {
         contentVoteConfiguration()
         starVoteIconConfiguration()
         voteAverageConfiguration()
-        contentPlusConfiguration()
-        plusIconConfiguration()
+        //contentPlusConfiguration()
+        //plusIconConfiguration()
     }
     
     private func imageConfiguration() {
@@ -61,12 +61,12 @@ class PopularView: UIView {
         imageView.addSubview(contentVoteView)
         contentVoteView.snp.makeConstraints { make in
             make.bottom.right.equalToSuperview().inset(8)
-            make.width.equalTo(50)
+            make.width.lessThanOrEqualTo(imageView.snp.width).dividedBy(2)
             make.height.equalTo(20)
         }
         
         contentVoteView.backgroundColor = UIColor(named: "transparentGrey")
-        contentVoteView.layer.cornerRadius = 6
+        contentVoteView.layer.cornerRadius = 3
         contentVoteView.clipsToBounds = true
     }
     

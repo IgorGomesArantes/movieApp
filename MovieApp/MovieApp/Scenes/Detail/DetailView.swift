@@ -74,7 +74,7 @@ class DetailView: UIView {
         contentScrollView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         contentScrollView.showsVerticalScrollIndicator = false
-        contentScrollView.backgroundColor = UIColor(named: "lightYellow")
+        contentScrollView.backgroundColor = .white//UIColor(named: "lightYellow")
     }
     
     private func imageConfiguration() {
