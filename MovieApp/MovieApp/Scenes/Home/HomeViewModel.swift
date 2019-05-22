@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum HomeSectionType {
+    case popular
+    case myList
+    case recomendation
+}
+
 protocol HomeViewModelDelegate: class {
     func didSelectMovie(code: Int)
 }
@@ -19,10 +25,11 @@ class HomeViewModel {
     private let movieService = MovieAPIManager()
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
+    let sections: [HomeSectionType] = [.popular, .myList, .recomendation]
     
     // MARK: - Configuration properties
     var numberOfSections: Int {
-        return 3
+        return sections.count
     }
     
     var numberOfRowsBySection: Int {
@@ -32,6 +39,8 @@ class HomeViewModel {
     // MARK: - Public methods
     func reload() {
         reloadPopular()
+        reloadMyList()
+        reloadRecomendations()
     }
     
     func detail(_ movieCode: Int) {
@@ -43,7 +52,17 @@ class HomeViewModel {
     }
     
     // MARK: - Configure cell methods
-    func configurePopularCell(_ cell: PopularTableViewCell) {
+    func configureCell(_ cell: PopularTableViewCell) {
+        cell.delegate = self
+        cell.setup(movies: popular)
+    }
+    
+    func configureCell(_ cell: MyListTableViewCell) {
+        cell.delegate = self
+        cell.setup(movies: popular)
+    }
+    
+    func configureCell(_ cell: RecomendationTableViewCell) {
         cell.delegate = self
         cell.setup(movies: popular)
     }
@@ -64,6 +83,46 @@ class HomeViewModel {
                 
             case .error(let string):
                 self.controllerDelegate?.popular(.error(string))
+            }
+        }
+    }
+    
+    // TODO: - Corrigir
+    private func reloadMyList() {
+        controllerDelegate?.myList(.loading)
+        
+        movieService.getPopularMovies() {
+            switch $0 {
+            case .success(let result):
+                if result.results.isEmpty {
+                    self.controllerDelegate?.myList(.empty)
+                } else {
+                    self.popular = result.results
+                    self.controllerDelegate?.myList(.success(result.results))
+                }
+                
+            case .error(let string):
+                self.controllerDelegate?.popular(.error(string))
+            }
+        }
+    }
+    
+    // TODO: - Corrigir
+    private func reloadRecomendations() {
+        controllerDelegate?.recomendation(.loading)
+        
+        movieService.getPopularMovies() {
+            switch $0 {
+            case .success(let result):
+                if result.results.isEmpty {
+                    self.controllerDelegate?.recomendation(.empty)
+                } else {
+                    self.popular = result.results
+                    self.controllerDelegate?.recomendation(.success(result.results))
+                }
+                
+            case .error(let string):
+                self.controllerDelegate?.recomendation(.error(string))
             }
         }
     }

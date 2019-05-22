@@ -11,6 +11,8 @@ import SnapKit
 
 protocol HomeViewControllerDelegate: class {
     func popular(_ result: ServiceStatus<MoviePage>)
+    func myList(_ result: ServiceStatus<[Movie]>)
+    func recomendation(_ result: ServiceStatus<[Movie]>)
 }
 
 class HomeViewController: UIViewController {
@@ -62,6 +64,8 @@ class HomeViewController: UIViewController {
         homeView.tableView.dataSource = self
         
         homeView.tableView.register(PopularTableViewCell.self, forCellReuseIdentifier: PopularTableViewCell.reuseIdentifier)
+        homeView.tableView.register(MyListTableViewCell.self, forCellReuseIdentifier: MyListTableViewCell.reuseIdentifier)
+        homeView.tableView.register(RecomendationTableViewCell.self, forCellReuseIdentifier: RecomendationTableViewCell.reuseIdentifier)
     }
 
     private func navigationItemConfiguration() {
@@ -82,7 +86,25 @@ extension HomeViewController: HomeViewControllerDelegate {
     func popular(_ result: ServiceStatus<MoviePage>) {
         switch result {
         case .success:
-            homeView.tableView.reloadData()
+            homeView.tableView.reloadSections([0], with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    func myList(_ result: ServiceStatus<[Movie]>) {
+        switch result {
+        case .success:
+            homeView.tableView.reloadSections([1], with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    func recomendation(_ result: ServiceStatus<[Movie]>) {
+        switch result {
+        case .success:
+            homeView.tableView.reloadSections([2], with: .automatic)
         default:
             break
         }
@@ -100,24 +122,44 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = homeView.tableView.dequeueReusableCell(withIdentifier: PopularTableViewCell.reuseIdentifier, for: indexPath) as! PopularTableViewCell
+        let sectionType = viewModel.sections[indexPath.section]
         
-        viewModel.configurePopularCell(cell)
+        switch sectionType {
+        case .popular:
+            let cell = homeView.tableView.dequeueReusableCell(withIdentifier: PopularTableViewCell.reuseIdentifier, for: indexPath) as! PopularTableViewCell
+            
+            viewModel.configureCell(cell)
+            
+            return cell
         
-        return cell
+        case .myList:
+            let cell = homeView.tableView.dequeueReusableCell(withIdentifier: MyListTableViewCell.reuseIdentifier, for: indexPath) as! MyListTableViewCell
+            
+            viewModel.configureCell(cell)
+            
+            return cell
+            
+        case .recomendation:
+            let cell = homeView.tableView.dequeueReusableCell(withIdentifier: RecomendationTableViewCell.reuseIdentifier, for: indexPath) as! RecomendationTableViewCell
+            
+            viewModel.configureCell(cell)
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let sectionType = viewModel.sections[indexPath.section]
         let width = UIScreen.main.bounds.width
-        let section = indexPath.section
         
         // TODO: - Dinamizar tamanho
-        if section == 0 {
-            return (width / 2.0) * 1.5
-        } else if section == 1 {
-            return width / 2.0
-        } else {
-            return width * 5
+        switch sectionType {
+        case .popular:
+            return (width / 2.0) * 1.5 + 10
+        case .myList:
+            return (width / 5.0) * 1.5 + 10
+        case .recomendation:
+            return (((width / 2.0) - 30) * 0.6 + 20) * 10
         }
     }
     

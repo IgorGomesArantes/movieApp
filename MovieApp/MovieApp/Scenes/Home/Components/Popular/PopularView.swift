@@ -53,7 +53,6 @@ class PopularView: UIView {
         imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "avatar")
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
     }

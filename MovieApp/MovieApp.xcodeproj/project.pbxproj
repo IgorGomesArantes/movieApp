@@ -61,6 +61,11 @@
 		788CC02E228E0E0F00A35A12 /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC02D228E0E0F00A35A12 /* PopularViewModel.swift */; };
 		788CC032228E11E300A35A12 /* PopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC031228E11E300A35A12 /* PopularTableViewCell.swift */; };
 		788CC035228F355F00A35A12 /* HomeTableSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC034228F355F00A35A12 /* HomeTableSectionHeaderView.swift */; };
+		788CC0472294A38F00A35A12 /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC0462294A38E00A35A12 /* MyListCell.swift */; };
+		788CC0492294A3AB00A35A12 /* MyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC0482294A3AB00A35A12 /* MyListViewModel.swift */; };
+		788CC04B2294A3E700A35A12 /* MyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC04A2294A3E700A35A12 /* MyListTableViewCell.swift */; };
+		788CC04E2294DC4600A35A12 /* RecomendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC04D2294DC4600A35A12 /* RecomendationTableViewCell.swift */; };
+		788CC0502294DCD400A35A12 /* RecomendationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC04F2294DCD400A35A12 /* RecomendationViewModel.swift */; };
 		78F1839722792E1A001FAFF5 /* Quality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F1839622792E1A001FAFF5 /* Quality.swift */; };
 		78F1839B227B4EC8001FAFF5 /* popular.json in Resources */ = {isa = PBXBuildFile; fileRef = 78F1839A227B4EC8001FAFF5 /* popular.json */; };
 		78F1839D227B4F2D001FAFF5 /* MoviePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F1839C227B4F2D001FAFF5 /* MoviePage.swift */; };
@@ -143,6 +148,11 @@
 		788CC02D228E0E0F00A35A12 /* PopularViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
 		788CC031228E11E300A35A12 /* PopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableViewCell.swift; sourceTree = "<group>"; };
 		788CC034228F355F00A35A12 /* HomeTableSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionHeaderView.swift; sourceTree = "<group>"; };
+		788CC0462294A38E00A35A12 /* MyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
+		788CC0482294A3AB00A35A12 /* MyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListViewModel.swift; sourceTree = "<group>"; };
+		788CC04A2294A3E700A35A12 /* MyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListTableViewCell.swift; sourceTree = "<group>"; };
+		788CC04D2294DC4600A35A12 /* RecomendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationTableViewCell.swift; sourceTree = "<group>"; };
+		788CC04F2294DCD400A35A12 /* RecomendationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationViewModel.swift; sourceTree = "<group>"; };
 		78F1839622792E1A001FAFF5 /* Quality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quality.swift; sourceTree = "<group>"; };
 		78F1839A227B4EC8001FAFF5 /* popular.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = popular.json; sourceTree = "<group>"; };
 		78F1839C227B4F2D001FAFF5 /* MoviePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePage.swift; sourceTree = "<group>"; };
@@ -478,6 +488,8 @@
 		787F0F052286216700EFB108 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				788CC04C2294D54600A35A12 /* Recomendations */,
+				788CC0432294A34900A35A12 /* MyList */,
 				781BB2D6226DFBA10031ADA6 /* Popular */,
 			);
 			path = Components;
@@ -491,6 +503,25 @@
 				788CC026228C88C500A35A12 /* ResultCollectionViewCell.swift */,
 			);
 			path = ResultCell;
+			sourceTree = "<group>";
+		};
+		788CC0432294A34900A35A12 /* MyList */ = {
+			isa = PBXGroup;
+			children = (
+				788CC0462294A38E00A35A12 /* MyListCell.swift */,
+				788CC0482294A3AB00A35A12 /* MyListViewModel.swift */,
+				788CC04A2294A3E700A35A12 /* MyListTableViewCell.swift */,
+			);
+			path = MyList;
+			sourceTree = "<group>";
+		};
+		788CC04C2294D54600A35A12 /* Recomendations */ = {
+			isa = PBXGroup;
+			children = (
+				788CC04F2294DCD400A35A12 /* RecomendationViewModel.swift */,
+				788CC04D2294DC4600A35A12 /* RecomendationTableViewCell.swift */,
+			);
+			path = Recomendations;
 			sourceTree = "<group>";
 		};
 		78F1839522792E0F001FAFF5 /* Enum */ = {
@@ -635,6 +666,7 @@
 				788CC025228C88B800A35A12 /* ResultViewModel.swift in Sources */,
 				7802DBEA22678C0400F6682F /* URLParameterEncoder.swift in Sources */,
 				7802DBE422678A8700F6682F /* HTTPParameters.swift in Sources */,
+				788CC0472294A38F00A35A12 /* MyListCell.swift in Sources */,
 				7802DC072267BF1000F6682F /* Genre.swift in Sources */,
 				7802DBDE226789B100F6682F /* EndPointProtocol.swift in Sources */,
 				78F1839D227B4F2D001FAFF5 /* MoviePage.swift in Sources */,
@@ -646,10 +678,12 @@
 				788CC018228C628A00A35A12 /* SearchViewModel.swift in Sources */,
 				788CC027228C88C500A35A12 /* ResultCollectionViewCell.swift in Sources */,
 				7802DBF92267A7AC00F6682F /* MovieAPIEndPoint.swift in Sources */,
+				788CC04B2294A3E700A35A12 /* MyListTableViewCell.swift in Sources */,
 				788CC023228C889600A35A12 /* ResultView.swift in Sources */,
 				78199A2322832D32009FC9CE /* MockedRequest.swift in Sources */,
 				788CC01C228C62CB00A35A12 /* SearchView.swift in Sources */,
 				7802DBF022678E5F00F6682F /* JSONParameterEncoder.swift in Sources */,
+				788CC0502294DCD400A35A12 /* RecomendationViewModel.swift in Sources */,
 				7802DC022267B05200F6682F /* ServiceResponse.swift in Sources */,
 				7802DC1E2267EF9100F6682F /* RequestProtocol.swift in Sources */,
 				7802DBE222678A2500F6682F /* HTTPMethod.swift in Sources */,
@@ -675,8 +709,10 @@
 				7802DBE622678AEE00F6682F /* Parameters.swift in Sources */,
 				788CC01A228C62AD00A35A12 /* SearchViewController.swift in Sources */,
 				7802DBF2226794B300F6682F /* NetworkRouter.swift in Sources */,
+				788CC04E2294DC4600A35A12 /* RecomendationTableViewCell.swift in Sources */,
 				788CC0122289EFBA00A35A12 /* SearchCoordinator.swift in Sources */,
 				787F0F072289A6EA00EFB108 /* PopularCell.swift in Sources */,
+				788CC0492294A3AB00A35A12 /* MyListViewModel.swift in Sources */,
 				781BB2D5226DFB850031ADA6 /* HomeViewModel.swift in Sources */,
 				7802DBFF2267B03500F6682F /* ServiceStatus.swift in Sources */,
 			);

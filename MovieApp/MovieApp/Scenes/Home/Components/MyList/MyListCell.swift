@@ -1,18 +1,18 @@
 //
-//  PopularCollectionViewCell.swift
+//  MyListCell.swift
 //  MovieApp
 //
-//  Created by Igor Gomes Arantes on 13/05/19.
+//  Created by Igor Gomes Arantes on 21/05/19.
 //  Copyright © 2019 Igor Gomes Arantes. All rights reserved.
 //
 
 import UIKit
 
-class PopularCell: UICollectionViewCell {
+class MyListCell: UICollectionViewCell {
     
-    // MARK: - Properties
-    static let reuseIdentifier = "popularCell"
-    private var view = PopularView()
+    // MARK: - View properties
+    static let reuseIdentifier = "myListCell"
+    let imageView = UIImageView()
     
     // MARK: - Initialization methods
     override init(frame: CGRect) {
@@ -26,22 +26,24 @@ class PopularCell: UICollectionViewCell {
     }
     
     // MARK: - Public methods
-    func setup(movieCode: Int, imagePath: String, voteAverage: Float) {
-        view.voteAverageLabel.text = String(voteAverage)
-        view.imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
+    func setup(_ imagePath: String) {
+        imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
     }
     
     // MARK: - Configuration methods
     private func initialConfiguration() {
-        viewConfiguration()
+        imageConfiguration()
         shadowConfiguration()
     }
     
-    private func viewConfiguration() {
-        addSubview(view)
-        view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+    private func imageConfiguration() {
+        addSubview(imageView)
+        imageView.frame = self.bounds
+        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
     }
     
     private func shadowConfiguration() {
