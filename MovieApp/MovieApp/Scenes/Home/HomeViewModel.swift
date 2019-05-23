@@ -22,6 +22,7 @@ class HomeViewModel {
 
     // MARK: - Properties
     private var popular = [Movie]()
+    private var myList = [Movie]()
     private let movieService = MovieAPIManager()
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
@@ -39,8 +40,28 @@ class HomeViewModel {
     // MARK: - Public methods
     func reload() {
         reloadPopular()
-        reloadMyList()
         reloadRecomendations()
+    }
+    
+    func reloadMyList() {
+        controllerDelegate?.myList(.loading)
+        
+        let movies = MovieEntity.all()
+        
+        if movies.isEmpty {
+            self.controllerDelegate?.myList(.empty)
+        } else {
+            self.myList = movies
+            self.controllerDelegate?.myList(.success(movies))
+        }
+    }
+    
+    func isMyListEmpty() -> Bool {
+        return myList.isEmpty
+    }
+    
+    func recomendationsCount() -> Int {
+        return 20
     }
     
     func detail(_ movieCode: Int) {
@@ -59,7 +80,7 @@ class HomeViewModel {
     
     func configureCell(_ cell: MyListTableViewCell) {
         cell.delegate = self
-        cell.setup(movies: popular)
+        cell.setup(movies: myList)
     }
     
     func configureCell(_ cell: RecomendationTableViewCell) {
@@ -86,27 +107,7 @@ class HomeViewModel {
             }
         }
     }
-    
-    // TODO: - Corrigir
-    private func reloadMyList() {
-        controllerDelegate?.myList(.loading)
-        
-        movieService.getPopularMovies() {
-            switch $0 {
-            case .success(let result):
-                if result.results.isEmpty {
-                    self.controllerDelegate?.myList(.empty)
-                } else {
-                    self.popular = result.results
-                    self.controllerDelegate?.myList(.success(result.results))
-                }
-                
-            case .error(let string):
-                self.controllerDelegate?.popular(.error(string))
-            }
-        }
-    }
-    
+
     // TODO: - Corrigir
     private func reloadRecomendations() {
         controllerDelegate?.recomendation(.loading)

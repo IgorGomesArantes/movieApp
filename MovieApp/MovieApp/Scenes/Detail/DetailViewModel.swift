@@ -48,10 +48,25 @@ class DetailViewModel {
         view.averageVoteNumberLabel.text = String(movie.voteAverage ?? 0.0)
         view.averageVoteProgressView.setProgress((movie.voteAverage ?? 0.0) / 10, animated: false)
         view.overviewLabel.text = movie.overview ?? ""
+        
+        if MovieEntity.isSaved(code: movie.id ?? 0) {
+            
+            view.titleLabel.backgroundColor = .red
+            
+        } else {
+            save()
+        }
     }
     
     func back() {
         coordinatorDelegate?.back()
+    }
+    
+    func save() {
+        let code = movie.id ?? 0
+        let imagePath = movie.posterPath ?? ""
+        
+        MovieEntity.save(code: code, imagePath: imagePath)
     }
     
     // MARK: - Private methods

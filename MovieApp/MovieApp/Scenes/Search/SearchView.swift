@@ -62,8 +62,6 @@ class SearchView: UIView {
             make.left.right.top.equalToSuperview().inset(constants.smallSpace)
         }
         
-        searchBar.becomeFirstResponder()
-        
         searchBar.showsScopeBar = true
         searchBar.isTranslucent = true
         searchBar.showsCancelButton = true

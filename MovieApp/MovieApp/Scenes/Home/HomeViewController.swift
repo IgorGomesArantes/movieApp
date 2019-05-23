@@ -36,6 +36,10 @@ class HomeViewController: UIViewController {
         viewModel.reload()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.reloadMyList()
+    }
+    
     // MARK: - Initialization methods
     static func instantiate(viewModel: HomeViewModel) -> HomeViewController {
         let homeViewController = HomeViewController()
@@ -114,7 +118,22 @@ extension HomeViewController: HomeViewControllerDelegate {
 // MARK: - Collection view delegate and data source methods
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsBySection
+        let sectionType = viewModel.sections[section]
+        
+        switch sectionType {
+        case .popular:
+            return 1
+            
+        case .myList:
+            if viewModel.isMyListEmpty() {
+                return 0
+            } else {
+                return 1
+            }
+            
+        case .recomendation:
+            return 1
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

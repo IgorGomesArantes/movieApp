@@ -26,6 +26,12 @@ class SearchViewController: UIViewController {
         viewModel.reload()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        searchView.searchBar.becomeFirstResponder()
+    }
+    
     // MARK: - Initialization methods
     static func instanciate(viewModel: SearchViewModel) -> SearchViewController {
         let viewController = SearchViewController()
