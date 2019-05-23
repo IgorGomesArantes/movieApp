@@ -36,7 +36,7 @@ class RecomendationCell: UICollectionViewCell {
     // MARK: - Configuration methods
     private func initialConfiguration() {
         viewConfiguration()
-        shadowConfiguration(0.2)
+        shadowConfiguration()
     }
     
     private func viewConfiguration() {

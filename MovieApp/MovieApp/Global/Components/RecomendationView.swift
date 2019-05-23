@@ -37,11 +37,16 @@ class RecomendationView: UIView {
     
     // MARK: - Configuration methods
     private func initialConfiguration() {
+        viewConfiguration()
         imageConfiguration()
         titleConfiguration()
         progressBarConfiguration()
         starConfiguration()
         voteAverageConfiguration()
+    }
+    
+    private func viewConfiguration() {
+        backgroundColor = UIColor.white
     }
     
     private func imageConfiguration() {

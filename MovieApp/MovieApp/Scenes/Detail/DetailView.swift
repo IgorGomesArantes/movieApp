@@ -24,8 +24,6 @@ class DetailView: UIView {
         
         let imageAspectRatio = 1.5
         let voteProgresHeight = CGFloat(3)
-        let buttonWidthSize = CGFloat(35)
-        let buttonHeightSize = CGFloat(40)
     }
     
     let constants = Constants()
@@ -43,6 +41,10 @@ class DetailView: UIView {
     let averageVoteProgressView = UIProgressView(progressViewStyle: .bar)
     let overviewLabel = UILabel()
     let myListButton = UIButton()
+    let myListLabel = UILabel()
+    let myListStackView = UIStackView()
+    let recomendationTitleLabel = UILabel()
+    let recomendationCollection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
     // MARK: - Initialization methods
     override init(frame: CGRect) {
@@ -55,6 +57,15 @@ class DetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    func check() {
+        myListButton.setImage(UIImage(named: "checked"), for: .normal)
+    }
+    
+    func uncheck() {
+        myListButton.setImage(UIImage(named: "blackPlus"), for: .normal)
+    }
+    
     // MARK: - Configuration methods
     private func initialConfiguration() {
         contentConfiguration()
@@ -64,8 +75,9 @@ class DetailView: UIView {
         averageVoteConfiguration()
         averageVoteBarConfiguration()
         overviewConfiguration()
-        //myListButtonConfiguration()
-        //mockConfiguration()
+        myListConfiguration()
+        recomendationTitleConfiguration()
+        recomendationCollectionConfiguration()
     }
     
     private func contentConfiguration() {
@@ -152,42 +164,88 @@ class DetailView: UIView {
         contentScrollView.addSubview(overviewLabel)
         overviewLabel.snp.makeConstraints { make in
             make.top.equalTo(averageVoteProgressView.snp.bottom).offset(constants.bigSpace)
-            make.left.right.bottom.equalToSuperview().inset(constants.smallSpace)
+            make.left.right.equalToSuperview().inset(constants.smallSpace)
         }
         
         overviewLabel.numberOfLines = 0
         overviewLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
     }
     
-    // TODO: - Corrigir
-    private func myListButtonConfiguration() {
-        contentScrollView.addSubview(myListButton)
-        myListButton.snp.makeConstraints { make in
+    private func myListConfiguration() {
+        contentScrollView.addSubview(myListStackView)
+        myListStackView.snp.makeConstraints { make in
             make.top.equalTo(overviewLabel.snp.bottom).offset(constants.smallSpace)
             make.left.equalToSuperview().inset(constants.smallSpace)
-            make.height.width.equalTo(constants.buttonWidthSize)
-            //make.width.equalTo(constants.buttonHeightSize)
         }
         
-        myListButton.imageView?.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(5)
+        myListStackView.axis = .vertical
+        myListStackView.alignment = .center
+        myListStackView.distribution = .fillProportionally
+        
+        myListStackView.addArrangedSubview(myListButton)
+        myListStackView.addArrangedSubview(myListLabel)
+        
+        myListButton.snp.makeConstraints { make in
+            make.width.equalTo(contentScrollView.snp.width).dividedBy(15)
+            make.height.equalTo(myListButton.snp.width)
         }
-        myListButton.setImage(UIImage(named: "blackPlus"), for: .normal)
-        myListButton.setTitle("Minha Lista", for: .normal)
-        myListButton.setTitleColor(.black, for: .normal)
-        myListButton.titleLabel?.font = UIFont.systemFont(ofSize: 8)
-        myListButton.titleEdgeInsets = UIEdgeInsets(top: constants.buttonWidthSize, left: 0.0, bottom: 0.0, right: 0.0)
+        
+        myListLabel.snp.makeConstraints { make in
+            make.height.equalTo(12)
+        }
+        
+        myListLabel.font = UIFont.systemFont(ofSize: 8)
+        myListLabel.text = "Minha lista"
     }
     
-    // MARK: - Mock methods
-    private func mockConfiguration() {
-        imageView.image = UIImage(named: "avengers")
-        titleLabel.text = "Avengers: EndGame"
-        releaseDateLabel.text = "11 de Março de 2019"
-        durationLabel.text = "128 min"
-        averageVoteLabel.text = "Nota geral:"
-        averageVoteNumberLabel.text = "7.4"
-        averageVoteProgressView.setProgress(0.74, animated: false)
-        overviewLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae neque gravida, sagittis leo quis, fringilla ipsum. Proin commodo, augue eu egestas pulvinar, elit elit ullamcorper eros, vel mollis ligula elit sed augue. Aliquam pharetra ligula a sem rhoncus faucibus. Donec ut nisi id risus dignissim viverra a ac ex. Fusce sem turpis, facilisis at fringilla ut, molestie ac dolor. Sed efficitur, velit consectetur pharetra lacinia, nibh quam egestas lorem, vitae auctor leo arcu dignissim felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi pharetra, lectus a cursus fermentum, tortor neque lacinia orci, non blandit ex neque id justo. Proin sit amet venenatis dui, quis suscipit dolor. Donec pharetra lorem sit amet auctor vulputate. Proin nec placerat dolor. Nullam hendrerit vel tortor quis pharetra. Suspendisse blandit hendrerit auctor. Suspendisse potenti. Mauris ac dictum tortor."
+    private func recomendationTitleConfiguration() {
+        contentScrollView.addSubview(recomendationTitleLabel)
+        recomendationTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(myListStackView.snp.bottom).offset(constants.bigSpace)
+            make.left.right.equalToSuperview().inset(constants.smallSpace)
+        }
+        
+        recomendationTitleLabel.font = UIFont.systemFont(ofSize: 13)
+        recomendationTitleLabel.text = "Títulos semelhantes"
+        recomendationTitleLabel.textAlignment = .left
+    }
+    
+    private func recomendationCollectionConfiguration() {
+        recomendationCollection.collectionViewLayout = buildFlowLayout()
+        
+        contentScrollView.addSubview(recomendationCollection)
+        recomendationCollection.snp.makeConstraints { make in
+            make.top.equalTo(recomendationTitleLabel.snp.bottom).offset(constants.smallSpace)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().inset(constants.smallSpace)
+            make.height.equalTo(1)
+        }
+        
+        recomendationCollection.backgroundColor = .clear
+        recomendationCollection.showsVerticalScrollIndicator = false
+    }
+    
+    // MARK: - Build methods
+    private func buildFlowLayout() -> UICollectionViewFlowLayout {
+        let cellWidth = (UIScreen.main.bounds.width / 2.0) - 20
+        let cellHeight = cellWidth * 0.5
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 15
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        
+        return layout
+    }
+    
+    // MARK: - Update methods
+    override func updateConstraints() {
+        let height = recomendationCollection.collectionViewLayout.collectionViewContentSize.height
+        recomendationCollection.snp.updateConstraints { (make) in
+            make.height.equalTo(height)
+        }
+        super.updateConstraints()
     }
 }

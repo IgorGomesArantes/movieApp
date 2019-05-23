@@ -12,7 +12,8 @@ import SDWebImage
 class DetailViewModel {
     
     // MARK: - Properties
-    var movie: Movie = Movie()
+    var movie = Movie()
+    var recomendations = [Movie]()
     let movieCode: Int
     let movieService = MovieAPIManager()
     var coordinatorDelegate: DetailCoordinatorDelegate?
@@ -38,6 +39,25 @@ class DetailViewModel {
         }
     }
     
+    func reloadRecomendations() {
+        controllerDelegate?.reloadRecomendations(.loading)
+        
+        movieService.getPopularMovies() {
+            switch $0 {
+            case .success(let result):
+                if result.results.isEmpty {
+                    self.controllerDelegate?.reloadRecomendations(.empty)
+                } else {
+                    self.recomendations = result.results
+                    self.controllerDelegate?.reloadRecomendations(.success(self.recomendations))
+                }
+                
+            case .error(let string):
+                self.controllerDelegate?.reloadRecomendations(.error(string))
+            }
+        }
+    }
+    
     func configure(_ view: DetailView) {
         let imagePath = movieService.getImagePath(movie.posterPath ?? "")
         view.imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
@@ -51,9 +71,10 @@ class DetailViewModel {
         
         if MovieEntity.isSaved(code: movie.id ?? 0) {
             
-            view.titleLabel.backgroundColor = .red
+            view.check()
             
         } else {
+            view.uncheck()
             save()
         }
     }
@@ -67,6 +88,16 @@ class DetailViewModel {
         let imagePath = movie.posterPath ?? ""
         
         MovieEntity.save(code: code, imagePath: imagePath)
+    }
+    
+    // MARK: - Cell configuration
+    func configureCell(_ cell: RecomendationCell, index: Int) {
+        let imagePath = movieService.getImagePath(recomendations[index].posterPath ?? "")
+        let movieCode = recomendations[index].id ?? 0
+        let voteAverare = recomendations[index].voteAverage ?? 0
+        let title = recomendations[index].title ?? ""
+        
+        cell.setup(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverare, title: title)
     }
     
     // MARK: - Private methods

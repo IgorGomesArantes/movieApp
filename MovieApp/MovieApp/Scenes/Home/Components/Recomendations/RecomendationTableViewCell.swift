@@ -89,8 +89,6 @@ extension RecomendationTableViewCell: UICollectionViewDelegate, UICollectionView
         
         viewModel.configureCell(cell, index: indexPath.row)
         
-        cell.backgroundColor = UIColor.white
-        
         return cell
     }
     
