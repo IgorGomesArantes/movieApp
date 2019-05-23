@@ -23,6 +23,7 @@ class HomeViewModel {
     // MARK: - Properties
     private var popular = [Movie]()
     private var myList = [Movie]()
+    private var recomendation = [Movie]()
     private let movieService = MovieAPIManager()
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
@@ -38,27 +39,12 @@ class HomeViewModel {
     }
     
     // MARK: - Public methods
-    func reload() {
-        reloadPopular()
-        //reloadRecomendations()
-    }
-    
-    func reloadMyList() {
-        controllerDelegate?.myList(.loading)
-        
-        let movies = MovieEntity.all()
-        
-        if movies.isEmpty {
-            self.controllerDelegate?.myList(.empty)
-        } else {
-            self.myList = movies
-            self.controllerDelegate?.myList(.success(movies))
-            reloadRecomendations()
-        }
-    }
-    
     func isMyListEmpty() -> Bool {
         return myList.isEmpty
+    }
+    
+    func isRecomendationEmpty() -> Bool {
+        return recomendation.isEmpty
     }
     
     func recomendationsCount() -> Int {
@@ -86,11 +72,11 @@ class HomeViewModel {
     
     func configureCell(_ cell: RecomendationTableViewCell) {
         cell.delegate = self
-        cell.setup(movies: popular)
+        cell.setup(movies: recomendation)
     }
     
     // MARK: - Reload methods
-    private func reloadPopular() {
+    func reloadPopular() {
         controllerDelegate?.popular(.loading)
         
         movieService.getPopularMovies() {
@@ -108,9 +94,22 @@ class HomeViewModel {
             }
         }
     }
-
+    
+    func reloadMyList() {
+        controllerDelegate?.myList(.loading)
+        
+        let movies = MovieEntity.all()
+        
+        if movies.isEmpty {
+            self.controllerDelegate?.myList(.empty)
+        } else {
+            self.myList = movies
+            self.controllerDelegate?.myList(.success(movies))
+        }
+    }
+    
     // TODO: - Corrigir
-    private func reloadRecomendations() {
+    func reloadRecomendations() {
         controllerDelegate?.recomendation(.loading)
         
         let count = myList.count
@@ -125,7 +124,7 @@ class HomeViewModel {
                     if result.results.isEmpty {
                         self.controllerDelegate?.recomendation(.empty)
                     } else {
-                        self.popular = result.results
+                        self.recomendation = result.results
                         self.controllerDelegate?.recomendation(.success(result.results))
                     }
                     
@@ -137,7 +136,6 @@ class HomeViewModel {
             myList = []
             controllerDelegate?.recomendation(.success([]))
         }
-
     }
 }
 

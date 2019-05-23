@@ -33,11 +33,14 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         initialConfiguration()
-        viewModel.reload()
+        viewModel.reloadPopular()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         viewModel.reloadMyList()
+        viewModel.reloadRecomendations()
     }
     
     // MARK: - Initialization methods
@@ -130,9 +133,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 return 1
             }
-            
+        
         case .recomendation:
-            return 1
+            if viewModel.isRecomendationEmpty() {
+                return 0
+            } else {
+                return 1
+            }
         }
     }
     
