@@ -74,4 +74,26 @@ class MovieEntity: Object {
             realm.deleteAll()
         }
     }
+    
+    static func saveOrRemove(code: Int, imagePath: String) -> Bool {
+        let movieEntity = MovieEntity()
+        movieEntity.code = code
+        movieEntity.imagePath = imagePath
+        
+        let realm = try! Realm()
+        
+        let savedMovie = realm.objects(MovieEntity.self).filter("code == \(code)").first
+        
+        if let savedMovie = savedMovie {
+            try! realm.write {
+                realm.delete(savedMovie)
+            }
+            return false
+        } else {
+            try! realm.write {
+                realm.add(movieEntity)
+            }
+            return true
+        }
+    }
 }

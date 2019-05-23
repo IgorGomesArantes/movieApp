@@ -40,7 +40,7 @@ class HomeViewModel {
     // MARK: - Public methods
     func reload() {
         reloadPopular()
-        reloadRecomendations()
+        //reloadRecomendations()
     }
     
     func reloadMyList() {
@@ -53,6 +53,7 @@ class HomeViewModel {
         } else {
             self.myList = movies
             self.controllerDelegate?.myList(.success(movies))
+            reloadRecomendations()
         }
     }
     
@@ -112,20 +113,31 @@ class HomeViewModel {
     private func reloadRecomendations() {
         controllerDelegate?.recomendation(.loading)
         
-        movieService.getPopularMovies() {
-            switch $0 {
-            case .success(let result):
-                if result.results.isEmpty {
-                    self.controllerDelegate?.recomendation(.empty)
-                } else {
-                    self.popular = result.results
-                    self.controllerDelegate?.recomendation(.success(result.results))
+        let count = myList.count
+        
+        if count > 0 {
+            let random = Int(arc4random_uniform(UInt32(count)))
+            let code = myList[random].id ?? 0
+            
+            movieService.getRecomendationMovies(code: code) {
+                switch $0 {
+                case .success(let result):
+                    if result.results.isEmpty {
+                        self.controllerDelegate?.recomendation(.empty)
+                    } else {
+                        self.popular = result.results
+                        self.controllerDelegate?.recomendation(.success(result.results))
+                    }
+                    
+                case .error(let string):
+                    self.controllerDelegate?.recomendation(.error(string))
                 }
-                
-            case .error(let string):
-                self.controllerDelegate?.recomendation(.error(string))
             }
+        } else {
+            myList = []
+            controllerDelegate?.recomendation(.success([]))
         }
+
     }
 }
 

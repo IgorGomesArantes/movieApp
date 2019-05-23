@@ -50,6 +50,7 @@ class DetailViewController: UIViewController {
         configureNavigationItem()
         detailViewConfiguration()
         recomendationCollectionConfiguration()
+        myListButtonConfiguration()
     }
     
     private func detailViewConfiguration() {
@@ -65,8 +66,17 @@ class DetailViewController: UIViewController {
         detailView.recomendationCollection.register(RecomendationCell.self, forCellWithReuseIdentifier: RecomendationCell.reuseIdentifier)
     }
     
+    private func myListButtonConfiguration() {
+        detailView.myListButton.addTarget(self, action: #selector(saveOrRemove), for: .touchDown)
+    }
+    
     private func configureNavigationItem() {
         navigationItem.title = "Detalhes"
+    }
+    
+    // MARK: - Action methods
+    @objc func saveOrRemove() {
+        viewModel.saveOrRemove(detailView)
     }
 }
 
@@ -110,5 +120,9 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
         viewModel.configureCell(cell, index: indexPath.row)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.detail(indexPath.row)
     }
 }

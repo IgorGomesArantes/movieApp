@@ -43,6 +43,18 @@ class MovieAPIManager {
         }
     }
     
+    func getSimilarMovies(code: Int, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
+        router.request(.similar(code: code)) {
+            completion($0)
+        }
+    }
+    
+    func getRecomendationMovies(code: Int, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
+        router.request(.recomendation(code: code)) {
+            completion($0)
+        }
+    }
+    
     func getImagePath(_ imagePath: String, quality: Quality = Quality.high) -> String {
         return "\(imageBaseURL)/\(quality.rawValue)/\(imagePath)"
     }

@@ -9,6 +9,7 @@
 import UIKit
 
 protocol DetailCoordinatorDelegate {
+    func detail(_ movieCode: Int)
     func back()
 }
 
@@ -56,7 +57,24 @@ class DetailCoordinator: Coordinator {
     }
 }
 
+// MARK: - Coordinator delegate methdos
+extension DetailCoordinator: CoordinatorDelegate {
+    func childDidFinish(_ coordinator: Coordinator) {
+        removeChildCoordinator(coordinator)
+    }
+}
+
+// MARK: - Detail coordinator delegate methods
 extension DetailCoordinator: DetailCoordinatorDelegate {
+    func detail(_ movieCode: Int) {
+        let initializationData = DetailCoordinator.InitializationData(navigationController: navigationController, movieCode: movieCode)
+        let detailCoordinator = DetailCoordinator(initializationData)
+        
+        addChildCoordinator(detailCoordinator)
+        
+        detailCoordinator.delegate = self
+    }
+    
     func back() {
         delegate?.childDidFinish(self)
     }

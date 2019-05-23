@@ -42,7 +42,7 @@ class DetailViewModel {
     func reloadRecomendations() {
         controllerDelegate?.reloadRecomendations(.loading)
         
-        movieService.getPopularMovies() {
+        movieService.getSimilarMovies(code: movieCode) {
             switch $0 {
             case .success(let result):
                 if result.results.isEmpty {
@@ -70,24 +70,33 @@ class DetailViewModel {
         view.overviewLabel.text = movie.overview ?? ""
         
         if MovieEntity.isSaved(code: movie.id ?? 0) {
-            
             view.check()
-            
         } else {
             view.uncheck()
-            save()
         }
+    }
+    
+    func detail(_ index: Int) {
+        let movieCode = recomendations[index].id ?? 0
+        
+        coordinatorDelegate?.detail(movieCode)
     }
     
     func back() {
         coordinatorDelegate?.back()
     }
     
-    func save() {
+    func saveOrRemove(_ view: DetailView) {
         let code = movie.id ?? 0
         let imagePath = movie.posterPath ?? ""
         
-        MovieEntity.save(code: code, imagePath: imagePath)
+        let isSaved = MovieEntity.saveOrRemove(code: code, imagePath: imagePath)
+        
+        if isSaved {
+            view.check()
+        } else {
+            view.uncheck()
+        }
     }
     
     // MARK: - Cell configuration
