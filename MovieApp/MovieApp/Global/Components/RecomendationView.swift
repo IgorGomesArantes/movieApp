@@ -63,7 +63,8 @@ class RecomendationView: UIView {
     private func titleConfiguration() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.right.equalToSuperview().inset(5)
+            make.top.equalToSuperview().inset(8)
+            make.right.equalToSuperview().inset(5)
             make.left.equalTo(imageView.snp.right).offset(8)
         }
         
@@ -74,7 +75,7 @@ class RecomendationView: UIView {
     private func progressBarConfiguration() {
         addSubview(averageVoteProgressView)
         averageVoteProgressView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(5)
+            make.bottom.equalToSuperview().inset(8)
             make.right.equalToSuperview().inset(8)
             make.left.equalTo(imageView.snp.right).offset(8)
             make.height.equalTo(1)

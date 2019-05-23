@@ -36,6 +36,12 @@ class HomeViewController: UIViewController {
         viewModel.reloadPopular()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        homeView.tableView.setContentOffset(.zero, animated: false)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
