@@ -60,6 +60,9 @@ class DetailViewModel {
     
     func configure(_ view: DetailView) {
         let imagePath = movieService.getImagePath(movie.posterPath ?? "")
+        let budget = getFormattedMoney(value: Float(movie.budget ?? 0))
+        let revenue = getFormattedMoney(value: Float(movie.revenue ?? 0))
+        
         view.imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
         view.titleLabel.text = movie.title ?? ""
         view.releaseDateLabel.text = getFormmatedDate()
@@ -68,6 +71,8 @@ class DetailViewModel {
         view.averageVoteNumberLabel.text = String(movie.voteAverage ?? 0.0)
         view.averageVoteProgressView.setProgress((movie.voteAverage ?? 0.0) / 10, animated: false)
         view.overviewLabel.text = movie.overview ?? ""
+        view.budgetLabel.text = "Despesas:\t\(budget)"
+        view.revenueLabel.text = "Receita:\t\(revenue)"
         
         if MovieEntity.isSaved(code: movie.id ?? 0) {
             view.check()
@@ -110,7 +115,6 @@ class DetailViewModel {
     }
     
     // MARK: - Private methods
-    // TODO: - Melhorar soluçãos
     private func getFormmatedDate() -> String {
         let months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
         
@@ -125,5 +129,15 @@ class DetailViewModel {
         let day = releaseSplittedDate[2]
         
         return "\(day) de \(months[month - 1]) de \(year)"
+    }
+    
+    private func getFormattedMoney(value: Float) -> String {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.locale = Locale.current
+        let valueString = currencyFormatter.string(from: NSNumber(value: value))!
+        
+        return valueString
     }
 }

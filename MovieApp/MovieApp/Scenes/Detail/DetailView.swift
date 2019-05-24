@@ -39,7 +39,11 @@ class DetailView: UIView {
     let averageVoteNumberLabel = UILabel()
     let averageVoteStackView = UIStackView()
     let averageVoteProgressView = UIProgressView(progressViewStyle: .bar)
+    let overviewTitleLabel = UILabel() // new
     let overviewLabel = UILabel()
+    let curiositiesTitleLabel = UILabel() // new
+    let budgetLabel = UILabel() // new
+    let revenueLabel = UILabel() // new
     let myListButton = UIButton()
     let myListLabel = UILabel()
     let myListStackView = UIStackView()
@@ -74,7 +78,11 @@ class DetailView: UIView {
         dateDurationStackConfiguration()
         averageVoteConfiguration()
         averageVoteBarConfiguration()
+        overviewTitleConfiguration()
         overviewConfiguration()
+        curiositiesTitleConfiguration()
+        budgetConfiguration()
+        revenueConfiguration()
         myListConfiguration()
         recomendationTitleConfiguration()
         recomendationCollectionConfiguration()
@@ -160,10 +168,22 @@ class DetailView: UIView {
         averageVoteProgressView.trackTintColor = UIColor(named: "lightGrey")
     }
     
+    private func overviewTitleConfiguration() {
+        contentScrollView.addSubview(overviewTitleLabel)
+        overviewTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(averageVoteProgressView.snp.bottom).offset(constants.bigSpace)
+            make.left.right.equalToSuperview().inset(constants.smallSpace)
+        }
+        
+        overviewTitleLabel.numberOfLines = 1
+        overviewTitleLabel.font = UIFont.systemFont(ofSize: constants.mediumFontSize)
+        overviewTitleLabel.text = "Resumo"
+    }
+    
     private func overviewConfiguration() {
         contentScrollView.addSubview(overviewLabel)
         overviewLabel.snp.makeConstraints { make in
-            make.top.equalTo(averageVoteProgressView.snp.bottom).offset(constants.bigSpace)
+            make.top.equalTo(overviewTitleLabel.snp.bottom).offset(constants.smallSpace)
             make.left.right.equalToSuperview().inset(constants.smallSpace)
         }
         
@@ -171,10 +191,44 @@ class DetailView: UIView {
         overviewLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
     }
     
+    private func curiositiesTitleConfiguration() {
+        contentScrollView.addSubview(curiositiesTitleLabel)
+        curiositiesTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(overviewLabel.snp.bottom).offset(constants.mediumSpace)
+            make.left.right.equalToSuperview().inset(constants.smallSpace)
+        }
+        
+        curiositiesTitleLabel.numberOfLines = 1
+        curiositiesTitleLabel.font = UIFont.systemFont(ofSize: constants.mediumFontSize)
+        curiositiesTitleLabel.text = "Curiosidades"
+    }
+    
+    private func budgetConfiguration() {
+        contentScrollView.addSubview(budgetLabel)
+        budgetLabel.snp.makeConstraints { make in
+            make.top.equalTo(curiositiesTitleLabel.snp.bottom).offset(constants.smallSpace)
+            make.left.right.equalToSuperview().inset(constants.smallSpace)
+        }
+        
+        budgetLabel.numberOfLines = 1
+        budgetLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
+    }
+    
+    private func revenueConfiguration() {
+        contentScrollView.addSubview(revenueLabel)
+        revenueLabel.snp.makeConstraints { make in
+            make.top.equalTo(budgetLabel.snp.bottom).offset(constants.smallSpace)
+            make.left.right.equalToSuperview().inset(constants.smallSpace)
+        }
+        
+        revenueLabel.numberOfLines = 1
+        revenueLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
+    }
+    
     private func myListConfiguration() {
         contentScrollView.addSubview(myListStackView)
         myListStackView.snp.makeConstraints { make in
-            make.top.equalTo(overviewLabel.snp.bottom).offset(constants.smallSpace)
+            make.top.equalTo(revenueLabel.snp.bottom).offset(constants.mediumSpace)
             make.left.equalToSuperview().inset(constants.smallSpace)
         }
         
