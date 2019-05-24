@@ -70,6 +70,11 @@
 		788CC0502294DCD400A35A12 /* RecomendationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC04F2294DCD400A35A12 /* RecomendationViewModel.swift */; };
 		788CC05222959C7F00A35A12 /* RecomendationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC05122959C7F00A35A12 /* RecomendationView.swift */; };
 		788CC05422959C9C00A35A12 /* RecomendationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788CC05322959C9C00A35A12 /* RecomendationCell.swift */; };
+		78D4F31F2297A4F300895081 /* similar.json in Resources */ = {isa = PBXBuildFile; fileRef = 78D4F31E2297A4F300895081 /* similar.json */; };
+		78D4F3212297A52D00895081 /* recommendations.json in Resources */ = {isa = PBXBuildFile; fileRef = 78D4F3202297A52D00895081 /* recommendations.json */; };
+		78D4F3232297A6E100895081 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78D4F3222297A6E100895081 /* Realm.framework */; };
+		78D4F3252297A6F900895081 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78D4F3242297A6F900895081 /* RealmSwift.framework */; };
+		78D4F3292297AC0F00895081 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D4F3282297AC0F00895081 /* HomeViewModelTests.swift */; };
 		78F1839722792E1A001FAFF5 /* Quality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F1839622792E1A001FAFF5 /* Quality.swift */; };
 		78F1839B227B4EC8001FAFF5 /* popular.json in Resources */ = {isa = PBXBuildFile; fileRef = 78F1839A227B4EC8001FAFF5 /* popular.json */; };
 		78F1839D227B4F2D001FAFF5 /* MoviePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F1839C227B4F2D001FAFF5 /* MoviePage.swift */; };
@@ -161,6 +166,11 @@
 		788CC04F2294DCD400A35A12 /* RecomendationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationViewModel.swift; sourceTree = "<group>"; };
 		788CC05122959C7F00A35A12 /* RecomendationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationView.swift; sourceTree = "<group>"; };
 		788CC05322959C9C00A35A12 /* RecomendationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationCell.swift; sourceTree = "<group>"; };
+		78D4F31E2297A4F300895081 /* similar.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = similar.json; sourceTree = "<group>"; };
+		78D4F3202297A52D00895081 /* recommendations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recommendations.json; sourceTree = "<group>"; };
+		78D4F3222297A6E100895081 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		78D4F3242297A6F900895081 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		78D4F3282297AC0F00895081 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		78F1839622792E1A001FAFF5 /* Quality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quality.swift; sourceTree = "<group>"; };
 		78F1839A227B4EC8001FAFF5 /* popular.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = popular.json; sourceTree = "<group>"; };
 		78F1839C227B4F2D001FAFF5 /* MoviePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePage.swift; sourceTree = "<group>"; };
@@ -173,6 +183,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78D4F3252297A6F900895081 /* RealmSwift.framework in Frameworks */,
+				78D4F3232297A6E100895081 /* Realm.framework in Frameworks */,
 				78F183A5227B93EB001FAFF5 /* SnapKit.framework in Frameworks */,
 				7802DBA62266680F00F6682F /* SDWebImageMapKit.framework in Frameworks */,
 				7802DBA72266680F00F6682F /* SDWebImage.framework in Frameworks */,
@@ -224,6 +236,8 @@
 		7802DBA32266680F00F6682F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78D4F3242297A6F900895081 /* RealmSwift.framework */,
+				78D4F3222297A6E100895081 /* Realm.framework */,
 				78F183A4227B93EB001FAFF5 /* SnapKit.framework */,
 				7802DBA52266680F00F6682F /* SDWebImage.framework */,
 				7802DBA42266680F00F6682F /* SDWebImageMapKit.framework */,
@@ -282,6 +296,7 @@
 		7802DBAF2266A25C00F6682F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				78D4F3272297AB8C00895081 /* Tests */,
 				787F0F052286216700EFB108 /* Components */,
 				781BB2D2226DFB760031ADA6 /* HomeCoordinator.swift */,
 				781BB2D4226DFB850031ADA6 /* HomeViewModel.swift */,
@@ -464,6 +479,8 @@
 				7802DC292268217900F6682F /* movie.json */,
 				78F1839A227B4EC8001FAFF5 /* popular.json */,
 				788CC01F228C64B500A35A12 /* search.json */,
+				78D4F31E2297A4F300895081 /* similar.json */,
+				78D4F3202297A52D00895081 /* recommendations.json */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -550,6 +567,14 @@
 				788CC04D2294DC4600A35A12 /* RecomendationTableViewCell.swift */,
 			);
 			path = Recomendations;
+			sourceTree = "<group>";
+		};
+		78D4F3272297AB8C00895081 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				78D4F3282297AC0F00895081 /* HomeViewModelTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		78F1839522792E0F001FAFF5 /* Enum */ = {
@@ -643,11 +668,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78D4F3212297A52D00895081 /* recommendations.json in Resources */,
 				7802DB9C2264179100F6682F /* LaunchScreen.storyboard in Resources */,
 				788CC020228C64B500A35A12 /* search.json in Resources */,
 				78F1839B227B4EC8001FAFF5 /* popular.json in Resources */,
 				7802DBBD2266A68F00F6682F /* English.strings in Resources */,
 				7802DC2A2268217900F6682F /* movie.json in Resources */,
+				78D4F31F2297A4F300895081 /* similar.json in Resources */,
 				7802DBB82266A66E00F6682F /* Portuguese.strings in Resources */,
 				7802DB992264179100F6682F /* Assets.xcassets in Resources */,
 			);
@@ -674,6 +701,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImageMapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -755,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7802DC152267EC9300F6682F /* MovieAppTests.swift in Sources */,
+				78D4F3292297AC0F00895081 /* HomeViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1272,7 +1302,7 @@
 				7802DBD02267734200F6682F /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Staging;
 		};
 		7802DBA02264179100F6682F /* Build configuration list for PBXNativeTarget "MovieApp" */ = {
 			isa = XCConfigurationList;
@@ -1282,7 +1312,7 @@
 				7802DBD12267734200F6682F /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Staging;
 		};
 		7802DC192267EC9300F6682F /* Build configuration list for PBXNativeTarget "MovieAppTests" */ = {
 			isa = XCConfigurationList;
@@ -1292,7 +1322,7 @@
 				7802DC1C2267EC9300F6682F /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Staging;
 		};
 /* End XCConfigurationList section */
 	};

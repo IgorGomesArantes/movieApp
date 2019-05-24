@@ -22,7 +22,7 @@ struct Configuration {
     var environment: Environment {
         guard let environmentKey = infoDictionary["Environment"] as? String,
             let environment = Environment(rawValue: environmentKey)
-            else { fatalError("Environment key not found") }
+            else { return .staging }
         
         return environment
     }

@@ -76,10 +76,10 @@ extension MovieAPIEndPoint: EndPointProtocol {
             return "popular"
             
         case .similar:
-            return "popular"
+            return "similar"
             
         case .recomendation:
-            return "popular"
+            return "recommendations"
         }
     }
     

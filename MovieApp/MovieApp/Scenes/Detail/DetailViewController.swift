@@ -104,7 +104,10 @@ extension DetailViewController: DetailViewControllerDelegate {
         switch result {
         case .success:
             detailView.recomendationCollection.reloadData()
-            detailView.updateConstraints()
+            detailView.recomendationCollection.performBatchUpdates(nil, completion: { result in
+                self.detailView.updateConstraints()
+            })
+            
         case .error:
             break
         case .loading:
@@ -130,5 +133,9 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.detail(indexPath.row)
+    }
+    
+    override func didChange(_ changeKind: NSKeyValueChange, valuesAt indexes: IndexSet, forKey key: String) {
+        detailView.updateConstraints()
     }
 }

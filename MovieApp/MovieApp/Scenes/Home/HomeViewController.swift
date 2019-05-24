@@ -46,7 +46,6 @@ class HomeViewController: UIViewController {
         super.viewDidAppear(animated)
         
         viewModel.reloadMyList()
-        viewModel.reloadRecomendations()
     }
     
     // MARK: - Initialization methods
@@ -109,6 +108,9 @@ extension HomeViewController: HomeViewControllerDelegate {
         switch result {
         case .success:
             homeView.tableView.reloadSections([1], with: .automatic)
+            homeView.tableView.performBatchUpdates(nil, completion: { result in
+                self.viewModel.reloadRecomendations()
+            })
         default:
             break
         }
