@@ -27,9 +27,9 @@ class DetailViewModel {
     var onReloadDetails: ((ServiceStatus) -> Void)?
     var onReloadRecomendations: ((ServiceStatus) -> Void)?
     
-    lazy var numberOfRecomendations: Int = {
+    var numberOfRecomendations: Int {
         return recomendations.count
-    } ()
+    }
     
     // MARK: - Initialization methods
     init(_ movieService: MovieAPIManager, movieCode: Int) {
@@ -90,16 +90,6 @@ class DetailViewModel {
         view.averageVoteNumberLabel.text = String(model.vote)
         view.averageVoteProgressView.setProgress((model.vote) / 10, animated: false)
         view.imageView.sd_setImage(with: URL(string: model.imageURL), placeholderImage: UIImage(named: "placeholder"))
-        
-        if MovieEntity.isSaved(code: model.code) {
-            DispatchQueue.main.async {
-                view.check()
-            }
-        } else {
-            DispatchQueue.main.async {
-                view.uncheck()
-            }
-        }
     }
     
     func detail(_ index: Int) {
@@ -110,21 +100,6 @@ class DetailViewModel {
     
     func back() {
         coordinatorDelegate?.back()
-    }
-    
-    func saveOrRemove(_ view: DetailView) {
-        guard let model = model else { return }
-        
-        let code = model.code
-        let imagePath = model.imageURL
-        
-        let isSaved = MovieEntity.saveOrRemove(code: code, imagePath: imagePath)
-        
-        if isSaved {
-            view.check()
-        } else {
-            view.uncheck()
-        }
     }
     
     // MARK: - Cell configuration
@@ -166,13 +141,12 @@ class DetailViewModel {
         let vote = movie.voteAverage ?? 0.0
         let overview = movie.overview ?? ""
         let runtime = "\(movie.runtime ?? 0) min"
-        let isSaved = MovieEntity.isSaved(code: code)
         let title = movie.title ?? "Título desconhecido"
         let releaseDate = getFormmatedDate(movie.releaseDate ?? "")
         let budget = getFormattedMoney(value: Float(movie.budget ?? 0))
         let imageURL = movieService.getImagePath(movie.posterPath ?? "")
         let revenue = getFormattedMoney(value: Float(movie.revenue ?? 0))
         
-        return DetailModel(code: code, vote: vote, isSaved: isSaved, title: title, budget: budget, revenue: revenue, runtime: runtime, imageURL: imageURL, overview: overview, releaseDate: releaseDate)
+        return DetailModel(code: code, vote: vote, title: title, budget: budget, revenue: revenue, runtime: runtime, imageURL: imageURL, overview: overview, releaseDate: releaseDate)
     }
 }

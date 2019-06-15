@@ -44,9 +44,6 @@ class DetailView: UIView {
     let curiositiesTitleLabel = UILabel()
     let budgetLabel = UILabel()
     let revenueLabel = UILabel()
-    let myListButton = UIButton()
-    let myListLabel = UILabel()
-    let myListStackView = UIStackView()
     let recomendationTitleLabel = UILabel()
     let recomendationCollection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
@@ -65,15 +62,6 @@ class DetailView: UIView {
         debugPrint("Detail view deinit")
     }
     
-    // MARK: - Public methods
-    func check() {
-        myListButton.setImage(UIImage(named: "checked"), for: .normal)
-    }
-    
-    func uncheck() {
-        myListButton.setImage(UIImage(named: "blackPlus"), for: .normal)
-    }
-    
     // MARK: - Configuration methods
     private func initialConfiguration() {
         contentConfiguration()
@@ -87,7 +75,6 @@ class DetailView: UIView {
         curiositiesTitleConfiguration()
         budgetConfiguration()
         revenueConfiguration()
-        myListConfiguration()
         recomendationTitleConfiguration()
         recomendationCollectionConfiguration()
     }
@@ -229,37 +216,10 @@ class DetailView: UIView {
         revenueLabel.font = UIFont.systemFont(ofSize: constants.verySmallFontSize)
     }
     
-    private func myListConfiguration() {
-        contentScrollView.addSubview(myListStackView)
-        myListStackView.snp.makeConstraints { make in
-            make.top.equalTo(revenueLabel.snp.bottom).offset(constants.mediumSpace)
-            make.left.equalToSuperview().inset(constants.smallSpace)
-        }
-        
-        myListStackView.axis = .vertical
-        myListStackView.alignment = .center
-        myListStackView.distribution = .fillProportionally
-        
-        myListStackView.addArrangedSubview(myListButton)
-        myListStackView.addArrangedSubview(myListLabel)
-        
-        myListButton.snp.makeConstraints { make in
-            make.width.equalTo(contentScrollView.snp.width).dividedBy(15)
-            make.height.equalTo(myListButton.snp.width)
-        }
-        
-        myListLabel.snp.makeConstraints { make in
-            make.height.equalTo(12)
-        }
-        
-        myListLabel.font = UIFont.systemFont(ofSize: 8)
-        myListLabel.text = "Minha lista"
-    }
-    
     private func recomendationTitleConfiguration() {
         contentScrollView.addSubview(recomendationTitleLabel)
         recomendationTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(myListStackView.snp.bottom).offset(constants.bigSpace)
+            make.top.equalTo(revenueLabel.snp.bottom).offset(constants.bigSpace)
             make.left.right.equalToSuperview().inset(constants.smallSpace)
         }
         

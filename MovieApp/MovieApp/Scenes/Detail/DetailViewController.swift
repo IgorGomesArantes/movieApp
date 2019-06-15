@@ -87,7 +87,6 @@ class DetailViewController: UIViewController {
         navigationConfiguration()
         viewConfiguration()
         detailViewConfiguration()
-        myListButtonConfiguration()
         activityIndicatorConfiguration()
         recomendationCollectionConfiguration()
     }
@@ -131,20 +130,11 @@ class DetailViewController: UIViewController {
         
         detailView.recomendationCollection.register(RecomendationCell.self, forCellWithReuseIdentifier: RecomendationCell.reuseIdentifier)
     }
-    
-    private func myListButtonConfiguration() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(saveOrRemove))
-        detailView.myListStackView.addGestureRecognizer(tapGesture)
-    }
-    
-    // MARK: - Action methods
-    @objc func saveOrRemove() {
-        viewModel.saveOrRemove(detailView)
-    }
 }
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        debugPrint("Count: \(viewModel.numberOfRecomendations)")
         return viewModel.numberOfRecomendations
     }
     
