@@ -86,7 +86,7 @@ class HomeViewModel {
                     self.controllerDelegate?.popular(.empty)
                 } else {
                     self.popular = result.results
-                    self.controllerDelegate?.popular(.success(result))
+                    self.controllerDelegate?.popular(.success)
                 }
                 
             case .error(let string):
@@ -104,7 +104,7 @@ class HomeViewModel {
             self.controllerDelegate?.myList(.empty)
         } else {
             self.myList = movies
-            self.controllerDelegate?.myList(.success(movies))
+            self.controllerDelegate?.myList(.success)
         }
     }
     
@@ -125,7 +125,7 @@ class HomeViewModel {
                         self.controllerDelegate?.recomendation(.empty)
                     } else {
                         self.recomendation = result.results
-                        self.controllerDelegate?.recomendation(.success(result.results))
+                        self.controllerDelegate?.recomendation(.success)
                     }
                     
                 case .error(let string):
@@ -134,7 +134,7 @@ class HomeViewModel {
             }
         } else {
             myList = []
-            controllerDelegate?.recomendation(.success([]))
+            controllerDelegate?.recomendation(.success)
         }
     }
 }

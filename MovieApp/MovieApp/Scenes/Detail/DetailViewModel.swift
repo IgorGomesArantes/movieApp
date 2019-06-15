@@ -9,75 +9,96 @@
 import UIKit
 import SDWebImage
 
+protocol DetailViewModelDelegate: class {
+    func detail(_ movieCode: Int)
+    func back()
+}
+
 class DetailViewModel {
     
     // MARK: - Properties
-    var movie = Movie()
-    var recomendations = [Movie]()
-    let movieCode: Int
-    let movieService = MovieAPIManager()
-    var coordinatorDelegate: DetailCoordinatorDelegate?
-    weak var controllerDelegate: DetailViewControllerDelegate?
+    private let movieCode: Int
+    private let movieService: MovieAPIManager
+    
+    private var model: DetailModel?
+    private var recomendations: [Movie] = []
+    
+    weak var coordinatorDelegate: DetailViewModelDelegate?
+    var onReloadDetails: ((ServiceStatus) -> Void)?
+    var onReloadRecomendations: ((ServiceStatus) -> Void)?
+    
+    lazy var numberOfRecomendations: Int = {
+        return recomendations.count
+    } ()
     
     // MARK: - Initialization methods
-    init(_ movieCode: Int) {
+    init(_ movieService: MovieAPIManager, movieCode: Int) {
+        self.movieService = movieService
         self.movieCode = movieCode
+    }
+    
+    deinit {
+        debugPrint("Detail view model deinit")
     }
     
     // MARK: - Public methods
     func reload() {
-        controllerDelegate?.reload(.loading)
+        onReloadDetails?(.loading)
         
-        movieService.getMovie(by: movieCode) {
-            switch($0) {
+        movieService.getMovie(by: movieCode) { response in
+            switch(response) {
             case .success(let result):
-                self.movie = result
-                self.controllerDelegate?.reload(.success(result))
+                self.model = self.movieToDetailModel(result)
+                self.onReloadDetails?(.success)
+                self.reloadRecomendations()
+                
             case .error(let string):
-                self.controllerDelegate?.reload(.error(string))
+                self.onReloadDetails?(.error(string))
             }
         }
     }
     
     func reloadRecomendations() {
-        controllerDelegate?.reloadRecomendations(.loading)
+        onReloadRecomendations?(.loading)
         
         movieService.getSimilarMovies(code: movieCode) {
             switch $0 {
             case .success(let result):
                 if result.results.isEmpty {
-                    self.controllerDelegate?.reloadRecomendations(.empty)
+                    self.onReloadRecomendations?(.empty)
                 } else {
                     self.recomendations = result.results
-                    self.controllerDelegate?.reloadRecomendations(.success(self.recomendations))
+                    self.onReloadRecomendations?(.success)
                 }
                 
             case .error(let string):
-                self.controllerDelegate?.reloadRecomendations(.error(string))
+                self.onReloadRecomendations?(.error(string))
             }
         }
     }
     
     func configure(_ view: DetailView) {
-        let imagePath = movieService.getImagePath(movie.posterPath ?? "")
-        let budget = getFormattedMoney(value: Float(movie.budget ?? 0))
-        let revenue = getFormattedMoney(value: Float(movie.revenue ?? 0))
+        guard let model = model else { return }
         
-        view.imageView.sd_setImage(with: URL(string: imagePath), placeholderImage: UIImage(named: "placeholder"))
-        view.titleLabel.text = movie.title ?? ""
-        view.releaseDateLabel.text = getFormmatedDate()
-        view.durationLabel.text = "\(movie.runtime ?? 0) min"
+        view.titleLabel.text = model.title
+        view.durationLabel.text = model.runtime
+        view.overviewLabel.text = model.overview
         view.averageVoteLabel.text = "Nota geral:"
-        view.averageVoteNumberLabel.text = String(movie.voteAverage ?? 0.0)
-        view.averageVoteProgressView.setProgress((movie.voteAverage ?? 0.0) / 10, animated: false)
-        view.overviewLabel.text = movie.overview ?? ""
-        view.budgetLabel.text = "Despesas:\t\(budget)"
-        view.revenueLabel.text = "Receita:\t\(revenue)"
+        view.releaseDateLabel.text = model.releaseDate
+        view.budgetLabel.text = "Despesas:\t\(model.budget)"
+        view.revenueLabel.text = "Receita:\t\(model.revenue)"
+        view.averageVoteNumberLabel.text = String(model.vote)
+        view.averageVoteProgressView.setProgress((model.vote) / 10, animated: false)
+        view.imageView.sd_setImage(with: URL(string: model.imageURL), placeholderImage: UIImage(named: "placeholder"))
         
-        if MovieEntity.isSaved(code: movie.id ?? 0) {
-            view.check()
+        if MovieEntity.isSaved(code: model.code) {
+            DispatchQueue.main.async {
+                view.check()
+            }
         } else {
-            view.uncheck()
+            DispatchQueue.main.async {
+                view.uncheck()
+            }
         }
     }
     
@@ -92,8 +113,10 @@ class DetailViewModel {
     }
     
     func saveOrRemove(_ view: DetailView) {
-        let code = movie.id ?? 0
-        let imagePath = movie.posterPath ?? ""
+        guard let model = model else { return }
+        
+        let code = model.code
+        let imagePath = model.imageURL
         
         let isSaved = MovieEntity.saveOrRemove(code: code, imagePath: imagePath)
         
@@ -114,19 +137,16 @@ class DetailViewModel {
         cell.setup(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverare, title: title)
     }
     
-    // MARK: - Private methods
-    private func getFormmatedDate() -> String {
+    // MARK: - Format methods
+    private func getFormmatedDate(_ date: String) -> String {
         let months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
         
-        guard let releaseDate = movie.releaseDate else { return "1 de \(months[0]) de 1900" }
+        let splittedDate = date.split(separator: "-")
+        if splittedDate.count != 3 { return "1 de \(months[0]) de 1900" }
         
-        let releaseSplittedDate = releaseDate.split(separator: "-")
-        
-        if releaseSplittedDate.count != 3 { return "1 de \(months[0]) de 1900" }
-        
-        let year = releaseSplittedDate[0]
-        let month = Int(releaseSplittedDate[1]) ?? 1
-        let day = releaseSplittedDate[2]
+        let year = splittedDate[0]
+        let month = Int(splittedDate[1]) ?? 1
+        let day = splittedDate[2]
         
         return "\(day) de \(months[month - 1]) de \(year)"
     }
@@ -139,5 +159,20 @@ class DetailViewModel {
         let valueString = currencyFormatter.string(from: NSNumber(value: value))!
         
         return valueString
+    }
+    
+    private func movieToDetailModel(_ movie: Movie) -> DetailModel {
+        let code = movie.id ?? 0
+        let vote = movie.voteAverage ?? 0.0
+        let overview = movie.overview ?? ""
+        let runtime = "\(movie.runtime ?? 0) min"
+        let isSaved = MovieEntity.isSaved(code: code)
+        let title = movie.title ?? "Título desconhecido"
+        let releaseDate = getFormmatedDate(movie.releaseDate ?? "")
+        let budget = getFormattedMoney(value: Float(movie.budget ?? 0))
+        let imageURL = movieService.getImagePath(movie.posterPath ?? "")
+        let revenue = getFormattedMoney(value: Float(movie.revenue ?? 0))
+        
+        return DetailModel(code: code, vote: vote, isSaved: isSaved, title: title, budget: budget, revenue: revenue, runtime: runtime, imageURL: imageURL, overview: overview, releaseDate: releaseDate)
     }
 }

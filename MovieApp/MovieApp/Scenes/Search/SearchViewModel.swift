@@ -34,7 +34,7 @@ class SearchViewModel {
                 if self.movies.isEmpty {
                     self.controllerDelegate?.reload(.empty)
                 } else {
-                    self.controllerDelegate?.reload(.success(self.movies))
+                    self.controllerDelegate?.reload(.success)
                 }
             case .error(let string):
                 self.controllerDelegate?.reload(.error(string))

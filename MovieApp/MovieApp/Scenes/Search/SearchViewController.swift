@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchViewControllerDelegate: class {
-    func reload(_ result: ServiceStatus<[Movie]>)
+    func reload(_ result: ServiceStatus)
 }
 
 class SearchViewController: UIViewController {
@@ -66,7 +66,7 @@ class SearchViewController: UIViewController {
 
 // MARK: - Search view controller delegate methods
 extension SearchViewController: SearchViewControllerDelegate {
-    func reload(_ result: ServiceStatus<[Movie]>) {
+    func reload(_ result: ServiceStatus) {
         switch result {
         case .success:
             searchView.resultCollectionView.reloadData()

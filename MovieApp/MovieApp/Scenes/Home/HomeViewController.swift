@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 
 protocol HomeViewControllerDelegate: class {
-    func popular(_ result: ServiceStatus<MoviePage>)
-    func myList(_ result: ServiceStatus<[Movie]>)
-    func recomendation(_ result: ServiceStatus<[Movie]>)
+    func popular(_ result: ServiceStatus)
+    func myList(_ result: ServiceStatus)
+    func recomendation(_ result: ServiceStatus)
 }
 
 class HomeViewController: UIViewController {
@@ -95,7 +95,7 @@ class HomeViewController: UIViewController {
 
 // MARK: - Home view controller delegate methods
 extension HomeViewController: HomeViewControllerDelegate {
-    func popular(_ result: ServiceStatus<MoviePage>) {
+    func popular(_ result: ServiceStatus) {
         switch result {
         case .success:
             homeView.tableView.reloadSections([0], with: .automatic)
@@ -104,7 +104,7 @@ extension HomeViewController: HomeViewControllerDelegate {
         }
     }
     
-    func myList(_ result: ServiceStatus<[Movie]>) {
+    func myList(_ result: ServiceStatus) {
         switch result {
         case .success:
             homeView.tableView.reloadSections([1], with: .automatic)
@@ -116,7 +116,7 @@ extension HomeViewController: HomeViewControllerDelegate {
         }
     }
     
-    func recomendation(_ result: ServiceStatus<[Movie]>) {
+    func recomendation(_ result: ServiceStatus) {
         switch result {
         case .success:
             homeView.tableView.reloadSections([2], with: .automatic)

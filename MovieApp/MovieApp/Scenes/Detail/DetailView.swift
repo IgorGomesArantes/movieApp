@@ -39,11 +39,11 @@ class DetailView: UIView {
     let averageVoteNumberLabel = UILabel()
     let averageVoteStackView = UIStackView()
     let averageVoteProgressView = UIProgressView(progressViewStyle: .bar)
-    let overviewTitleLabel = UILabel() // new
+    let overviewTitleLabel = UILabel()
     let overviewLabel = UILabel()
-    let curiositiesTitleLabel = UILabel() // new
-    let budgetLabel = UILabel() // new
-    let revenueLabel = UILabel() // new
+    let curiositiesTitleLabel = UILabel()
+    let budgetLabel = UILabel()
+    let revenueLabel = UILabel()
     let myListButton = UIButton()
     let myListLabel = UILabel()
     let myListStackView = UIStackView()
@@ -59,6 +59,10 @@ class DetailView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        debugPrint("Detail view deinit")
     }
     
     // MARK: - Public methods

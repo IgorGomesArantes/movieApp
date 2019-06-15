@@ -8,15 +8,13 @@
 
 import UIKit
 
-protocol DetailViewControllerDelegate: class {
-    func reload(_ result: ServiceStatus<Movie>)
-    func reloadRecomendations(_ result: ServiceStatus<[Movie]>)
-}
-
 class DetailViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: - Vieww properties
     private let detailView = DetailView()
+    private let activityIndicator = UIActivityIndicatorView(style: .gray)
+    
+    // MARK: - Properties
     private var viewModel: DetailViewModel!
     
     // MARK: - View lifecycle methods
@@ -25,7 +23,6 @@ class DetailViewController: UIViewController {
         
         initialConfiguration()
         viewModel.reload()
-        viewModel.reloadRecomendations()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,33 +33,96 @@ class DetailViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        detailView.contentScrollView.setContentOffset(.zero, animated: false)
+        detailView.contentScrollView.setContentOffset(.zero, animated: true)
     }
     
     // MARK: - Initialization methods
     static func instanciate(viewModel: DetailViewModel) -> DetailViewController {
         let viewController = DetailViewController()
-        
         viewController.viewModel = viewModel
         
         return viewController
     }
     
+    deinit {
+        debugPrint("Detail view controller deinit")
+    }
+    
+    // MARK: - Reload methods
+    private func reloadDetails(_ status: ServiceStatus) {
+        switch status {
+        case .success:
+            activityIndicator.stopAnimating()
+            detailView.isHidden = false
+            viewModel.configure(detailView)
+            
+        case .loading:
+            detailView.isHidden = true
+            activityIndicator.startAnimating()
+
+        case .empty, .error:
+            break
+        }
+    }
+    
+    private func reloadRecomendations(_ status: ServiceStatus) {
+        switch status {
+        case .success:
+            detailView.recomendationCollection.reloadData()
+            detailView.recomendationCollection.performBatchUpdates(nil, completion: { _ in
+                self.detailView.updateConstraints()
+            })
+            
+        case .error, .loading, .empty:
+            break
+        }
+    }
+    
     // MARK - Configuration methods
     private func initialConfiguration() {
-        configureNavigationItem()
+        viewModelConfiguration()
+        navigationConfiguration()
+        viewConfiguration()
         detailViewConfiguration()
-        recomendationCollectionConfiguration()
         myListButtonConfiguration()
+        activityIndicatorConfiguration()
+        recomendationCollectionConfiguration()
+    }
+    
+    private func viewModelConfiguration() {
+        viewModel.onReloadDetails = { [weak self] status in
+            self?.reloadDetails(status)
+        }
+        
+        viewModel.onReloadRecomendations = { [weak self] status in
+            self?.reloadRecomendations(status)
+        }
+    }
+    
+    private func navigationConfiguration() {
+        navigationItem.title = "Detalhes"
+    }
+    
+    private func viewConfiguration() {
+        view.backgroundColor = .white
+    }
+    
+    private func activityIndicatorConfiguration() {
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(8)
+        }
     }
     
     private func detailViewConfiguration() {
         view.addSubview(detailView)
-        detailView.frame = view.bounds
-        detailView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        detailView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     private func recomendationCollectionConfiguration() {
@@ -73,11 +133,8 @@ class DetailViewController: UIViewController {
     }
     
     private func myListButtonConfiguration() {
-        detailView.myListButton.addTarget(self, action: #selector(saveOrRemove), for: .touchDown)
-    }
-    
-    private func configureNavigationItem() {
-        navigationItem.title = "Detalhes"
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(saveOrRemove))
+        detailView.myListStackView.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Action methods
@@ -86,41 +143,9 @@ class DetailViewController: UIViewController {
     }
 }
 
-extension DetailViewController: DetailViewControllerDelegate {
-    func reload(_ result: ServiceStatus<Movie>) {
-        switch result {
-        case .success:
-            viewModel.configure(detailView)
-        case .error:
-            break
-        case .loading:
-            break
-        case .empty:
-            break
-        }
-    }
-    
-    func reloadRecomendations(_ result: ServiceStatus<[Movie]>) {
-        switch result {
-        case .success:
-            detailView.recomendationCollection.reloadData()
-            detailView.recomendationCollection.performBatchUpdates(nil, completion: { result in
-                self.detailView.updateConstraints()
-            })
-            
-        case .error:
-            break
-        case .loading:
-            break
-        case .empty:
-            break
-        }
-    }
-}
-
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.recomendations.count
+        return viewModel.numberOfRecomendations
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -133,9 +158,5 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.detail(indexPath.row)
-    }
-    
-    override func didChange(_ changeKind: NSKeyValueChange, valuesAt indexes: IndexSet, forKey key: String) {
-        detailView.updateConstraints()
     }
 }

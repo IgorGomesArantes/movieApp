@@ -8,21 +8,11 @@
 
 import UIKit
 
-protocol DetailCoordinatorDelegate {
-    func detail(_ movieCode: Int)
-    func back()
-}
-
 class DetailCoordinator: Coordinator {
     
     // MARK: - Metadata
-    struct InitializationData {
-        let navigationController: UINavigationController
-        let movieCode: Int
-    }
-    
     struct DetailModule {
-        weak var viewModel: DetailViewModel?
+        var viewModel: DetailViewModel
         let controller: DetailViewController
     }
     
@@ -31,26 +21,32 @@ class DetailCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var rootViewController: UIViewController { return detailModule.controller }
     
-    let movieCode: Int
-    let navigationController: UINavigationController
-    var detailModule: DetailModule { return buildDetailModule() }
+    private let movieCode: Int
+    private let movieService: MovieAPIManager
+    private let navigationController: UINavigationController
+    private lazy var detailModule = buildDetailModule()
     
     // MARK: - Initialization methods
-    init(_ initializationData: InitializationData) {
-        self.movieCode = initializationData.movieCode
-        self.navigationController = initializationData.navigationController
+    init(_ navigationController: UINavigationController, movieService: MovieAPIManager, movieCode: Int) {
+        self.navigationController = navigationController
+        self.movieService = movieService
+        self.movieCode = movieCode
     }
     
+    deinit {
+        debugPrint("Detail coordinator deinit")
+    }
+    
+    // MARK: - Start methods
     func start() {
         navigationController.pushViewController(rootViewController, animated: false)
     }
     
     // MARK: - Build module methods
     private func buildDetailModule() -> DetailModule {
-        let viewModel = DetailViewModel(movieCode)
+        let viewModel = DetailViewModel(movieService, movieCode: movieCode)
         let viewController = DetailViewController.instanciate(viewModel: viewModel)
         
-        viewModel.controllerDelegate = viewController
         viewModel.coordinatorDelegate = self
         
         return DetailModule(viewModel: viewModel, controller: viewController)
@@ -64,11 +60,10 @@ extension DetailCoordinator: CoordinatorDelegate {
     }
 }
 
-// MARK: - Detail coordinator delegate methods
-extension DetailCoordinator: DetailCoordinatorDelegate {
+// MARK: - Detail view model delegate methods
+extension DetailCoordinator: DetailViewModelDelegate {
     func detail(_ movieCode: Int) {
-        let initializationData = DetailCoordinator.InitializationData(navigationController: navigationController, movieCode: movieCode)
-        let detailCoordinator = DetailCoordinator(initializationData)
+        let detailCoordinator = DetailCoordinator(navigationController, movieService: movieService, movieCode: movieCode)
         
         addChildCoordinator(detailCoordinator)
         

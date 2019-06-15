@@ -75,8 +75,7 @@ extension SearchCoordinator: SearchCoordinatorDelegate {
     }
     
     func detail(movieCode: Int) {
-        let initializationData = DetailCoordinator.InitializationData(navigationController: navigationController, movieCode: movieCode)
-        let detailCoordinator = DetailCoordinator(initializationData)
+        let detailCoordinator = DetailCoordinator(navigationController, movieService: MovieAPIManager(), movieCode: movieCode)
         
         addChildCoordinator(detailCoordinator)
         

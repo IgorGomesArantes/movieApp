@@ -56,8 +56,7 @@ class HomeCoordinator: Coordinator {
 // MARK: - Home coordinator delegate methods
 extension HomeCoordinator: HomeCoordinatorDelegate {
     func detail(_ movieCode: Int) {
-        let initializationData = DetailCoordinator.InitializationData(navigationController: navigationController, movieCode: movieCode)
-        let detailCoordinator = DetailCoordinator(initializationData)
+        let detailCoordinator = DetailCoordinator(navigationController, movieService: MovieAPIManager(), movieCode: movieCode)
         
         addChildCoordinator(detailCoordinator)
         

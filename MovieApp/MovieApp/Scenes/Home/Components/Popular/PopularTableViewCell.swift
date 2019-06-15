@@ -55,6 +55,7 @@ class PopularTableViewCell: UITableViewCell {
         
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
+        //collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
         

@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum ServiceStatus<Result:Decodable> {
-    case success(Result)
+enum ServiceStatus {
+    case success
     case error(String)
     case empty
     case loading

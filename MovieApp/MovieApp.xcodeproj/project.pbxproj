@@ -46,6 +46,7 @@
 		781BB2D3226DFB760031ADA6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781BB2D2226DFB760031ADA6 /* HomeCoordinator.swift */; };
 		781BB2D5226DFB850031ADA6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781BB2D4226DFB850031ADA6 /* HomeViewModel.swift */; };
 		781BB2D8226DFC180031ADA6 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781BB2D7226DFC180031ADA6 /* ApplicationCoordinator.swift */; };
+		7837636A22B49FFF00B55984 /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7837636922B49FFF00B55984 /* DetailModel.swift */; };
 		787F0F012286068A00EFB108 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F0F002286068A00EFB108 /* HomeView.swift */; };
 		787F0F072289A6EA00EFB108 /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F0F062289A6EA00EFB108 /* PopularCell.swift */; };
 		787F0F092289D67200EFB108 /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F0F082289D67200EFB108 /* DetailCoordinator.swift */; };
@@ -142,6 +143,7 @@
 		781BB2D2226DFB760031ADA6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		781BB2D4226DFB850031ADA6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		781BB2D7226DFC180031ADA6 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		7837636922B49FFF00B55984 /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 		787F0F002286068A00EFB108 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		787F0F062289A6EA00EFB108 /* PopularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
 		787F0F082289D67200EFB108 /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
@@ -322,10 +324,12 @@
 		7802DBB12266A26C00F6682F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				787F0F082289D67200EFB108 /* DetailCoordinator.swift */,
-				787F0F0A2289D68900EFB108 /* DetailViewModel.swift */,
-				787F0F0C2289D69400EFB108 /* DetailViewController.swift */,
+				7837636B22B4AAB700B55984 /* Tests */,
 				787F0F0E2289D6A400EFB108 /* DetailView.swift */,
+				7837636922B49FFF00B55984 /* DetailModel.swift */,
+				787F0F0A2289D68900EFB108 /* DetailViewModel.swift */,
+				787F0F082289D67200EFB108 /* DetailCoordinator.swift */,
+				787F0F0C2289D69400EFB108 /* DetailViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -528,6 +532,13 @@
 				788CC031228E11E300A35A12 /* PopularTableViewCell.swift */,
 			);
 			path = Popular;
+			sourceTree = "<group>";
+		};
+		7837636B22B4AAB700B55984 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		787F0F052286216700EFB108 /* Components */ = {
@@ -769,6 +780,7 @@
 				788CC01A228C62AD00A35A12 /* SearchViewController.swift in Sources */,
 				7802DBF2226794B300F6682F /* NetworkRouter.swift in Sources */,
 				788CC04E2294DC4600A35A12 /* RecomendationTableViewCell.swift in Sources */,
+				7837636A22B49FFF00B55984 /* DetailModel.swift in Sources */,
 				788CC0122289EFBA00A35A12 /* SearchCoordinator.swift in Sources */,
 				781AD4372295A32C00B70C18 /* UIViewExtensions.swift in Sources */,
 				787F0F072289A6EA00EFB108 /* PopularCell.swift in Sources */,
@@ -897,6 +909,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PNTT39UXP5;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -978,6 +991,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PNTT39UXP5;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
