@@ -12,9 +12,10 @@ import Foundation
 enum MovieAPIEndPoint {
     case movie(code: Int)
     case search(query: String)
-    case popular(page: Int)
+    case popular
     case similar(code: Int)
-    case recomendation(code: Int)
+    case topRated
+    case nowPlaying
 }
 
 // MARK: - Constants
@@ -59,8 +60,11 @@ extension MovieAPIEndPoint: EndPointProtocol {
         case .similar(let code):
             return "movie/\(code)/similar"
             
-        case .recomendation(let code):
-            return "movie/\(code)/recommendations"
+        case .topRated:
+            return "movie/top_rated"
+            
+        case .nowPlaying:
+            return "movie/now_playing"
         }
     }
     
@@ -78,8 +82,11 @@ extension MovieAPIEndPoint: EndPointProtocol {
         case .similar:
             return "similar"
             
-        case .recomendation:
-            return "recommendations"
+        case .topRated:
+            return "topRated"
+            
+        case .nowPlaying:
+            return "nowPlaying"
         }
     }
     
@@ -98,16 +105,20 @@ extension MovieAPIEndPoint: EndPointProtocol {
             let parameters = ["query": query, "sort_by": "popularity", "api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
             
-        case .popular(let page):
-            let parameters = ["api_key": apiKey, "language": language, "page": String(page)]
+        case .popular:
+            let parameters = ["api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
             
         case .similar:
             let parameters = ["api_key": apiKey, "language": language]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
             
-        case .recomendation:
+        case .topRated:
             let parameters = ["api_key": apiKey, "language": language]
+            return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
+            
+        case .nowPlaying:
+            let parameters = ["api_key": apiKey, "language": language, "region": "BR"]
             return HTTPParameters(bodyParameters: nil, urlParameters: parameters)
         }
     }

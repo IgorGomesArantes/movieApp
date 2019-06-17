@@ -10,13 +10,6 @@ import UIKit
 
 class PopularView: UIView {
     
-    // MARK: - Constants
-    struct Constants {
-        
-    }
-    
-    private let constants = Constants()
-    
     // MARK: - View properties
     let imageView = UIImageView()
     let voteAverageLabel = UILabel()
@@ -40,17 +33,16 @@ class PopularView: UIView {
     // MARK: - Configuration methods
     private func initialConfiguration() {
         imageConfiguration()
-        contentVoteConfiguration()
-        starVoteIconConfiguration()
-        voteAverageConfiguration()
-        //contentPlusConfiguration()
-        //plusIconConfiguration()
+//        contentVoteConfiguration()
+//        starVoteIconConfiguration()
+//        voteAverageConfiguration()
     }
     
     private func imageConfiguration() {
         addSubview(imageView)
-        imageView.frame = self.bounds
-        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 5

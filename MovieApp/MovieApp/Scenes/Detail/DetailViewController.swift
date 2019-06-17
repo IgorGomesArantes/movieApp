@@ -72,9 +72,7 @@ class DetailViewController: UIViewController {
         switch status {
         case .success:
             detailView.recomendationCollection.reloadData()
-            detailView.recomendationCollection.performBatchUpdates(nil, completion: { _ in
-                self.detailView.updateConstraints()
-            })
+            detailView.updateConstraints()
             
         case .error, .loading, .empty:
             break
@@ -134,7 +132,6 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        debugPrint("Count: \(viewModel.numberOfRecomendations)")
         return viewModel.numberOfRecomendations
     }
     
