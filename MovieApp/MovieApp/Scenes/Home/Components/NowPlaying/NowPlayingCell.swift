@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyListCell: UICollectionViewCell {
+class NowPlayingCell: UICollectionViewCell {
     
     // MARK: - View properties
     static let reuseIdentifier = "myListCell"

@@ -11,7 +11,7 @@ import UIKit
 class HomeTableSectionHeaderView: UIView {
     
     // MARK: - Properties
-    private let titleLabel = UILabel()
+    let titleLabel = UILabel()
     private let width = UIScreen.main.bounds.width
     
     // MARK: - Inititalization methods
@@ -23,11 +23,6 @@ class HomeTableSectionHeaderView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Public methods
-    func setup(title: String) {
-        titleLabel.text = title
     }
     
     // MARK: - Configuration methods

@@ -72,9 +72,7 @@ class DetailViewController: UIViewController {
         switch status {
         case .success:
             detailView.recomendationCollection.reloadData()
-            detailView.recomendationCollection.performBatchUpdates(nil, completion: { _ in
-                self.detailView.updateConstraints()
-            })
+            detailView.updateConstraints()
             
         case .error, .loading, .empty:
             break
@@ -87,7 +85,6 @@ class DetailViewController: UIViewController {
         navigationConfiguration()
         viewConfiguration()
         detailViewConfiguration()
-        myListButtonConfiguration()
         activityIndicatorConfiguration()
         recomendationCollectionConfiguration()
     }
@@ -130,16 +127,6 @@ class DetailViewController: UIViewController {
         detailView.recomendationCollection.dataSource = self
         
         detailView.recomendationCollection.register(RecomendationCell.self, forCellWithReuseIdentifier: RecomendationCell.reuseIdentifier)
-    }
-    
-    private func myListButtonConfiguration() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(saveOrRemove))
-        detailView.myListStackView.addGestureRecognizer(tapGesture)
-    }
-    
-    // MARK: - Action methods
-    @objc func saveOrRemove() {
-        viewModel.saveOrRemove(detailView)
     }
 }
 

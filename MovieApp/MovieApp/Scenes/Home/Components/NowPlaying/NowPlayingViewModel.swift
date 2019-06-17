@@ -1,14 +1,14 @@
 //
-//  RecomendationViewModel.swift
+//  MyListViewModel.swift
 //  MovieApp
 //
 //  Created by Igor Gomes Arantes on 21/05/19.
 //  Copyright © 2019 Igor Gomes Arantes. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class RecomendationViewModel {
+class NowPlayingViewModel {
     
     // MARK: - Properties
     private let movieService = MovieAPIManager()
@@ -27,12 +27,9 @@ class RecomendationViewModel {
         self.movies = movies
     }
     
-    func configureCell(_ cell: RecomendationCell, index: Int) {
+    func configureCell(_ cell: NowPlayingCell, index: Int) {
         let imagePath = movieService.getImagePath(movies[index].posterPath ?? "")
-        let movieCode = movies[index].id ?? 0
-        let voteAverare = movies[index].voteAverage ?? 0
-        let title = movies[index].title ?? ""
         
-        cell.setup(movieCode: movieCode, imagePath: imagePath, voteAverage: voteAverare, title: title)
+        cell.setup(imagePath)
     }
 }

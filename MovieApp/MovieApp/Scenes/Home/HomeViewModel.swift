@@ -8,75 +8,36 @@
 
 import UIKit
 
-enum HomeSectionType {
-    case popular
-    case myList
-    case recomendation
-}
-
 protocol HomeViewModelDelegate: class {
     func didSelectMovie(code: Int)
 }
 
 class HomeViewModel {
+    
+    // MARK: - Metadata
+    enum SectionStyle {
+        case popular
+        case topRated
+        case nowPlaying
+    }
 
     // MARK: - Properties
     private var popular = [Movie]()
-    private var myList = [Movie]()
-    private var recomendation = [Movie]()
+    private var topRated = [Movie]()
+    private var nowPlaying = [Movie]()
     private let movieService = MovieAPIManager()
     var coordinatorDelegate: HomeCoordinatorDelegate?
     weak var controllerDelegate: HomeViewControllerDelegate?
-    let sections: [HomeSectionType] = [.popular, .myList, .recomendation]
-    
-    // MARK: - Configuration properties
-    var numberOfSections: Int {
-        return sections.count
-    }
-    
-    var numberOfRowsBySection: Int {
-        return 1
-    }
-    
-    // MARK: - Public methods
-    func isMyListEmpty() -> Bool {
-        return myList.isEmpty
-    }
-    
-    func isRecomendationEmpty() -> Bool {
-        return recomendation.isEmpty
-    }
-    
-    func recomendationsCount() -> Int {
-        return 20
-    }
-    
-    func detail(_ movieCode: Int) {
-        coordinatorDelegate?.detail(movieCode)
-    }
-    
-    func search() {
-        coordinatorDelegate?.search()
-    }
-    
-    // MARK: - Configure cell methods
-    func configureCell(_ cell: PopularTableViewCell) {
-        cell.delegate = self
-        cell.setup(movies: popular)
-    }
-    
-    func configureCell(_ cell: MyListTableViewCell) {
-        cell.delegate = self
-        cell.setup(movies: myList)
-    }
-    
-    func configureCell(_ cell: RecomendationTableViewCell) {
-        cell.delegate = self
-        cell.setup(movies: recomendation)
-    }
+    let sections: [SectionStyle] = [.popular, .nowPlaying, .topRated]
     
     // MARK: - Reload methods
-    func reloadPopular() {
+    func reloadAll() {
+        reloadPopular()
+        reloadNowPlaying()
+        reloadTopRated()
+    }
+    
+    private func reloadPopular() {
         controllerDelegate?.popular(.loading)
         
         movieService.getPopularMovies() {
@@ -95,47 +56,80 @@ class HomeViewModel {
         }
     }
     
-    func reloadMyList() {
-        controllerDelegate?.myList(.loading)
+    private func reloadTopRated() {
+        controllerDelegate?.topRated(.loading)
         
-        let movies = MovieEntity.all()
-        
-        if movies.isEmpty {
-            self.controllerDelegate?.myList(.empty)
-        } else {
-            self.myList = movies
-            self.controllerDelegate?.myList(.success)
+        movieService.getTopRatedMovies() {
+            switch $0 {
+            case .success(let result):
+                if result.results.isEmpty {
+                    self.controllerDelegate?.topRated(.empty)
+                } else {
+                    self.topRated = result.results
+                    self.controllerDelegate?.topRated(.success)
+                }
+                
+            case .error(let string):
+                self.controllerDelegate?.topRated(.error(string))
+            }
         }
     }
     
-    // TODO: - Corrigir
-    func reloadRecomendations() {
-        controllerDelegate?.recomendation(.loading)
+    private func reloadNowPlaying() {
+        controllerDelegate?.nowPlaying(.loading)
         
-        let count = myList.count
-        
-        if count > 0 {
-            let random = Int(arc4random_uniform(UInt32(count)))
-            let code = myList[random].id ?? 0
-            
-            movieService.getRecomendationMovies(code: code) {
-                switch $0 {
-                case .success(let result):
-                    if result.results.isEmpty {
-                        self.controllerDelegate?.recomendation(.empty)
-                    } else {
-                        self.recomendation = result.results
-                        self.controllerDelegate?.recomendation(.success)
-                    }
-                    
-                case .error(let string):
-                    self.controllerDelegate?.recomendation(.error(string))
+        movieService.getNowPlayingMovies() {
+            switch $0 {
+            case .success(let result):
+                if result.results.isEmpty {
+                    self.controllerDelegate?.nowPlaying(.empty)
+                } else {
+                    self.nowPlaying = result.results
+                    self.controllerDelegate?.nowPlaying(.success)
                 }
+                
+            case .error(let string):
+                self.controllerDelegate?.nowPlaying(.error(string))
             }
-        } else {
-            myList = []
-            controllerDelegate?.recomendation(.success)
         }
+    }
+    
+    // MARK: - Configure methods
+    func configureHeader(_ header: HomeTableSectionHeaderView, section: Int) {
+        let sectionStyle = sections[section]
+        
+        switch sectionStyle {
+        case .popular:
+            header.titleLabel.text = "Melhores da semana"
+        case .topRated:
+            header.titleLabel.text = "Melhores de todos os tempos"
+        case .nowPlaying:
+            header.titleLabel.text = "Agora nos cinemas"
+        }
+    }
+    
+    func configureCell(_ cell: PopularTableViewCell) {
+        cell.delegate = self
+        cell.setup(movies: popular)
+    }
+    
+    func configureCell(_ cell: NowPlayingTableViewCell) {
+        cell.delegate = self
+        cell.setup(movies: nowPlaying)
+    }
+    
+    func configureCell(_ cell: TopRatedTableViewCell) {
+        cell.delegate = self
+        cell.setup(movies: topRated)
+    }
+    
+    // MARK: - Navigation methods
+    func detail(_ movieCode: Int) {
+        coordinatorDelegate?.detail(movieCode)
+    }
+    
+    func search() {
+        coordinatorDelegate?.search()
     }
 }
 

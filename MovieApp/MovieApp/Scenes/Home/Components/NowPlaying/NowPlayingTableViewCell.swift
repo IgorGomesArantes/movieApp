@@ -8,15 +8,18 @@
 
 import UIKit
 
-class MyListTableViewCell: UITableViewCell {
+class NowPlayingTableViewCell: UITableViewCell {
     
     // MARK: - Static constants
-    static let reuseIdentifier = "myListTableViewCell"
+    static let reuseIdentifier = "nowPlayingTableViewCell"
+    
+    private static let cellWidth = ceil(UIScreen.main.bounds.width / 5.0)
+    private static let cellHeight = ceil(cellWidth * 1.5)
     
     // MARK: - Properties
     weak var delegate: HomeViewModelDelegate?
     private var collectionView: UICollectionView!
-    private var viewModel = MyListViewModel()
+    private var viewModel = NowPlayingViewModel()
     
     // MARK: - Initialization methods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,8 +46,9 @@ class MyListTableViewCell: UITableViewCell {
     
     private func hierarchyConfiguration() {
         addSubview(collectionView)
-        collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(NowPlayingTableViewCell.cellHeight + 10)
         }
     }
     
@@ -58,34 +62,31 @@ class MyListTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.reuseIdentifier)
+        collectionView.register(NowPlayingCell.self, forCellWithReuseIdentifier: NowPlayingCell.reuseIdentifier)
     }
     
     // MARK: - Build methods
     private func buildFlowLayout() -> UICollectionViewFlowLayout {
-        let cellWidth = UIScreen.main.bounds.width / 5.0
-        let cellHeight = cellWidth * 1.5
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 20
-        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        layout.itemSize = CGSize(width: NowPlayingTableViewCell.cellWidth, height: NowPlayingTableViewCell.cellHeight)
         
         return layout
     }
 }
 
 // MARK: - Collection delegate and datasource methods
-extension MyListTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension NowPlayingTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.reuseIdentifier, for: indexPath) as! MyListCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NowPlayingCell.reuseIdentifier, for: indexPath) as! NowPlayingCell
         
         viewModel.configureCell(cell, index: indexPath.row)
         

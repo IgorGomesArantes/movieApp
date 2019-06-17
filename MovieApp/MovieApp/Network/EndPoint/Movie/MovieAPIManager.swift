@@ -14,6 +14,7 @@ class MovieAPIManager {
     private let router: NetworkRouter<MovieAPIEndPoint>
     private let imageBaseURL = "https://image.tmdb.org/t/p"
     
+    // TODO: - Injeção de dependencias
     // MARK: - Initialization methods
     init() {
         switch Configuration.shared.environment {
@@ -37,8 +38,8 @@ class MovieAPIManager {
         }
     }
     
-    func getPopularMovies(page: Int = 1, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
-        router.request(.popular(page: page)) {
+    func getPopularMovies(completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
+        router.request(.popular) {
             completion($0)
         }
     }
@@ -49,8 +50,14 @@ class MovieAPIManager {
         }
     }
     
-    func getRecomendationMovies(code: Int, completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
-        router.request(.recomendation(code: code)) {
+    func getTopRatedMovies(completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
+        router.request(.topRated) {
+            completion($0)
+        }
+    }
+    
+    func getNowPlayingMovies(completion: @escaping (ServiceResponse<MoviePage>) -> ()) {
+        router.request(.nowPlaying) {
             completion($0)
         }
     }

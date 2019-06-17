@@ -11,18 +11,11 @@ import SnapKit
 
 protocol HomeViewControllerDelegate: class {
     func popular(_ result: ServiceStatus)
-    func myList(_ result: ServiceStatus)
-    func recomendation(_ result: ServiceStatus)
+    func topRated(_ result: ServiceStatus)
+    func nowPlaying(_ result: ServiceStatus)
 }
 
 class HomeViewController: UIViewController {
-    
-    // MARK: - Constants
-    struct Constants {
-        let sections = ["Melhores da semana", "Minha lista", "Recomendações para você"]
-    }
-    
-    let constants = Constants()
     
     // MARK: - Properties
     private var viewModel: HomeViewModel!
@@ -33,19 +26,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         initialConfiguration()
-        viewModel.reloadPopular()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        homeView.tableView.setContentOffset(.zero, animated: false)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        viewModel.reloadMyList()
+        self.viewModel.reloadAll()
     }
     
     // MARK: - Initialization methods
@@ -67,8 +48,9 @@ class HomeViewController: UIViewController {
     
     private func homeViewConfiguration() {
         view.addSubview(homeView)
-        homeView.frame = view.bounds
-        homeView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        homeView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     private func tableViewConfiguration() {
@@ -76,8 +58,8 @@ class HomeViewController: UIViewController {
         homeView.tableView.dataSource = self
         
         homeView.tableView.register(PopularTableViewCell.self, forCellReuseIdentifier: PopularTableViewCell.reuseIdentifier)
-        homeView.tableView.register(MyListTableViewCell.self, forCellReuseIdentifier: MyListTableViewCell.reuseIdentifier)
-        homeView.tableView.register(RecomendationTableViewCell.self, forCellReuseIdentifier: RecomendationTableViewCell.reuseIdentifier)
+        homeView.tableView.register(NowPlayingTableViewCell.self, forCellReuseIdentifier: NowPlayingTableViewCell.reuseIdentifier)
+        homeView.tableView.register(TopRatedTableViewCell.self, forCellReuseIdentifier: TopRatedTableViewCell.reuseIdentifier)
     }
 
     private func navigationItemConfiguration() {
@@ -98,28 +80,25 @@ extension HomeViewController: HomeViewControllerDelegate {
     func popular(_ result: ServiceStatus) {
         switch result {
         case .success:
-            homeView.tableView.reloadSections([0], with: .automatic)
+            homeView.tableView.reloadSections([0], with: .none)
         default:
             break
         }
     }
     
-    func myList(_ result: ServiceStatus) {
+    func nowPlaying(_ result: ServiceStatus) {
         switch result {
         case .success:
-            homeView.tableView.reloadSections([1], with: .automatic)
-            homeView.tableView.performBatchUpdates(nil, completion: { result in
-                self.viewModel.reloadRecomendations()
-            })
+            homeView.tableView.reloadSections([1], with: .none)
         default:
             break
         }
     }
     
-    func recomendation(_ result: ServiceStatus) {
+    func topRated(_ result: ServiceStatus) {
         switch result {
         case .success:
-            homeView.tableView.reloadSections([2], with: .automatic)
+            homeView.tableView.reloadSections([2], with: .none)
         default:
             break
         }
@@ -132,27 +111,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let sectionType = viewModel.sections[section]
         
         switch sectionType {
-        case .popular:
+        case .popular, .topRated, .nowPlaying:
             return 1
-            
-        case .myList:
-            if viewModel.isMyListEmpty() {
-                return 0
-            } else {
-                return 1
-            }
-        
-        case .recomendation:
-            if viewModel.isRecomendationEmpty() {
-                return 0
-            } else {
-                return 1
-            }
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections
+        return viewModel.sections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,40 +131,26 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         
-        case .myList:
-            let cell = homeView.tableView.dequeueReusableCell(withIdentifier: MyListTableViewCell.reuseIdentifier, for: indexPath) as! MyListTableViewCell
+        case .nowPlaying:
+            let cell = homeView.tableView.dequeueReusableCell(withIdentifier: NowPlayingTableViewCell.reuseIdentifier, for: indexPath) as! NowPlayingTableViewCell
             
             viewModel.configureCell(cell)
             
             return cell
             
-        case .recomendation:
-            let cell = homeView.tableView.dequeueReusableCell(withIdentifier: RecomendationTableViewCell.reuseIdentifier, for: indexPath) as! RecomendationTableViewCell
+        case .topRated:
+            let cell = homeView.tableView.dequeueReusableCell(withIdentifier: TopRatedTableViewCell.reuseIdentifier, for: indexPath) as! TopRatedTableViewCell
             
             viewModel.configureCell(cell)
             
             return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let sectionType = viewModel.sections[indexPath.section]
-        let width = UIScreen.main.bounds.width
-        
-        // TODO: - Dinamizar tamanho
-        switch sectionType {
-        case .popular:
-            return (width / 2.0) * 1.5 + 10
-        case .myList:
-            return (width / 5.0) * 1.5 + 10
-        case .recomendation:
-            return ((((width / 2.0) - 30) * 0.5 + 15) * 10) + 10
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HomeTableSectionHeaderView()
-        headerView.setup(title: constants.sections[section])
+        
+        viewModel.configureHeader(headerView, section: section)
 
         return headerView
     }

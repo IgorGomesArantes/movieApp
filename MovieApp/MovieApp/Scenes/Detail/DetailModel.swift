@@ -11,7 +11,6 @@ import Foundation
 struct DetailModel {
     let code: Int
     let vote: Float
-    let isSaved: Bool
     let title: String
     let budget: String
     let revenue: String

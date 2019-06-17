@@ -10,14 +10,17 @@ import UIKit
 
 class PopularTableViewCell: UITableViewCell {
     
-    // MARK: - Static constants
+    // MARK: - Constants
     static let reuseIdentifier = "popularTableViewCell"
+    
+    private static let cellWidth = ceil(UIScreen.main.bounds.width / 2.0)
+    private static let cellHeight = ceil(cellWidth * 1.5)
     
     // MARK: - Properties
     weak var delegate: HomeViewModelDelegate?
-    private var collectionView: UICollectionView!
+    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: buildFlowLayout())
     private var viewModel = PopularViewModel()
-    
+
     // MARK: - Initialization methods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,33 +32,32 @@ class PopularTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.contentView.autoresizingMask = .flexibleHeight
+    }
+    
     // MARK: - Public methods
     func setup(movies: [Movie]) {
         viewModel.setup(movies: movies)
         collectionView.reloadData()
+        updateConstraints()
     }
     
     // MARK: - Configuration methods
     private func initialConfiguration() {
         collectionConfiguration()
-        hierarchyConfiguration()
     }
-    
-    private func hierarchyConfiguration() {
-        addSubview(collectionView)
-        collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    }
-    
+
     private func collectionConfiguration() {
-        let layout = buildFlowLayout()
-        
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        contentView.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(PopularTableViewCell.cellHeight + 10)
+        }
         
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
-        //collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -63,10 +65,7 @@ class PopularTableViewCell: UITableViewCell {
     }
     
     // MARK: - Build methods
-    private func buildFlowLayout() -> UICollectionViewFlowLayout {
-        let cellWidth = UIScreen.main.bounds.width / 2.0
-        let cellHeight = cellWidth * 1.5
-        
+    private static func buildFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
@@ -79,7 +78,7 @@ class PopularTableViewCell: UITableViewCell {
 }
 
 // MARK: - Collection delegate and datasource methods
-extension PopularTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PopularTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.count
     }
