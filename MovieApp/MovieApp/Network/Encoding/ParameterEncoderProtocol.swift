@@ -11,3 +11,6 @@ import Foundation
 protocol ParameterEncoderProtocol {
     func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
 }
+
+
+

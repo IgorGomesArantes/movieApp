@@ -23,13 +23,19 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         initialConfiguration()
-        viewModel.reload()
+        searchView.reload(.blank)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         searchView.searchBar.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        searchView.searchBar.resignFirstResponder()
     }
     
     // MARK: - Initialization methods
@@ -41,10 +47,31 @@ class SearchViewController: UIViewController {
         return viewController
     }
     
+    // MARK: - Reload methods
+    private func onReload(_ result: ServiceStatus) {
+        switch result {
+        case .success:
+            searchView.reload(.full)
+        case .error:
+            searchView.reload(.error(string: "Erro ao buscar os filmes!"))
+        case .loading:
+            searchView.reload(.loading)
+        case .empty:
+            searchView.reload(.empty(string: "Nenhum filme encontrado!"))
+        }
+    }
+    
     // MARK - Configuration methods
     private func initialConfiguration() {
+        viewModelConfiguration()
         configureNavigationItem()
         searchViewConfiguration()
+    }
+    
+    private func viewModelConfiguration() {
+        viewModel.onChange = { [weak self] result in
+            self?.onReload(result)
+        }
     }
     
     private func searchViewConfiguration() {
@@ -64,22 +91,6 @@ class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - Search view controller delegate methods
-extension SearchViewController: SearchViewControllerDelegate {
-    func reload(_ result: ServiceStatus) {
-        switch result {
-        case .success:
-            searchView.resultCollectionView.reloadData()
-        case .error:
-            break
-        case .loading:
-            break
-        case .empty:
-            break
-        }
-    }
-}
-
 // MARK: - Search bar delegate methods
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -87,9 +98,18 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let query = searchBar.text ?? ""
+        searchView.searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.stopSearchTimer()
+        viewModel.searchQuery = searchText
         
-        viewModel.reload(query: query)
+        if searchText.isEmpty {
+            searchView.reload(.blank)
+        } else {
+            viewModel.startSearchTimer()
+        }
     }
 }
 

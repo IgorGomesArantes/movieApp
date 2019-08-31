@@ -10,6 +10,15 @@ import UIKit
 
 class SearchView: UIView {
     
+    // MARK: - Metadata
+    enum State {
+        case empty(string: String)
+        case error(string: String)
+        case loading
+        case full
+        case blank
+    }
+    
     // MARK: - Constants
     struct Constants {
         let backGroundColor = UIColor.white//UIColor(named: "lightYellow")
@@ -29,12 +38,20 @@ class SearchView: UIView {
     let contentView = UIView()
     let searchBar = UISearchBar()
     var resultCollectionView: UICollectionView!
+    private let activityIndicatorView = UIActivityIndicatorView()
+    private let stackView = UIStackView()
+    private let imageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let refreshButton = UIButton()
+    private let refreshControl = UIRefreshControl()
+    
     
     // MARK: - Initialization methods
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         initialConfiguration()
+        reload(.blank)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,6 +63,11 @@ class SearchView: UIView {
         contentConfiguration()
         searchBarConfiguration()
         resultCollectionConfiguration()
+        loadingConfiguration()
+        stackConfiguration()
+        imageConfiguration()
+        titleConfiguration()
+        refreshButtonConfiguration()
     }
     
     private func contentConfiguration() {
@@ -96,6 +118,124 @@ class SearchView: UIView {
         
         resultCollectionView.backgroundColor = constants.backGroundColor
         resultCollectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.reuseIdentifier)
+    }
+    
+    private func loadingConfiguration() {
+        addSubview(activityIndicatorView)
+        activityIndicatorView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
+        }
+        
+        activityIndicatorView.style = .white
+        activityIndicatorView.color = .black
+    }
+    
+    private func stackConfiguration() {
+        addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
+        }
+        
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8.0
+    }
+    
+    private func imageConfiguration() {
+        stackView.addArrangedSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+        }
+        
+        imageView.contentMode = .scaleAspectFit
+    }
+    
+    private func titleConfiguration() {
+        stackView.addArrangedSubview(titleLabel)
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
+    }
+    
+    private func refreshButtonConfiguration() {
+        stackView.addArrangedSubview(refreshButton)
+        refreshButton.addTarget(self, action: #selector(refreshButtonAction), for: .touchDown)
+        refreshButton.setTitle("Tentar novamente", for: .normal)
+        refreshButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        refreshButton.setTitleColor(.black, for: .normal)
+        refreshButton.setTitleColor(.black, for: .highlighted)
+    }
+    
+    // MARK: - Action methods
+    @objc private func refreshButtonAction() {
+        //tryAgainAction?()
+    }
+    
+    // MARK: - Reload methods
+    func reload(_ state: State) {
+        switch state {
+        case .full:
+            fullReload()
+            
+        case .empty(let string):
+            emptyReload(string)
+            
+        case .error(let string):
+            errorReload(string)
+            
+        case .loading:
+            loadingReload()
+            
+        case .blank:
+            blankReload()
+        }
+    }
+    
+    private func fullReload() {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.isHidden = true
+        stackView.isHidden = true
+        
+        resultCollectionView.isHidden = false
+        resultCollectionView.reloadData()
+    }
+    
+    private func emptyReload(_ string: String) {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.isHidden = true
+        resultCollectionView.isHidden = true
+        refreshButton.isHidden = true
+        
+        stackView.isHidden = false
+        titleLabel.text = string
+        imageView.image = UIImage(named: "")
+    }
+    
+    private func errorReload(_ string: String) {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.isHidden = true
+        resultCollectionView.isHidden = true
+        
+        refreshButton.isHidden = false
+        stackView.isHidden = false
+        titleLabel.text = string
+        imageView.image = UIImage(named: "")
+    }
+    
+    private func loadingReload() {
+        stackView.isHidden = true
+        resultCollectionView.isHidden = true
+        
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.isHidden = false
+    }
+    
+    private func blankReload() {
+        stackView.isHidden = true
+        resultCollectionView.isHidden = true
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.stopAnimating()
     }
     
     // MARK: - Cell size properties

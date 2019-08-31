@@ -11,20 +11,23 @@ import UIKit
 class SearchViewModel {
     
     // MARK: - Properties
+    private var searchTimer: Timer? = nil
     private let movieService = MovieAPIManager()
     private var movies = [Movie]()
     var coordinatorDelegate: SearchCoordinatorDelegate?
-    weak var controllerDelegate: SearchViewControllerDelegate?
+    var onChange: ((ServiceStatus) -> ())?
     
     var resultCount: Int {
         return movies.count
     }
     
+    var searchQuery: String = "" 
+    
     // MARK: - Public methods
-    func reload(query: String = "") {
-        let formattedQuery = query.replacingOccurrences(of: " ", with: "+")
+    @objc func reload() {
+        let formattedQuery = searchQuery.replacingOccurrences(of: " ", with: "+")
         
-        controllerDelegate?.reload(.loading)
+        onChange?(.loading)
         
         movieService.getMovies(by: formattedQuery) {
             switch($0) {
@@ -32,12 +35,12 @@ class SearchViewModel {
                 self.movies = result.results
                 
                 if self.movies.isEmpty {
-                    self.controllerDelegate?.reload(.empty)
+                    self.onChange?(.empty)
                 } else {
-                    self.controllerDelegate?.reload(.success)
+                    self.onChange?(.success)
                 }
             case .error(let string):
-                self.controllerDelegate?.reload(.error(string))
+                self.onChange?(.error(string))
             }
         }
     }
@@ -60,5 +63,20 @@ class SearchViewModel {
         let movieCode = movies[index].id ?? 0
         
         coordinatorDelegate?.detail(movieCode: movieCode)
+    }
+    
+    // MARK: - Timer methods
+    func startSearchTimer() {
+        searchTimer =  Timer.scheduledTimer(
+            timeInterval: TimeInterval(0.8),
+            target      : self,
+            selector    : #selector(reload),
+            userInfo    : nil,
+            repeats     : false)
+    }
+    
+    func stopSearchTimer() {
+        searchTimer?.invalidate()
+        searchTimer = nil
     }
 }

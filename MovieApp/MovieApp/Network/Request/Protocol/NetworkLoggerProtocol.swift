@@ -12,3 +12,5 @@ protocol NetworkLoggerProtocol {
     func log(request: URLRequest)
     func log(response: URLResponse)
 }
+
+

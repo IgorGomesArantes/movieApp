@@ -33,11 +33,11 @@ class DetailViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        detailView.contentScrollView.setContentOffset(.zero, animated: true)
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//        detailView.contentScrollView.setContentOffset(.zero, animated: true)
+//    }
     
     // MARK: - Initialization methods
     static func instanciate(viewModel: DetailViewModel) -> DetailViewController {

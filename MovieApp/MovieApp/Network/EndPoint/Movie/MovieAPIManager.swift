@@ -62,7 +62,7 @@ class MovieAPIManager {
         }
     }
     
-    func getImagePath(_ imagePath: String, quality: Quality = Quality.high) -> String {
+    func getImagePath(_ imagePath: String, quality: Quality = Quality.medium) -> String {
         return "\(imageBaseURL)/\(quality.rawValue)/\(imagePath)"
     }
 }

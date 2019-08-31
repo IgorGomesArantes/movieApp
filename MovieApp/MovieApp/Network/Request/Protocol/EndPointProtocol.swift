@@ -16,3 +16,6 @@ protocol EndPointProtocol {
     var httpMethod: HTTPMethod { get }
     var httpParameters: HTTPParameters { get }
 }
+
+
+

@@ -1,0 +1,408 @@
+{
+    "page": 1,
+    "total_results": 19830,
+    "total_pages": 992,
+    "results": [
+        {
+            "vote_count": 3363,
+            "id": 299534,
+            "video": false,
+            "vote_average": 8.7,
+            "title": "Vingadores: Ultimato",
+            "popularity": 578.139,
+            "poster_path": "/q6725aR8Zs4IwGMXzZT8aC8lh41.jpg",
+            "original_language": "en",
+            "original_title": "Avengers: Endgame",
+            "genre_ids": [
+                12,
+                878,
+                28
+            ],
+            "backdrop_path": "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+            "adult": false,
+            "overview": "Após os eventos devastadores de Vingadores: Guerra Infinita, o universo está em ruínas devido aos esforços do Titã Louco, Thanos. Com a ajuda de aliados remanescentes, os Vingadores devem se reunir mais uma vez a fim de desfazer as ações de Thanos e restaurar a ordem no universo de uma vez por todas, não importando as consequências.",
+            "release_date": "2019-04-24"
+        },
+        {
+            "vote_count": 4487,
+            "id": 299537,
+            "video": false,
+            "vote_average": 7.1,
+            "title": "Capitã Marvel",
+            "popularity": 322.244,
+            "poster_path": "/73fdK6W2cYdkR3ATr5ZwzBX6NUK.jpg",
+            "original_language": "en",
+            "original_title": "Captain Marvel",
+            "genre_ids": [
+                28,
+                12,
+                878
+            ],
+            "backdrop_path": "/w2PMyoyLU22YvrGK3smVM9fW1jj.jpg",
+            "adult": false,
+            "overview": "A história segue Carol Danvers e como ela se torna um dos heróis mais poderosos do universo quando a Terra é pega no meio de uma guerra galáctica entre duas raças alienígenas. Situado na década de 1990, Capitã Marvel é uma nova aventura de um período inédito na história do universo cinematográfico da Marvel.",
+            "release_date": "2019-03-06"
+        },
+        {
+            "vote_count": 13163,
+            "id": 299536,
+            "video": false,
+            "vote_average": 8.3,
+            "title": "Vingadores: Guerra Infinita",
+            "popularity": 240.652,
+            "poster_path": "/rkHe0BfOo1f5N2q6rxgdYac7Zf6.jpg",
+            "original_language": "en",
+            "original_title": "Avengers: Infinity War",
+            "genre_ids": [
+                12,
+                28,
+                14
+            ],
+            "backdrop_path": "/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg",
+            "adult": false,
+            "overview": "Enquanto os Vingadores e seus aliados continuaram a proteger o mundo de ameaças grandes demais para qualquer herói, uma nova ameaça emergiu das sombras cósmicas: Thanos. Um déspota de infâmia intergalática, tem o objetivo de coletar todas as seis Joias do Infinito, artefatos de poder inimaginável, e usá-las para infligir sua vontade distorcida em toda a realidade. Tudo pelo que os Vingadores lutaram levou até este momento - o destino da Terra e da própria existência nunca foi tão incerto.",
+            "release_date": "2018-04-25"
+        },
+        {
+            "vote_count": 279,
+            "id": 456740,
+            "video": false,
+            "vote_average": 5.2,
+            "title": "Hellboy",
+            "popularity": 229.636,
+            "poster_path": "/bk8LyaMqUtaQ9hUShuvFznQYQKR.jpg",
+            "original_language": "en",
+            "original_title": "Hellboy",
+            "genre_ids": [
+                28,
+                12,
+                14
+            ],
+            "backdrop_path": "/5BkSkNtfrnTuKOtTaZhl8avn4wU.jpg",
+            "adult": false,
+            "overview": "Hellboy chega à Inglaterra, onde ele deve derrotar Nimue, o consorte de Merlin e a Rainha do Sangue. Mas a batalha deles trará o fim do mundo, um destino que ele desesperadamente tenta evitar.",
+            "release_date": "2019-04-10"
+        },
+        {
+            "vote_count": 690,
+            "id": 537915,
+            "video": false,
+            "vote_average": 6.3,
+            "title": "After",
+            "popularity": 209.979,
+            "poster_path": "/u3B2YKUjWABcxXZ6Nm9h10hLUbh.jpg",
+            "original_language": "en",
+            "original_title": "After",
+            "genre_ids": [
+                18,
+                10749
+            ],
+            "backdrop_path": "/8lESY7UGpOsbL2caib9Qe4bOebF.jpg",
+            "adult": false,
+            "overview": "Baseado no romance de Anna Todd, o filme retrata a jornada de Tessa Young (Josephine Langford), uma jovem de 18 anos com uma vida simples: ótimas notas na escola, muitos amigos e um namorado doce. Todos os próximos passos de sua vida já estão planejados, mas as coisas desandam quando ela conhece um homem rebelde e rude com segredos sombrios que mudam sua vida.",
+            "release_date": "2019-04-11"
+        },
+        {
+            "vote_count": 349,
+            "id": 438650,
+            "video": false,
+            "vote_average": 5.3,
+            "title": "Vingança a Sangue-Frio",
+            "popularity": 192.339,
+            "poster_path": "/zcOI07W1am2Ej33DuIfABrjfzRd.jpg",
+            "original_language": "en",
+            "original_title": "Cold Pursuit",
+            "genre_ids": [
+                28,
+                18,
+                53,
+                80
+            ],
+            "backdrop_path": "/aiM3XxYE2JvW1vJ4AC6cI1RjAoT.jpg",
+            "adult": false,
+            "overview": "Nels é um tranquilo homem de família que trabalha como motorista de um removedor de neve e vê seu mundo virado de cabeça para baixo quando seu filho é morto por um poderoso traficante de drogas. Impulsionado pelo desejo de vingança e sem nada para perder, ele faz tudo o que por preciso para destruir o cartel.",
+            "release_date": "2019-02-07"
+        },
+        {
+            "vote_count": 19125,
+            "id": 24428,
+            "video": false,
+            "vote_average": 7.6,
+            "title": "Os Vingadores",
+            "popularity": 183.153,
+            "poster_path": "/enkQRpdhnvHEnO66j4UJ9szrUtS.jpg",
+            "original_language": "en",
+            "original_title": "The Avengers",
+            "genre_ids": [
+                878,
+                28,
+                12
+            ],
+            "backdrop_path": "/hbn46fQaRmlpBuUrEiFqv0GDL6Y.jpg",
+            "adult": false,
+            "overview": "Loki retorna à Terra enviado pelos chitauri, uma raça alienígena que pretende dominar os humanos. Com a promessa de que será o soberano do planeta, ele rouba o cubo cósmico dentro de instalações da S.H.I.E.L.D. e, com isso, adquire grandes poderes. Loki os usa para controlar o dr. Erik Selvig  e Clint Barton/Gavião Arqueiro, que passam a trabalhar para ele. No intuito de contê-los, Nick Fury convoca um grupo de pessoas com grandes habilidades, mas que jamais haviam trabalhado juntas: Homem de Ferro, Capitão América, Thor, Hulk e Viúva Negra. Só que, apesar do grande perigo que a Terra corre, não é tão simples assim conter o ego e os interesses de cada um deles para que possam agir em grupo.",
+            "release_date": "2012-04-25"
+        },
+        {
+            "vote_count": 14,
+            "id": 495925,
+            "video": false,
+            "vote_average": 5.9,
+            "title": "映画ドラえもん のび太の宝島",
+            "popularity": 170.741,
+            "poster_path": "/cmJ71gdZxCqkMUvGwWgSg3MK7pC.jpg",
+            "original_language": "ja",
+            "original_title": "映画ドラえもん のび太の宝島",
+            "genre_ids": [
+                16
+            ],
+            "backdrop_path": "/8OamoIWfC9zmhwhh1PPaBcDoQaH.jpg",
+            "adult": false,
+            "overview": "",
+            "release_date": "2018-03-03"
+        },
+        {
+            "vote_count": 1335,
+            "id": 287947,
+            "video": false,
+            "vote_average": 7.2,
+            "title": "Shazam!",
+            "popularity": 164.876,
+            "poster_path": "/wuicV3wiHje0Np1tb2AetTJLB9I.jpg",
+            "original_language": "en",
+            "original_title": "Shazam!",
+            "genre_ids": [
+                35,
+                12,
+                14
+            ],
+            "backdrop_path": "/bi4jh0Kt0uuZGsGJoUUfqmbrjQg.jpg",
+            "adult": false,
+            "overview": "Billy Batson (Asher Angel) tem apenas 14 anos de idade, mas recebeu de um antigo mago o dom de se transformar num super-herói adulto chamado Shazam (Zachary Levi). Ao gritar a palavra SHAZAM!, o adolescente se transforma nessa sua poderosa versão adulta para se divertir e testar suas habilidades. Contudo, ele precisa aprender a controlar seus poderes para enfrentar o malvado Dr. Thaddeus Sivana (Mark Strong).",
+            "release_date": "2019-03-23"
+        },
+        {
+            "vote_count": 12986,
+            "id": 99861,
+            "video": false,
+            "vote_average": 7.3,
+            "title": "Vingadores: Era de Ultron",
+            "popularity": 124.082,
+            "poster_path": "/ztRXtaFkIZ4fQdDvKtt6MP5VBYZ.jpg",
+            "original_language": "en",
+            "original_title": "Avengers: Age of Ultron",
+            "genre_ids": [
+                28,
+                12,
+                878
+            ],
+            "backdrop_path": "/rFtsE7Lhlc2jRWF7SRAU0fvrveQ.jpg",
+            "adult": false,
+            "overview": "Quando Tony Stark tenta reiniciar um programa de manutenção de paz, as coisas não dão certo e os super-heróis mais poderosos da Terra, incluindo Homem de Ferro, Capitão América, Thor, Hulk, Viúva Negra e Gavião Arqueiro, terão que passar no teste definitivo para salvar o planeta. Com o aparecimento do vilão Ultron, a equipe dos Vingadores tem a missão de neutralizar seus terríveis planos. Alianças complicadas e ação inesperada pavimentam o caminho para uma aventura épica global.",
+            "release_date": "2015-04-22"
+        },
+        {
+            "vote_count": 2548,
+            "id": 450465,
+            "video": false,
+            "vote_average": 6.5,
+            "title": "Vidro",
+            "popularity": 121.279,
+            "poster_path": "/d8rvXqqZ3hzrWfFGS47jU7sCx69.jpg",
+            "original_language": "en",
+            "original_title": "Glass",
+            "genre_ids": [
+                53,
+                9648,
+                18,
+                14,
+                878
+            ],
+            "backdrop_path": "/lvjscO8wmpEbIfOEZi92Je8Ktlg.jpg",
+            "adult": false,
+            "overview": "Após a conclusão de Fragmentado, Kevin Crumb, o homem com 23 personalidades diferentes, passa a ser perseguido por David Dunn. O jogo de gato e rato entre o homem inquebrável e a Fera é influenciado pela presença de Elijah Price, que manipula os encontros entre eles e mantém segredos sobre os dois.",
+            "release_date": "2019-01-16"
+        },
+        {
+            "vote_count": 200,
+            "id": 487297,
+            "video": false,
+            "vote_average": 5.8,
+            "title": "Do Que os Homens Gostam",
+            "popularity": 113.068,
+            "poster_path": "/30IiwvIRqPGjUV0bxJkZfnSiCL.jpg",
+            "original_language": "en",
+            "original_title": "What Men Want",
+            "genre_ids": [
+                35,
+                14,
+                10749
+            ],
+            "backdrop_path": "/wbAQKi2E5cO0Utk5KDk9yX3kuOu.jpg",
+            "adult": false,
+            "overview": "Uma mulher (Taraji P. Henson) é excluída pelos agentes esportivos masculinos em sua profissão, mas ganha uma vantagem inesperada para contratar a próxima estrela da NBA quando desenvolve a capacidade de ouvir os pensamentos dos homens.",
+            "release_date": "2019-02-08"
+        },
+        {
+            "vote_count": 1652,
+            "id": 166428,
+            "video": false,
+            "vote_average": 7.6,
+            "title": "Como Treinar o Seu Dragão 3",
+            "popularity": 111.141,
+            "poster_path": "/bvHS8BPJKJMQHGgYl5iswPR88F7.jpg",
+            "original_language": "en",
+            "original_title": "How to Train Your Dragon: The Hidden World",
+            "genre_ids": [
+                16,
+                10751,
+                12
+            ],
+            "backdrop_path": "/lFwykSz3Ykj1Q3JXJURnGUTNf1o.jpg",
+            "adult": false,
+            "overview": "Soluço busca realizar seu grande sonho de encontrar um lar pacífico onde os dragões possam viver em segurança. Lá, Banguela descobre uma companheira, assim como ele, mas um tanto selvagem. Mas é quando o perigo começa a rondar o lar, que a dupla Banguela e Soluço é testada e precisa tomar decisões difíceis para salvar suas espécies.",
+            "release_date": "2019-01-03"
+        },
+        {
+            "vote_count": 17489,
+            "id": 118340,
+            "video": false,
+            "vote_average": 7.9,
+            "title": "Guardiões da Galáxia",
+            "popularity": 105.893,
+            "poster_path": "/jp8VuqoeknyLe56JtFDIqhUaRrZ.jpg",
+            "original_language": "en",
+            "original_title": "Guardians of the Galaxy",
+            "genre_ids": [
+                28,
+                878,
+                12
+            ],
+            "backdrop_path": "/bHarw8xrmQeqf3t8HpuMY7zoK4x.jpg",
+            "adult": false,
+            "overview": "O aventureiro do espaço Peter Quill torna-se presa de caçadores de recompensas depois que rouba a esfera de um vilão traiçoeiro, Ronan. Para escapar do perigo, ele faz uma aliança com um grupo de quatro extraterrestres. Quando Quill descobre que a esfera roubada possui um poder capaz de mudar os rumos do universo, ele e seu grupo deverão proteger o objeto para salvar o futuro da galáxia.",
+            "release_date": "2014-07-30"
+        },
+        {
+            "vote_count": 11843,
+            "id": 284054,
+            "video": false,
+            "vote_average": 7.4,
+            "title": "Pantera Negra",
+            "popularity": 100.231,
+            "poster_path": "/8TjvIO8ZJPKrMKXEjOVGNSzuO6q.jpg",
+            "original_language": "en",
+            "original_title": "Black Panther",
+            "genre_ids": [
+                28,
+                12,
+                14,
+                878
+            ],
+            "backdrop_path": "/6ELJEzQJ3Y45HczvreC3dg0GV5R.jpg",
+            "adult": false,
+            "overview": "Após a morte do Rei T'Chaka (John Kani), o príncipe T'Challa (Chadwick Boseman) retorna a Wakanda para a cerimônia de coroação. Nela são reunidas as cinco tribos que compõem o reino, sendo que uma delas, os Jabari, não apoia o atual governo. T'Challa logo recebe o apoio de Okoye (Danai Gurira), a chefe da guarda de Wakanda, da irmã Shuri (Letitia Wright), que coordena a área tecnológica do reino, e também de Nakia (Lupita Nyong'o), a grande paixão do atual Pantera Negra, que não quer se tornar rainha. Juntos, eles estão à procura de Ulysses Klaue (Andy Serkis), que roubou de Wakanda um punhado de vibranium, alguns anos atrás.",
+            "release_date": "2018-02-13"
+        },
+        {
+            "vote_count": 11,
+            "id": 543103,
+            "video": false,
+            "vote_average": 4.9,
+            "title": "Kamen Rider Heisei Generations Forever",
+            "popularity": 99.75,
+            "poster_path": "/6sOFQDlkY6El1B2P5gklzJfVdsT.jpg",
+            "original_language": "ja",
+            "original_title": "仮面ライダー平成ジェネレーションズFOREVER",
+            "genre_ids": [
+                28,
+                12,
+                878
+            ],
+            "backdrop_path": "/uufTqD2CSn1NqL3cXEl4Vp3bCav.jpg",
+            "adult": false,
+            "overview": "",
+            "release_date": "2018-12-22"
+        },
+        {
+            "vote_count": 11,
+            "id": 576393,
+            "video": false,
+            "vote_average": 6,
+            "title": "一吻定情",
+            "popularity": 92.48,
+            "poster_path": "/wtaSH8MfJSCEIrrEX9SQuHdU5sl.jpg",
+            "original_language": "zh",
+            "original_title": "一吻定情",
+            "genre_ids": [
+                10749,
+                35
+            ],
+            "backdrop_path": "/yY7kr7Rgvo8W0Kr3U0bMV8Zq1qM.jpg",
+            "adult": false,
+            "overview": "",
+            "release_date": "2019-02-14"
+        },
+        {
+            "vote_count": 660,
+            "id": 491418,
+            "video": false,
+            "vote_average": 7.5,
+            "title": "De Repente uma Família",
+            "popularity": 91.475,
+            "poster_path": "/eMh9FdmUHTpwYfv3NGN1h2HhMQi.jpg",
+            "original_language": "en",
+            "original_title": "Instant Family",
+            "genre_ids": [
+                35,
+                18
+            ],
+            "backdrop_path": "/lwICpzZudw8BZ0bODaHgRWCdioB.jpg",
+            "adult": false,
+            "overview": "O jovem casal Pete (Mark Wahlberg) e Ellie (Rose Byrne) decide adotar uma criança, e busca uma feira destinada a proporcionar encontros entre adultos e jovens sem lar. O casal se apaixona pela pré-adolescente Lizzie (Isabela Moner), uma garota de temperamento forte, e decide adotá-la. Mas Lizzie tem dois irmãos menores, que se mudam com ela. Logo, Pete e Ellie se veem com três crianças barulhentas e indisciplinadas, que mudam as suas vidas por completo.",
+            "release_date": "2018-11-16"
+        },
+        {
+            "vote_count": 12107,
+            "id": 283995,
+            "video": false,
+            "vote_average": 7.7,
+            "title": "Guardiões da Galáxia Vol. 2",
+            "popularity": 88.912,
+            "poster_path": "/hXi3ExbRXnZCPbdHQkppQdcdMUF.jpg",
+            "original_language": "en",
+            "original_title": "Guardians of the Galaxy Vol. 2",
+            "genre_ids": [
+                28,
+                12,
+                35,
+                878
+            ],
+            "backdrop_path": "/aJn9XeesqsrSLKcHfHP4u5985hn.jpg",
+            "adult": false,
+            "overview": "Peter Quill (Chris Pratt), Gamora (Zoe Saldana), Rocket Racoon (voz de Bradley Cooper), Baby Groot (voz de Vin Diesel) e Drax (Dave Bautista) provaram que, apesar das desavenças, formam uma equipe e tanto. Agora, Peter descobre segredos sobre a identidade de seu pai e na busca por ele, inimigos acabam se tornando aliados.",
+            "release_date": "2017-04-19"
+        },
+        {
+            "vote_count": 10967,
+            "id": 284053,
+            "video": false,
+            "vote_average": 7.5,
+            "title": "Thor: Ragnarok",
+            "popularity": 85.783,
+            "poster_path": "/3MZlw0ztDak4ATX2FqA5qUh4DfN.jpg",
+            "original_language": "en",
+            "original_title": "Thor: Ragnarok",
+            "genre_ids": [
+                28,
+                12,
+                35,
+                14
+            ],
+            "backdrop_path": "/kaIfm5ryEOwYg8mLbq8HkPuM1Fo.jpg",
+            "adult": false,
+            "overview": "Thor está aprisionado do outro lado do universo, sem seu martelo, e se vê em uma corrida para voltar até Asgard e impedir o Ragnarok, a destruição de seu lar e o fim da civilização asgardiana que está nas mãos de uma nova e poderosa ameaça, a terrível Hela. Mas primeiro ele precisa sobreviver a uma batalha de gladiadores que o coloca contra seu ex-aliado e vingador, o Incrível Hulk.",
+            "release_date": "2017-10-25"
+        }
+    ]
+}

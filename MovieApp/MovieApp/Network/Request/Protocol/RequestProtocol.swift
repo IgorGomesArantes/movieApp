@@ -12,3 +12,9 @@ protocol RequestProtocol {
     func requestData(_ route: EndPointProtocol, completion: @escaping (Data?, URLResponse?, Error?) -> ())
     func cancel()
 }
+
+
+
+
+
+

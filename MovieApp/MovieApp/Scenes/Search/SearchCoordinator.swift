@@ -49,7 +49,6 @@ class SearchCoordinator: Coordinator {
         let viewModel = SearchViewModel()
         let viewController = SearchViewController.instanciate(viewModel: viewModel)
         
-        viewModel.controllerDelegate = viewController
         viewModel.coordinatorDelegate = self
         
         return SearchModule(viewModel: viewModel, viewController: viewController)

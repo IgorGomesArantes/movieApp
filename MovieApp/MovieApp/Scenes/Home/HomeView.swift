@@ -31,13 +31,14 @@ class HomeView: UIView {
     }
 
     private func tableViewConfiguration() {
+        
         addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
-        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
     }
